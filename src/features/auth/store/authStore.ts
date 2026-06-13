@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { authService } from '../services/authService'
-import type { User } from '../types'
+import type { User } from '../types/authType'
 
 interface AuthState {
   isAuthenticated: boolean

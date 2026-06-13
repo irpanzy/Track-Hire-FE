@@ -7,7 +7,7 @@ import type {
   RegisterResponse,
   GenericResponse,
   User,
-} from '../types'
+} from '../types/authType'
 
 export const authService = {
   login: async (credentials: LoginCredentials): Promise<LoginResponse> => {

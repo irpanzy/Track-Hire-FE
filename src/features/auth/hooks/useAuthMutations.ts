@@ -13,7 +13,7 @@ import type {
   RegisterCredentials,
   ForgotPasswordData,
   ResetPasswordData,
-} from '../types'
+} from '../types/authType'
 
 export function useLogin(
   onSuccessCallback?: (user: User) => void,
