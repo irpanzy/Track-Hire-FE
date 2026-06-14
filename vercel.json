@@ -11,11 +11,11 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; base-uri 'self'; frame-ancestors 'none'; frame-src 'self' https://accounts.google.com; object-src 'none'; form-action 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: blob: https:; connect-src 'self' http://localhost:3000 https://accounts.google.com; upgrade-insecure-requests"
+          "value": "default-src 'self'; base-uri 'self'; frame-ancestors 'none'; frame-src 'self' https://accounts.google.com https://www.google.com; object-src 'none'; form-action 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://accounts.google.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://accounts.google.com; font-src 'self' data:; img-src 'self' data: blob: https:; connect-src 'self' https://api.track-hire.app https://accounts.google.com https://www.googleapis.com; upgrade-insecure-requests"
         },
         {
           "key": "Access-Control-Allow-Origin",
-          "value": "*"
+          "value": "https://www.track-hire.app"
         },
         {
           "key": "X-Frame-Options",
