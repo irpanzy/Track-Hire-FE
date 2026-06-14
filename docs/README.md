@@ -17,9 +17,10 @@ Jika Anda baru pertama kali bekerja dengan project ini, ikuti urutan berikut:
 
 1. **Setup Development** - Baca README.md utama di root project
 2. **Understand Architecture** - Lihat struktur folder `src/features/auth/`
-3. **Ready to Deploy?** - Mulai dari [deploy-checklist.md](./deploy-checklist.md)
-4. **Deploy Process** - Ikuti [deployment.md](./deployment.md)
-5. **Track Changes** - Check [changelog.md](./changelog.md)
+3. **Configure CORS & CSP** - Mulai dari [cors-csp-setup.md](./cors-csp-setup.md) ⭐
+4. **Ready to Deploy?** - Mulai dari [deploy-checklist.md](./deploy-checklist.md)
+5. **Deploy Process** - Ikuti [deployment.md](./deployment.md)
+6. **Track Changes** - Check [changelog.md](./changelog.md)
 
 ---
 
@@ -154,6 +155,79 @@ Topics covered:
 
 ---
 
+### 6. [csp-configuration.md](./csp-configuration.md)
+
+**Content Security Policy configuration guide**
+
+Topics covered:
+
+- Apa itu CSP dan kenapa penting
+- Environment-based CSP (development vs production)
+- Complete CSP directives explanation
+- connect-src configuration (localhost vs production API)
+- Google OAuth CSP requirements
+- Testing CSP violations
+- Common CSP issues & solutions
+- Security best practices
+- Production deployment checklist
+
+**When to read:**
+
+- 🔴 CSP violations di browser console
+- API calls blocked by CSP
+- Switching between localhost dan production backend
+- Understanding security headers
+- Debugging "refused to connect" errors
+
+---
+
+### 7. [cors-csp-setup.md](./cors-csp-setup.md) ⭐
+
+**Quick reference untuk CORS + CSP setup** (START HERE!)
+
+Topics covered:
+
+- Backend CORS configuration summary
+- Frontend CSP configuration summary
+- Development setup (localhost)
+- Production setup (track-hire.app)
+- Testing checklist
+- Files changed overview
+- Quick troubleshooting
+- Production deployment checklist
+- Domain overview
+
+**When to read:**
+
+- 🌟 First time setup (READ THIS FIRST!)
+- Quick reference untuk CORS/CSP
+- Switching between dev and production
+- Troubleshooting connection issues
+- Understanding full setup
+
+---
+
+### 8. [google-oauth-fix.md](./google-oauth-fix.md)
+
+**Quick fix untuk Google OAuth button tidak muncul**
+
+Topics covered:
+
+- Problem: Google button tidak muncul
+- 90% solution (environment variable)
+- Step-by-step fix guide
+- Google Cloud Console setup
+- Testing checklist
+- Expected result before/after
+
+**When to read:**
+
+- 🔴 Google button tidak muncul (QUICK FIX!)
+- Need immediate solution
+- Before reading full troubleshooting guide
+
+---
+
 ## 🔗 Quick Links
 
 ### Deployment
@@ -186,12 +260,15 @@ Topics covered:
 
 ```
 docs/
-├── README.md                      # 👈 You are here - Documentation index
-├── deployment.md                  # Full deployment guide
-├── security-headers.md            # Security configuration
-├── deploy-checklist.md            # Quick deploy checklist
-├── google-oauth-troubleshooting.md # 🆕 Google OAuth debugging
-└── changelog.md                   # Version history
+├── README.md                       # 👈 You are here - Documentation index
+├── cors-csp-setup.md               # 🌟 START HERE - CORS & CSP quick reference
+├── deployment.md                   # Full deployment guide
+├── deploy-checklist.md             # Quick deploy checklist
+├── security-headers.md             # Security configuration
+├── csp-configuration.md            # CSP setup & troubleshooting
+├── google-oauth-fix.md             # Quick fix for Google OAuth
+├── google-oauth-troubleshooting.md # Full Google OAuth debugging
+└── changelog.md                    # Version history
 ```
 
 ---
@@ -232,11 +309,13 @@ docs/
 
 ### Where to Look First:
 
-1. **🔴 Google Button Tidak Muncul?** → [google-oauth-troubleshooting.md](./google-oauth-troubleshooting.md)
-2. **Deployment Issues?** → [deployment.md](./deployment.md) Troubleshooting section
-3. **CORS/CSP Errors?** → [security-headers.md](./security-headers.md) Common Issues
-4. **Quick Question?** → [deploy-checklist.md](./deploy-checklist.md)
-5. **Version Info?** → [changelog.md](./changelog.md)
+1. **🌟 First Time Setup?** → [cors-csp-setup.md](./cors-csp-setup.md) (START HERE!)
+2. **🔴 Google Button Tidak Muncul?** → [google-oauth-fix.md](./google-oauth-fix.md) (Quick Fix)
+3. **🔴 CSP Violations / API Blocked?** → [csp-configuration.md](./csp-configuration.md)
+4. **Deployment Issues?** → [deployment.md](./deployment.md) Troubleshooting section
+5. **CORS/Security Headers?** → [security-headers.md](./security-headers.md) Common Issues
+6. **Quick Deploy Checklist?** → [deploy-checklist.md](./deploy-checklist.md)
+7. **Version Info?** → [changelog.md](./changelog.md)
 
 ### External Resources:
 
@@ -269,14 +348,17 @@ docs/
 
 ## 📊 Documentation Status
 
-| Document                        | Status      | Last Updated | Priority |
-| ------------------------------- | ----------- | ------------ | -------- |
-| deployment.md                   | ✅ Complete | 2026-06-14   | High     |
-| security-headers.md             | ✅ Complete | 2026-06-14   | High     |
-| deploy-checklist.md             | ✅ Complete | 2026-06-14   | High     |
-| google-oauth-troubleshooting.md | ✅ Complete | 2026-06-14   | High     |
-| changelog.md                    | ✅ Complete | 2026-06-14   | Medium   |
-| README.md                       | ✅ Complete | 2026-06-14   | High     |
+| Document                        | Status      | Last Updated | Priority    |
+| ------------------------------- | ----------- | ------------ | ----------- |
+| cors-csp-setup.md               | ✅ Complete | 2026-06-14   | ⭐ Critical |
+| deployment.md                   | ✅ Complete | 2026-06-14   | High        |
+| security-headers.md             | ✅ Complete | 2026-06-14   | High        |
+| deploy-checklist.md             | ✅ Complete | 2026-06-14   | High        |
+| csp-configuration.md            | ✅ Complete | 2026-06-14   | High        |
+| google-oauth-fix.md             | ✅ Complete | 2026-06-14   | High        |
+| google-oauth-troubleshooting.md | ✅ Complete | 2026-06-14   | Medium      |
+| changelog.md                    | ✅ Complete | 2026-06-14   | Medium      |
+| README.md                       | ✅ Complete | 2026-06-14   | High        |
 
 ---
 
@@ -314,5 +396,10 @@ Planning untuk dokumentasi future:
 ---
 
 **Questions? Suggestions?** Feel free to update this documentation or reach out to the team!
+
+**Need Quick Help?**
+
+- 🌟 First time? → [cors-csp-setup.md](./cors-csp-setup.md)
+- 🔴 Google OAuth issue? → [google-oauth-fix.md](./google-oauth-fix.md)
 
 **Happy Coding! 🚀**
