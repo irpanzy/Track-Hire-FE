@@ -42,10 +42,10 @@ git push origin main
 
 Tambahkan environment variables berikut di Vercel:
 
-| Key                     | Value                          | Description            |
-| ----------------------- | ------------------------------ | ---------------------- |
-| `VITE_API_BASE_URL`     | `https://your-backend.com/api` | Backend API URL        |
-| `VITE_GOOGLE_CLIENT_ID` | `your-google-client-id`        | Google OAuth Client ID |
+| Key                     | Value                            | Description            |
+| ----------------------- | -------------------------------- | ---------------------- |
+| `VITE_API_BASE_URL`     | `https://api.track-hire.app/api` | Backend API URL        |
+| `VITE_GOOGLE_CLIENT_ID` | `your-google-client-id`          | Google OAuth Client ID |
 
 **Cara set environment variables:**
 
