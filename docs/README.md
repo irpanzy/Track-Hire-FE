@@ -127,6 +127,33 @@ Topics covered:
 
 ---
 
+### 5. [google-oauth-troubleshooting.md](./google-oauth-troubleshooting.md)
+
+**Debugging Google OAuth issues**
+
+Topics covered:
+
+- Google button tidak muncul di production
+- Environment variables verification (VITE_GOOGLE_CLIENT_ID)
+- Google Cloud Console configuration
+- Content Security Policy (CSP) requirements
+- Browser console debugging
+- Network tab inspection
+- Step-by-step debugging process
+- Common error messages & solutions
+- Complete working configuration examples
+- Testing procedures
+
+**When to read:**
+
+- 🔴 Google "Continue with Google" button tidak muncul
+- Google OAuth errors di console
+- After deploying to production
+- Troubleshooting authentication issues
+- Setting up Google OAuth untuk pertama kali
+
+---
+
 ## 🔗 Quick Links
 
 ### Deployment
@@ -159,11 +186,12 @@ Topics covered:
 
 ```
 docs/
-├── README.md                 # 👈 You are here - Documentation index
-├── deployment.md            # Full deployment guide
-├── security-headers.md      # Security configuration
-├── deploy-checklist.md      # Quick deploy checklist
-└── changelog.md             # Version history
+├── README.md                      # 👈 You are here - Documentation index
+├── deployment.md                  # Full deployment guide
+├── security-headers.md            # Security configuration
+├── deploy-checklist.md            # Quick deploy checklist
+├── google-oauth-troubleshooting.md # 🆕 Google OAuth debugging
+└── changelog.md                   # Version history
 ```
 
 ---
@@ -204,10 +232,11 @@ docs/
 
 ### Where to Look First:
 
-1. **Deployment Issues?** → [deployment.md](./deployment.md) Troubleshooting section
-2. **CORS/CSP Errors?** → [security-headers.md](./security-headers.md) Common Issues
-3. **Quick Question?** → [deploy-checklist.md](./deploy-checklist.md)
-4. **Version Info?** → [changelog.md](./changelog.md)
+1. **🔴 Google Button Tidak Muncul?** → [google-oauth-troubleshooting.md](./google-oauth-troubleshooting.md)
+2. **Deployment Issues?** → [deployment.md](./deployment.md) Troubleshooting section
+3. **CORS/CSP Errors?** → [security-headers.md](./security-headers.md) Common Issues
+4. **Quick Question?** → [deploy-checklist.md](./deploy-checklist.md)
+5. **Version Info?** → [changelog.md](./changelog.md)
 
 ### External Resources:
 
@@ -240,13 +269,14 @@ docs/
 
 ## 📊 Documentation Status
 
-| Document            | Status      | Last Updated | Priority |
-| ------------------- | ----------- | ------------ | -------- |
-| deployment.md       | ✅ Complete | 2026-06-14   | High     |
-| security-headers.md | ✅ Complete | 2026-06-14   | High     |
-| deploy-checklist.md | ✅ Complete | 2026-06-14   | High     |
-| changelog.md        | ✅ Complete | 2026-06-14   | Medium   |
-| README.md           | ✅ Complete | 2026-06-14   | High     |
+| Document                        | Status      | Last Updated | Priority |
+| ------------------------------- | ----------- | ------------ | -------- |
+| deployment.md                   | ✅ Complete | 2026-06-14   | High     |
+| security-headers.md             | ✅ Complete | 2026-06-14   | High     |
+| deploy-checklist.md             | ✅ Complete | 2026-06-14   | High     |
+| google-oauth-troubleshooting.md | ✅ Complete | 2026-06-14   | High     |
+| changelog.md                    | ✅ Complete | 2026-06-14   | Medium   |
+| README.md                       | ✅ Complete | 2026-06-14   | High     |
 
 ---
 
