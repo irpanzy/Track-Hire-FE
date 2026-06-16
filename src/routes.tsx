@@ -15,6 +15,7 @@ import Companies from './pages/companies/Companies'
 import Reminders from './pages/reminders/Reminders'
 import Profile from './pages/profile/Profile'
 import AdminUsers from './pages/admin/AdminUsers'
+import RecycleBin from './pages/admin/RecycleBin'
 import NotFound from './pages/NotFound'
 
 export const router = createBrowserRouter([
@@ -81,6 +82,10 @@ export const router = createBrowserRouter([
                   {
                     path: 'admin/users',
                     element: <AdminUsers />,
+                  },
+                  {
+                    path: 'admin/recycle-bin',
+                    element: <RecycleBin />,
                   },
                 ],
               },

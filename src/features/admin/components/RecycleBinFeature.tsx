@@ -1,14 +1,19 @@
 import { useState, useCallback } from 'react'
-import { Users } from 'lucide-react'
-import { useUsers, useDeleteUser } from '../hooks/useAdminQueries'
-import type { UsersQueryParams, AdminUser } from '../types/adminType'
+import { Trash2, RefreshCw } from 'lucide-react'
+import {
+  useDeletedUsers,
+  useRestoreUser,
+  usePermanentDeleteUser,
+} from '../hooks/useAdminQueries'
+import type { UsersQueryParams, DeletedUser } from '../types/adminType'
 import UsersFilters from './UsersFilters'
-import UsersTable from './UsersTable'
-import ConfirmDeleteDialog from './ConfirmDeleteDialog'
+import DeletedUsersTable from './DeletedUsersTable'
+import ConfirmRestoreDialog from './ConfirmRestoreDialog'
+import ConfirmPermanentDeleteDialog from './ConfirmPermanentDeleteDialog'
 
 const LIMIT = 10
 
-export default function AdminUsersFeature() {
+export default function RecycleBinFeature() {
   const [params, setParams] = useState<UsersQueryParams>({
     page: 1,
     limit: LIMIT,
@@ -16,10 +21,15 @@ export default function AdminUsersFeature() {
     order: 'desc',
   })
   const [searchInput, setSearchInput] = useState('')
-  const [deleteTarget, setDeleteTarget] = useState<AdminUser | null>(null)
+  const [restoreTarget, setRestoreTarget] = useState<DeletedUser | null>(null)
+  const [permanentDeleteTarget, setPermanentDeleteTarget] =
+    useState<DeletedUser | null>(null)
 
-  const { data, isLoading, isError } = useUsers(params)
-  const deleteMutation = useDeleteUser(() => setDeleteTarget(null))
+  const { data, isLoading, isError } = useDeletedUsers(params)
+  const restoreMutation = useRestoreUser(() => setRestoreTarget(null))
+  const permanentDeleteMutation = usePermanentDeleteUser(() =>
+    setPermanentDeleteTarget(null)
+  )
 
   const updateParam = useCallback(
     <K extends keyof UsersQueryParams>(key: K, value: UsersQueryParams[K]) => {
@@ -62,18 +72,18 @@ export default function AdminUsersFeature() {
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">User Management</h1>
+          <h1 className="text-2xl font-bold text-white">Recycle Bin</h1>
           <p className="mt-0.5 text-sm text-zinc-500">
-            Manage all registered users in the system
+            Restore or permanently delete users
           </p>
         </div>
         {pagination && (
           <div className="hidden items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900 px-4 py-2 sm:flex">
-            <Users className="h-4 w-4 text-indigo-400" />
+            <Trash2 className="h-4 w-4 text-red-400" />
             <span className="text-sm font-semibold text-white">
               {pagination.total}
             </span>
-            <span className="text-sm text-zinc-500">total users</span>
+            <span className="text-sm text-zinc-500">deleted users</span>
           </div>
         )}
       </div>
@@ -100,7 +110,7 @@ export default function AdminUsersFeature() {
         onOrderChange={(order) => setParams((p) => ({ ...p, order, page: 1 }))}
       />
 
-      <UsersTable
+      <DeletedUsersTable
         users={users}
         isLoading={isLoading}
         isError={isError}
@@ -108,16 +118,28 @@ export default function AdminUsersFeature() {
         sortBy={params.sortBy}
         order={params.order}
         onToggleSort={handleToggleSort}
-        onDeleteClick={setDeleteTarget}
+        onRestoreClick={setRestoreTarget}
+        onPermanentDeleteClick={setPermanentDeleteTarget}
         onPageChange={(page) => setParams((p) => ({ ...p, page }))}
       />
 
-      {deleteTarget && (
-        <ConfirmDeleteDialog
-          user={deleteTarget}
-          onConfirm={() => deleteMutation.mutate(deleteTarget.id)}
-          onCancel={() => setDeleteTarget(null)}
-          isLoading={deleteMutation.isPending}
+      {restoreTarget && (
+        <ConfirmRestoreDialog
+          user={restoreTarget}
+          onConfirm={() => restoreMutation.mutate(restoreTarget.id)}
+          onCancel={() => setRestoreTarget(null)}
+          isLoading={restoreMutation.isPending}
+        />
+      )}
+
+      {permanentDeleteTarget && (
+        <ConfirmPermanentDeleteDialog
+          user={permanentDeleteTarget}
+          onConfirm={() =>
+            permanentDeleteMutation.mutate(permanentDeleteTarget.id)
+          }
+          onCancel={() => setPermanentDeleteTarget(null)}
+          isLoading={permanentDeleteMutation.isPending}
         />
       )}
     </div>

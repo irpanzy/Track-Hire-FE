@@ -19,6 +19,7 @@ import {
   X,
   Plus,
   Shield,
+  Trash2,
 } from 'lucide-react'
 
 export default function DashboardLayout() {
@@ -43,13 +44,17 @@ export default function DashboardLayout() {
 
   const adminNavItems =
     user?.role === 'ADMIN'
-      ? [{ name: 'Users', path: '/admin/users', icon: Shield }]
+      ? [
+          { name: 'Users', path: '/admin/users', icon: Shield },
+          { name: 'Recycle Bin', path: '/admin/recycle-bin', icon: Trash2 },
+        ]
       : []
 
   const getPageTitle = () => {
     const path = location.pathname
     if (path === '/') return 'Dashboard'
     if (path === '/admin/users') return 'User Management'
+    if (path === '/admin/recycle-bin') return 'Recycle Bin'
     const item = [...navItems, ...adminNavItems].find(
       (i) => i.path !== '/' && path.startsWith(i.path)
     )
