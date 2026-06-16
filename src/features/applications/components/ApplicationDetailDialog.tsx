@@ -15,6 +15,14 @@ import {
 import { useApplication } from '../hooks/useApplications'
 import { STATUS_COLORS } from '../constants/applicationConstants'
 import { cn } from '@/lib/utils'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 
 interface ApplicationDetailDialogProps {
   applicationId: string
@@ -35,11 +43,13 @@ export default function ApplicationDetailDialog({
 
   if (isLoading) {
     return (
-      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
-        <div className="flex h-48 w-full max-w-3xl items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900">
-          <Loader2 className="h-8 w-8 animate-spin text-indigo-400" />
-        </div>
-      </div>
+      <Dialog open={true} onOpenChange={onClose}>
+        <DialogContent className="max-w-3xl" showCloseButton={false}>
+          <div className="flex h-32 items-center justify-center">
+            <Loader2 className="h-8 w-8 animate-spin text-indigo-400" />
+          </div>
+        </DialogContent>
+      </Dialog>
     )
   }
 
@@ -48,40 +58,44 @@ export default function ApplicationDetailDialog({
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
-      <div className="max-h-[90vh] w-full max-w-4xl overflow-y-auto rounded-xl border border-zinc-800 bg-zinc-900 shadow-2xl">
-        {/* Header */}
-        <div className="sticky top-0 z-10 flex items-center justify-between border-b border-zinc-800 bg-zinc-900 p-6">
-          <div className="flex-1">
-            <h2 className="text-2xl font-bold text-white">
-              {application.position}
-            </h2>
-            <div className="mt-1 flex items-center gap-2 text-sm text-zinc-400">
-              <Building2 className="h-4 w-4" />
-              <span>{application.company.name}</span>
+    <Dialog open={true} onOpenChange={onClose}>
+      <DialogContent
+        className="max-h-[90vh] max-w-4xl overflow-y-auto"
+        showCloseButton={false}
+      >
+        <DialogHeader>
+          <DialogTitle className="flex items-center justify-between">
+            <div className="flex-1">
+              <h2 className="text-2xl font-bold">{application.position}</h2>
+              <div className="mt-1 flex items-center gap-2 text-sm text-zinc-400">
+                <Building2 className="h-4 w-4" />
+                <span>{application.company.name}</span>
+              </div>
             </div>
-          </div>
-          <button
-            onClick={onClose}
-            className="rounded-lg p-1 text-zinc-500 transition-colors hover:bg-zinc-800 hover:text-white"
-          >
-            <X className="h-5 w-5" />
-          </button>
-        </div>
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              onClick={onClose}
+              className="absolute top-2 right-2"
+            >
+              <X className="h-5 w-5" />
+            </Button>
+          </DialogTitle>
+        </DialogHeader>
 
         {/* Content */}
-        <div className="space-y-6 p-6">
+        <div className="space-y-6">
           {/* Status Badge */}
           <div className="flex items-center gap-3">
-            <span
+            <Badge
               className={cn(
-                'inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold ring-1',
+                'inline-flex items-center gap-1.5',
                 STATUS_COLORS[application.status]
               )}
             >
               <CheckCircle className="h-4 w-4" />
               {application.status}
-            </span>
+            </Badge>
             <span className="text-sm text-zinc-500">
               {application.jobType.replace('_', ' ')}
             </span>
@@ -293,37 +307,37 @@ export default function ApplicationDetailDialog({
           {/* Source Link */}
           {application.sourceUrl && (
             <div className="flex justify-center">
-              <a
-                href={application.sourceUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-lg border border-zinc-800 px-4 py-2 text-sm font-medium text-zinc-400 transition-colors hover:border-indigo-500 hover:bg-zinc-800 hover:text-indigo-400"
-              >
-                <ExternalLink className="h-4 w-4" />
-                View Original Job Posting
-              </a>
+              <Button variant="outline" asChild>
+                <a
+                  href={application.sourceUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2"
+                >
+                  <ExternalLink className="h-4 w-4" />
+                  View Original Job Posting
+                </a>
+              </Button>
             </div>
           )}
         </div>
 
         {/* Footer Actions */}
-        <div className="sticky bottom-0 flex justify-end gap-3 border-t border-zinc-800 bg-zinc-900 p-6">
-          <button
+        <div className="bg-muted/50 -mx-4 -mb-4 flex justify-end gap-3 rounded-b-xl border-t border-zinc-800 p-4 pt-4">
+          <Button
+            variant="outline"
             onClick={onDelete}
-            className="flex items-center gap-2 rounded-lg border border-red-500/20 px-4 py-2 text-sm font-medium text-red-400 transition-colors hover:bg-red-500/10"
+            className="border-red-500/20 text-red-400 hover:bg-red-500/10"
           >
-            <Trash2 className="h-4 w-4" />
+            <Trash2 className="mr-2 h-4 w-4" />
             Delete
-          </button>
-          <button
-            onClick={onEdit}
-            className="flex items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-indigo-500"
-          >
-            <Pencil className="h-4 w-4" />
+          </Button>
+          <Button onClick={onEdit}>
+            <Pencil className="mr-2 h-4 w-4" />
             Edit Application
-          </button>
+          </Button>
         </div>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   )
 }

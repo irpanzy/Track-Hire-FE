@@ -4,6 +4,41 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added - Shadcn UI Migration (June 17, 2026)
+
+**Branch:** `feature/shadcn-ui-migration`
+
+Migrated all custom forms and modals to use shadcn components for consistency and better accessibility:
+
+**✅ Completed:**
+
+1. **ApplicationFormDialog** (~400 lines)
+   - Replaced custom backdrop div with Dialog component
+   - Migrated 3 `<select>` elements to shadcn Select (using Controller from react-hook-form)
+   - Migrated 3 `<textarea>` elements to shadcn Textarea component
+   - Form validation working correctly with react-hook-form + zod
+
+2. **Companies.tsx**
+   - Migrated Add Company modal to Dialog + Input components
+   - Migrated Edit Company modal to Dialog + Input components
+   - All CRUD functionality preserved and working
+
+3. **Reminders.tsx**
+   - Migrated Schedule Reminder modal to Dialog component
+   - Replaced custom inputs with shadcn Input component
+   - Migrated 2 `<select>` elements to shadcn Select component
+   - Date/time inputs functioning correctly
+
+**Status:** Build passes successfully ✓
+
+**Next Steps:**
+
+- Migrate admin tables (AdminUsersFeature, RecycleBinFeature) to use Table + Badge
+- Migrate ApplicationDetailDialog to use Dialog + Badge
+- Install and use Avatar component for profile pages
+
+---
+
 ### Added
 
 - Feature slicing pattern for auth module

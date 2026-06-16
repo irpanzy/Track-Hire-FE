@@ -17,6 +17,13 @@ import {
   type MockCompany,
 } from '../../lib/mockData'
 import { toast } from 'sonner'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
 
 export default function Companies() {
   const [companies, setCompanies] = useState<MockCompany[]>([])
@@ -263,159 +270,153 @@ export default function Companies() {
       )}
 
       {/* Add Company Modal */}
-      {isAddModalOpen && (
-        <div className="animate-fade-in fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
-          <div className="animate-zoom-in w-full max-w-md rounded-xl border border-zinc-800 bg-zinc-900 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-zinc-800 p-5">
-              <h2 className="flex items-center gap-2 text-lg font-bold text-white">
+      <Dialog open={isAddModalOpen} onOpenChange={setIsAddModalOpen}>
+        <DialogContent className="max-w-md" showCloseButton={false}>
+          <DialogHeader>
+            <DialogTitle className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
                 <Building2 className="h-5 w-5 text-indigo-400" />
                 Add Target Company
-              </h2>
+              </div>
               <button
                 onClick={() => setIsAddModalOpen(false)}
                 className="cursor-pointer rounded-lg p-1 text-zinc-400 transition-colors hover:bg-zinc-800"
               >
                 <X className="h-5 w-5" />
               </button>
+            </DialogTitle>
+          </DialogHeader>
+
+          <form onSubmit={handleAddCompany} className="space-y-4">
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-zinc-400">
+                Company Name *
+              </label>
+              <Input
+                type="text"
+                placeholder="e.g. Google"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
             </div>
 
-            <form onSubmit={handleAddCompany} className="space-y-4 p-5">
-              <div className="space-y-1.5">
-                <label className="text-zinc-450 text-xs font-semibold">
-                  Company Name *
-                </label>
-                <input
-                  type="text"
-                  placeholder="e.g. Google"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                  className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2 text-sm text-white placeholder-zinc-700 transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                />
-              </div>
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-zinc-400">
+                Industry *
+              </label>
+              <Input
+                type="text"
+                placeholder="e.g. Technology / Artificial Intelligence"
+                value={industry}
+                onChange={(e) => setIndustry(e.target.value)}
+                required
+              />
+            </div>
 
-              <div className="space-y-1.5">
-                <label className="text-zinc-450 text-xs font-semibold">
-                  Industry *
-                </label>
-                <input
-                  type="text"
-                  placeholder="e.g. Technology / Artificial Intelligence"
-                  value={industry}
-                  onChange={(e) => setIndustry(e.target.value)}
-                  required
-                  className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2 text-sm text-white placeholder-zinc-700 transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                />
-              </div>
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-zinc-400">
+                Website URL
+              </label>
+              <Input
+                type="text"
+                placeholder="e.g. www.google.com"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+              />
+            </div>
 
-              <div className="space-y-1.5">
-                <label className="text-zinc-450 text-xs font-semibold">
-                  Website URL
-                </label>
-                <input
-                  type="text"
-                  placeholder="e.g. www.google.com"
-                  value={website}
-                  onChange={(e) => setWebsite(e.target.value)}
-                  className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2 text-sm text-white placeholder-zinc-700 transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                />
-              </div>
-
-              <div className="flex justify-end gap-3 border-t border-zinc-800 pt-4">
-                <button
-                  type="button"
-                  onClick={() => setIsAddModalOpen(false)}
-                  className="bg-zinc-850 cursor-pointer rounded-lg px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-zinc-800"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="cursor-pointer rounded-lg bg-indigo-600 px-4 py-2 text-xs font-semibold text-white shadow-md shadow-indigo-600/10 transition-all hover:bg-indigo-500 hover:shadow-indigo-600/20"
-                >
-                  Add Company
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+            <div className="flex justify-end gap-3 border-t border-zinc-800 pt-4">
+              <button
+                type="button"
+                onClick={() => setIsAddModalOpen(false)}
+                className="bg-zinc-850 cursor-pointer rounded-lg px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-zinc-800"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="cursor-pointer rounded-lg bg-indigo-600 px-4 py-2 text-xs font-semibold text-white shadow-md shadow-indigo-600/10 transition-all hover:bg-indigo-500 hover:shadow-indigo-600/20"
+              >
+                Add Company
+              </button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
 
       {/* Edit Company Modal */}
-      {isEditModalOpen && (
-        <div className="animate-fade-in fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
-          <div className="animate-zoom-in w-full max-w-md rounded-xl border border-zinc-800 bg-zinc-900 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-zinc-800 p-5">
-              <h2 className="flex items-center gap-2 text-lg font-bold text-white">
+      <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
+        <DialogContent className="max-w-md" showCloseButton={false}>
+          <DialogHeader>
+            <DialogTitle className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
                 <Building2 className="h-5 w-5 text-indigo-400" />
                 Edit Target Company
-              </h2>
+              </div>
               <button
                 onClick={() => setIsEditModalOpen(false)}
                 className="cursor-pointer rounded-lg p-1 text-zinc-400 transition-colors hover:bg-zinc-800"
               >
                 <X className="h-5 w-5" />
               </button>
+            </DialogTitle>
+          </DialogHeader>
+
+          <form onSubmit={handleUpdateCompany} className="space-y-4">
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-zinc-400">
+                Company Name *
+              </label>
+              <Input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
             </div>
 
-            <form onSubmit={handleUpdateCompany} className="space-y-4 p-5">
-              <div className="space-y-1.5">
-                <label className="text-zinc-450 text-xs font-semibold">
-                  Company Name *
-                </label>
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                  className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2 text-sm text-white placeholder-zinc-700 transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                />
-              </div>
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-zinc-400">
+                Industry *
+              </label>
+              <Input
+                type="text"
+                value={industry}
+                onChange={(e) => setIndustry(e.target.value)}
+                required
+              />
+            </div>
 
-              <div className="space-y-1.5">
-                <label className="text-zinc-450 text-xs font-semibold">
-                  Industry *
-                </label>
-                <input
-                  type="text"
-                  value={industry}
-                  onChange={(e) => setIndustry(e.target.value)}
-                  required
-                  className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2 text-sm text-white placeholder-zinc-700 transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                />
-              </div>
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-zinc-400">
+                Website URL
+              </label>
+              <Input
+                type="text"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+              />
+            </div>
 
-              <div className="space-y-1.5">
-                <label className="text-zinc-450 text-xs font-semibold">
-                  Website URL
-                </label>
-                <input
-                  type="text"
-                  value={website}
-                  onChange={(e) => setWebsite(e.target.value)}
-                  className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2 text-sm text-white placeholder-zinc-700 transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                />
-              </div>
-
-              <div className="flex justify-end gap-3 border-t border-zinc-800 pt-4">
-                <button
-                  type="button"
-                  onClick={() => setIsEditModalOpen(false)}
-                  className="bg-zinc-850 cursor-pointer rounded-lg px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-zinc-800"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="cursor-pointer rounded-lg bg-indigo-600 px-4 py-2 text-xs font-semibold text-white shadow-md shadow-indigo-600/10 transition-all hover:bg-indigo-500 hover:shadow-indigo-600/20"
-                >
-                  Save Changes
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+            <div className="flex justify-end gap-3 border-t border-zinc-800 pt-4">
+              <button
+                type="button"
+                onClick={() => setIsEditModalOpen(false)}
+                className="bg-zinc-850 cursor-pointer rounded-lg px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-zinc-800"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="cursor-pointer rounded-lg bg-indigo-600 px-4 py-2 text-xs font-semibold text-white shadow-md shadow-indigo-600/10 transition-all hover:bg-indigo-500 hover:shadow-indigo-600/20"
+              >
+                Save Changes
+              </button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }

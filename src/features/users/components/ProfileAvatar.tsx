@@ -2,6 +2,8 @@ import { useRef } from 'react'
 import { Camera, Trash2, Loader2 } from 'lucide-react'
 import { toast } from 'sonner'
 import type { User } from '../types/userTypes'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
 
 interface ProfileAvatarProps {
   user: User | null | undefined
@@ -52,21 +54,23 @@ export default function ProfileAvatar({
   return (
     <div className="flex h-fit flex-col items-center rounded-xl border border-zinc-800 bg-zinc-900 p-6 text-center shadow-sm">
       <div className="group relative">
-        <div className="shadow-indigo-650/10 flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border border-indigo-500/30 bg-indigo-500/20 shadow-lg">
+        <Avatar className="h-24 w-24 border-2 border-indigo-500/30 shadow-lg shadow-indigo-600/10">
           {isUploading ? (
-            <Loader2 className="h-8 w-8 animate-spin text-indigo-400" />
-          ) : user?.avatarUrl ? (
-            <img
-              src={user.avatarUrl}
-              alt={user.name}
-              className="h-full w-full object-cover"
-            />
+            <AvatarFallback className="bg-indigo-500/20">
+              <Loader2 className="h-8 w-8 animate-spin text-indigo-400" />
+            </AvatarFallback>
           ) : (
-            <span className="text-3xl font-bold text-white">
-              {user?.name?.[0]?.toUpperCase() || 'U'}
-            </span>
+            <>
+              <AvatarImage
+                src={user?.avatarUrl || undefined}
+                alt={user?.name}
+              />
+              <AvatarFallback className="bg-indigo-500/20 text-3xl font-bold text-white">
+                {user?.name?.[0]?.toUpperCase() || 'U'}
+              </AvatarFallback>
+            </>
           )}
-        </div>
+        </Avatar>
 
         {/* Input Picker */}
         <input
@@ -77,41 +81,44 @@ export default function ProfileAvatar({
           className="hidden"
         />
 
-        <button
+        <Button
+          size="icon-sm"
           onClick={handleTriggerFileInput}
           disabled={isUploading}
-          className="disabled:bg-indigo-650 absolute right-0 bottom-0 cursor-pointer rounded-full border-2 border-zinc-900 bg-indigo-600 p-2 text-white shadow-md transition-all hover:bg-indigo-500 active:scale-95 disabled:cursor-not-allowed"
+          className="absolute right-0 bottom-0 rounded-full border-2 border-zinc-900 shadow-md"
           title="Upload profile photo"
         >
           <Camera className="h-3.5 w-3.5" />
-        </button>
+        </Button>
       </div>
 
       <h3 className="mt-4 text-lg font-bold text-white">
         {user?.name || 'User'}
       </h3>
-      <p className="text-zinc-550 mt-1 text-xs">
+      <p className="mt-1 text-xs text-zinc-500">
         {user?.email || 'user@example.com'}
       </p>
 
       {user?.avatarUrl && !isUploading && (
-        <button
+        <Button
+          variant="outline"
+          size="sm"
           onClick={handleDeleteAvatar}
           disabled={isDeleting}
-          className="mt-4 flex cursor-pointer items-center gap-1.5 rounded-lg border border-red-500/10 px-3 py-1.5 text-xs font-semibold text-red-400 transition-all hover:border-red-500/25 hover:bg-red-500/10 hover:text-red-300 disabled:cursor-not-allowed disabled:opacity-50"
+          className="mt-4 border-red-500/20 text-red-400 hover:border-red-500/30 hover:bg-red-500/10"
         >
           {isDeleting ? (
             <>
-              <Loader2 className="h-3.5 w-3.5 animate-spin" />
+              <Loader2 className="mr-1.5 h-3.5 w-3.5 animate-spin" />
               Removing...
             </>
           ) : (
             <>
-              <Trash2 className="h-3.5 w-3.5" />
+              <Trash2 className="mr-1.5 h-3.5 w-3.5" />
               Remove Photo
             </>
           )}
-        </button>
+        </Button>
       )}
     </div>
   )
