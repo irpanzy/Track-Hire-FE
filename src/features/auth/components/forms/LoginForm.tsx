@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link } from 'react-router-dom'
@@ -22,12 +22,17 @@ interface LoginFormProps {
   isLoading: boolean
 }
 
+const REMEMBER_ME_KEY = 'track-hire-remember-me'
+const SAVED_CREDENTIALS_KEY = 'track-hire-saved-credentials'
+
 export default function LoginForm({ onSubmit, isLoading }: LoginFormProps) {
   const [showPassword, setShowPassword] = useState(false)
+  const [rememberMe, setRememberMe] = useState(false)
 
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
@@ -37,8 +42,40 @@ export default function LoginForm({ onSubmit, isLoading }: LoginFormProps) {
     },
   })
 
+  // Load saved credentials on mount
+  useEffect(() => {
+    const savedRememberMe = localStorage.getItem(REMEMBER_ME_KEY) === 'true'
+    const savedCredentials = localStorage.getItem(SAVED_CREDENTIALS_KEY)
+
+    if (savedRememberMe && savedCredentials) {
+      try {
+        const { emailOrUsername } = JSON.parse(savedCredentials)
+        setValue('emailOrUsername', emailOrUsername)
+        setRememberMe(true)
+      } catch (error) {
+        console.error('Failed to load saved credentials:', error)
+      }
+    }
+  }, [setValue])
+
+  const handleFormSubmit = (data: LoginFormValues) => {
+    // Save credentials if remember me is checked
+    if (rememberMe) {
+      localStorage.setItem(REMEMBER_ME_KEY, 'true')
+      localStorage.setItem(
+        SAVED_CREDENTIALS_KEY,
+        JSON.stringify({ emailOrUsername: data.emailOrUsername })
+      )
+    } else {
+      localStorage.removeItem(REMEMBER_ME_KEY)
+      localStorage.removeItem(SAVED_CREDENTIALS_KEY)
+    }
+
+    onSubmit(data)
+  }
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+    <form onSubmit={handleSubmit(handleFormSubmit)} className="space-y-5">
       {/* Email or Username */}
       <div className="space-y-1.5">
         <Label
@@ -123,6 +160,23 @@ export default function LoginForm({ onSubmit, isLoading }: LoginFormProps) {
             {errors.password.message}
           </p>
         )}
+      </div>
+
+      {/* Remember Me */}
+      <div className="flex items-center gap-2">
+        <input
+          id="rememberMe"
+          type="checkbox"
+          checked={rememberMe}
+          onChange={(e) => setRememberMe(e.target.checked)}
+          className="h-4 w-4 cursor-pointer rounded border-zinc-700 bg-zinc-900 text-indigo-600 transition-colors focus:ring-2 focus:ring-indigo-500/20 focus:ring-offset-0"
+        />
+        <Label
+          htmlFor="rememberMe"
+          className="cursor-pointer text-sm font-normal text-zinc-400 transition-colors hover:text-zinc-300"
+        >
+          Remember me
+        </Label>
       </div>
 
       <Button
