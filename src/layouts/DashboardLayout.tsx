@@ -17,6 +17,7 @@ import {
   Menu,
   X,
   Plus,
+  Shield,
 } from 'lucide-react'
 
 export default function DashboardLayout() {
@@ -38,10 +39,18 @@ export default function DashboardLayout() {
     { name: 'Profile', path: '/profile', icon: User },
   ]
 
+  const adminNavItems =
+    user?.role === 'ADMIN'
+      ? [{ name: 'Users', path: '/admin/users', icon: Shield }]
+      : []
+
   const getPageTitle = () => {
     const path = location.pathname
     if (path === '/') return 'Dashboard'
-    const item = navItems.find((i) => i.path !== '/' && path.startsWith(i.path))
+    if (path === '/admin/users') return 'User Management'
+    const item = [...navItems, ...adminNavItems].find(
+      (i) => i.path !== '/' && path.startsWith(i.path)
+    )
     return item ? item.name : 'Not Found'
   }
 
@@ -78,6 +87,35 @@ export default function DashboardLayout() {
               </NavLink>
             )
           })}
+
+          {/* Admin Section */}
+          {adminNavItems.length > 0 && (
+            <>
+              <div className="my-2 border-t border-zinc-800" />
+              <p className="px-4 pb-1 text-[10px] font-semibold tracking-widest text-zinc-600 uppercase">
+                Admin
+              </p>
+              {adminNavItems.map((item) => {
+                const Icon = item.icon
+                return (
+                  <NavLink
+                    key={item.name}
+                    to={item.path}
+                    className={({ isActive }) =>
+                      `group flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-all duration-200 ${
+                        isActive
+                          ? 'bg-indigo-500/15 text-indigo-300 shadow-lg ring-1 shadow-indigo-600/10 ring-indigo-500/20'
+                          : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
+                      }`
+                    }
+                  >
+                    <Icon className="h-5 w-5 shrink-0" />
+                    {item.name}
+                  </NavLink>
+                )
+              })}
+            </>
+          )}
         </nav>
 
         {/* User profile / Logout */}
@@ -161,6 +199,36 @@ export default function DashboardLayout() {
                   </NavLink>
                 )
               })}
+
+              {/* Admin Section — mobile */}
+              {adminNavItems.length > 0 && (
+                <>
+                  <div className="my-2 border-t border-zinc-800" />
+                  <p className="px-4 pb-1 text-[10px] font-semibold tracking-widest text-zinc-600 uppercase">
+                    Admin
+                  </p>
+                  {adminNavItems.map((item) => {
+                    const Icon = item.icon
+                    return (
+                      <NavLink
+                        key={item.name}
+                        to={item.path}
+                        onClick={() => setSidebarOpen(false)}
+                        className={({ isActive }) =>
+                          `flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-all ${
+                            isActive
+                              ? 'bg-indigo-500/15 text-indigo-300 ring-1 ring-indigo-500/20'
+                              : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
+                          }`
+                        }
+                      >
+                        <Icon className="h-5 w-5" />
+                        {item.name}
+                      </NavLink>
+                    )
+                  })}
+                </>
+              )}
             </nav>
 
             <div className="border-zinc-850 border-t pt-4">

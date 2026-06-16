@@ -1,0 +1,105 @@
+import { useState, useCallback } from 'react'
+import { Users } from 'lucide-react'
+import { useUsers, useDeleteUser } from '../hooks/useAdminQueries'
+import type { UsersQueryParams, AdminUser } from '../types/adminType'
+import UsersFilters from './UsersFilters'
+import UsersTable from './UsersTable'
+import ConfirmDeleteDialog from './ConfirmDeleteDialog'
+
+const LIMIT = 10
+
+export default function AdminUsersFeature() {
+  const [params, setParams] = useState<UsersQueryParams>({
+    page: 1,
+    limit: LIMIT,
+    search: '',
+    role: '',
+    sortBy: 'createdAt',
+    order: 'desc',
+  })
+  const [searchInput, setSearchInput] = useState('')
+  const [deleteTarget, setDeleteTarget] = useState<AdminUser | null>(null)
+
+  const { data, isLoading, isError } = useUsers(params)
+  const deleteMutation = useDeleteUser(() => setDeleteTarget(null))
+
+  const updateParam = useCallback(
+    <K extends keyof UsersQueryParams>(key: K, value: UsersQueryParams[K]) => {
+      setParams((prev) => ({ ...prev, [key]: value, page: 1 }))
+    },
+    []
+  )
+
+  const handleSearchSubmit = () => updateParam('search', searchInput)
+
+  const handleSearchKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') handleSearchSubmit()
+  }
+
+  const handleToggleSort = (field: UsersQueryParams['sortBy']) => {
+    setParams((prev) => ({
+      ...prev,
+      sortBy: field,
+      order: prev.sortBy === field && prev.order === 'asc' ? 'desc' : 'asc',
+      page: 1,
+    }))
+  }
+
+  const pagination = data?.pagination
+  const users = data?.users ?? []
+
+  return (
+    <div className="space-y-6">
+      {/* Page Header */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-white">User Management</h1>
+          <p className="mt-0.5 text-sm text-zinc-500">
+            Manage all registered users in the system
+          </p>
+        </div>
+        {pagination && (
+          <div className="hidden items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900 px-4 py-2 sm:flex">
+            <Users className="h-4 w-4 text-indigo-400" />
+            <span className="text-sm font-semibold text-white">
+              {pagination.total}
+            </span>
+            <span className="text-sm text-zinc-500">total users</span>
+          </div>
+        )}
+      </div>
+
+      <UsersFilters
+        searchInput={searchInput}
+        role={params.role}
+        order={params.order}
+        onSearchInputChange={setSearchInput}
+        onSearchSubmit={handleSearchSubmit}
+        onSearchKeyDown={handleSearchKeyDown}
+        onRoleChange={(role) => updateParam('role', role)}
+        onOrderChange={(order) => setParams((p) => ({ ...p, order, page: 1 }))}
+      />
+
+      <UsersTable
+        users={users}
+        isLoading={isLoading}
+        isError={isError}
+        pagination={pagination}
+        sortBy={params.sortBy}
+        order={params.order}
+        onToggleSort={handleToggleSort}
+        onDeleteClick={setDeleteTarget}
+        onPageChange={(page) => setParams((p) => ({ ...p, page }))}
+      />
+
+      {deleteTarget && (
+        <ConfirmDeleteDialog
+          user={deleteTarget}
+          onConfirm={() => deleteMutation.mutate(deleteTarget.id)}
+          onCancel={() => setDeleteTarget(null)}
+          isLoading={deleteMutation.isPending}
+        />
+      )}
+    </div>
+  )
+}
