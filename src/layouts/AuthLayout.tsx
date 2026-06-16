@@ -1,12 +1,25 @@
-import { Outlet, Navigate } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
+import { toast } from 'sonner'
 import { useAuthStore } from '@/features/auth'
 import logoLight from '@/assets/logo-track-hire-light.png'
+
+function RedirectToDashboard() {
+  const navigate = useNavigate()
+  useEffect(() => {
+    toast.info('You are already logged in.', {
+      description: 'Redirecting you to the dashboard…',
+    })
+    navigate('/', { replace: true })
+  }, [navigate])
+  return null
+}
 
 export default function AuthLayout() {
   const { isAuthenticated } = useAuthStore()
 
   if (isAuthenticated) {
-    return <Navigate to="/" replace />
+    return <RedirectToDashboard />
   }
 
   return (
