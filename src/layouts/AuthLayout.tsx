@@ -1,6 +1,6 @@
 import { Outlet, Navigate } from 'react-router-dom'
 import { useAuthStore } from '@/features/auth'
-import { Briefcase } from 'lucide-react'
+import logoLight from '@/assets/logo-track-hire-light.png'
 
 export default function AuthLayout() {
   const { isAuthenticated } = useAuthStore()
@@ -26,14 +26,8 @@ export default function AuthLayout() {
           }}
         />
 
-        {/* Logo */}
-        <div className="relative z-10 flex items-center gap-2.5">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-900 shadow-lg">
-            <Briefcase className="h-5 w-5 text-indigo-400" />
-          </div>
-          <span className="bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-xl font-bold text-transparent">
-            Track Hire
-          </span>
+        <div className="relative z-10">
+          <img src={logoLight} alt="Track Hire" className="h-15 w-auto" />
         </div>
 
         {/* Hero content */}
@@ -82,11 +76,8 @@ export default function AuthLayout() {
       {/* Right panel: Auth Forms */}
       <div className="flex flex-1 flex-col items-center justify-center overflow-x-hidden px-4 py-8 sm:px-6 sm:py-10 lg:px-10">
         {/* Logo — mobile only */}
-        <div className="mb-8 flex items-center gap-2.5 lg:hidden">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-800 shadow-md">
-            <Briefcase className="h-4.5 w-4.5 text-indigo-400" />
-          </div>
-          <span className="text-xl font-bold text-white">Track Hire</span>
+        <div className="mb-8 lg:hidden">
+          <img src={logoLight} alt="Track Hire" className="h-14 w-auto" />
         </div>
 
         <div className="w-full max-w-[420px]">
