@@ -9,6 +9,10 @@ export interface AdminUser {
   createdAt: string
 }
 
+export interface DeletedUser extends AdminUser {
+  deletedAt: string
+}
+
 export interface Pagination {
   page: number
   limit: number
@@ -20,6 +24,17 @@ export interface UsersResponse {
   message: string
   users: AdminUser[]
   pagination: Pagination
+}
+
+export interface DeletedUsersResponse {
+  message: string
+  users: DeletedUser[]
+  pagination: Pagination
+}
+
+export interface UserResponse {
+  message: string
+  user: AdminUser
 }
 
 export interface UsersQueryParams {

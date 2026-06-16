@@ -7,6 +7,7 @@ interface AuthState {
   user: User | null
   isCheckingAuth: boolean
   login: (user: User) => void
+  setUser: (user: User) => void
   logout: () => Promise<void>
   checkAuth: () => Promise<void>
 }
@@ -17,6 +18,8 @@ export const useAuthStore = create<AuthState>((set) => ({
   isCheckingAuth: true,
 
   login: (user) => set({ isAuthenticated: true, user }),
+
+  setUser: (user) => set({ user }),
 
   logout: async () => {
     try {
