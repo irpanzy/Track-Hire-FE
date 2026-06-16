@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { toast } from 'sonner'
 import { authService } from '../services/authService'
 import { useAuthStore } from '../store/authStore'
 import type {
@@ -27,6 +28,7 @@ export function useLogin(
     mutationFn: (data: LoginCredentials) => authService.login(data),
     onSuccess: (data) => {
       setAuthUser(data.user)
+      toast.success(`Welcome back, ${data.user.name}!`)
       if (onSuccessCallback) {
         onSuccessCallback(data.user)
       } else {
@@ -52,6 +54,7 @@ export function useGoogleLogin(
     mutationFn: (idToken: string) => authService.googleLogin(idToken),
     onSuccess: (data) => {
       setAuthUser(data.user)
+      toast.success(`Welcome back, ${data.user.name}!`)
       if (onSuccessCallback) {
         onSuccessCallback(data.user)
       } else {

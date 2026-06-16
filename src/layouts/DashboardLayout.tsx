@@ -7,6 +7,7 @@ import {
   useLocation,
 } from 'react-router-dom'
 import { useAuthStore } from '@/features/auth'
+import { toast } from 'sonner'
 import {
   LayoutDashboard,
   Briefcase,
@@ -28,6 +29,7 @@ export default function DashboardLayout() {
 
   const handleLogout = () => {
     logout()
+    toast.success('Signed out successfully')
     navigate('/login')
   }
 
