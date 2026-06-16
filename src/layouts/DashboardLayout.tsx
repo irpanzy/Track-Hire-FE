@@ -21,6 +21,7 @@ import {
   Shield,
   Trash2,
 } from 'lucide-react'
+import logoLight from '@/assets/logo-track-hire-light.png'
 
 export default function DashboardLayout() {
   const { user, logout } = useAuthStore()
@@ -67,10 +68,7 @@ export default function DashboardLayout() {
       <aside className="border-zinc-850 hidden border-r bg-zinc-900 md:flex md:w-64 md:flex-col">
         {/* Brand */}
         <div className="border-zinc-850 flex h-16 items-center gap-2 border-b px-6">
-          <Briefcase className="h-6 w-6 text-indigo-400" />
-          <span className="text-lg font-extrabold tracking-wider text-white">
-            TRACK HIRE
-          </span>
+          <img src={logoLight} alt="Track Hire" className="h-12 w-auto" />
         </div>
 
         {/* Navigation */}
@@ -171,12 +169,7 @@ export default function DashboardLayout() {
 
           <aside className="border-zinc-850 relative flex w-64 max-w-xs flex-col border-r bg-zinc-900 p-4">
             <div className="mb-8 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Briefcase className="h-6 w-6 text-indigo-400" />
-                <span className="text-lg font-extrabold tracking-wider text-white">
-                  TRACK HIRE
-                </span>
-              </div>
+              <img src={logoLight} alt="Track Hire" className="h-12 w-auto" />
               <button
                 onClick={() => setSidebarOpen(false)}
                 className="cursor-pointer rounded-lg p-1 text-zinc-400 hover:bg-zinc-800 hover:text-white"
