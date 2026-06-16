@@ -16,8 +16,8 @@ export default function VerifyEmailFeature() {
     : ''
 
   return (
-    <div className="animate-fade-in w-full max-w-md space-y-6 text-center">
-      <div className="flex flex-col items-center space-y-6 rounded-xl border border-zinc-800 bg-zinc-900 p-8 shadow-xl">
+    <div className="animate-fade-in w-full space-y-6 text-center">
+      <div className="flex flex-col items-center space-y-6 rounded-xl border border-zinc-800/80 bg-zinc-900/60 p-8 shadow-xl backdrop-blur-sm">
         {isLoading && <VerifyEmailLoading />}
         {!isLoading && !isError && <VerifyEmailSuccess />}
         {!isLoading && isError && <VerifyEmailError message={errorMessage} />}

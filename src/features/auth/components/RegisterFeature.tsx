@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { AlertCircle } from 'lucide-react'
+import { AlertCircle, UserPlus } from 'lucide-react'
 import { useRegister } from '../hooks/useAuthMutations'
 import RegisterForm from './forms/RegisterForm'
 import RegisterSuccess from './feedback/RegisterSuccess'
@@ -36,29 +36,36 @@ export default function RegisterFeature() {
   }
 
   return (
-    <div className="animate-fade-in w-full max-w-md space-y-8">
-      <div className="text-center lg:text-left">
-        <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-          Get Started
-        </h2>
-        <p className="mt-2.5 text-sm text-zinc-400">
+    <div className="animate-fade-in w-full space-y-6">
+      {/* Header */}
+      <div>
+        <div className="mb-1 flex items-center gap-2">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-600/15 text-indigo-400">
+            <UserPlus className="h-4 w-4" />
+          </div>
+          <h2 className="text-2xl font-bold tracking-tight text-white">
+            Get Started
+          </h2>
+        </div>
+        <p className="mt-1 text-sm text-zinc-500">
           Already have an account?{' '}
           <Link
             to="/login"
-            className="font-semibold text-indigo-400 hover:text-indigo-300 hover:underline"
+            className="font-medium text-indigo-400 transition-colors hover:text-indigo-300 hover:underline"
           >
             Sign in
           </Link>
         </p>
       </div>
 
-      <div className="space-y-5 rounded-xl border border-zinc-800 bg-zinc-900 p-6 shadow-xl sm:p-8">
+      {/* Card */}
+      <div className="rounded-xl border border-zinc-800/80 bg-zinc-900/60 p-5 shadow-xl backdrop-blur-sm sm:p-6">
         {apiError && (
-          <div className="animate-shake flex items-start gap-2.5 rounded-lg border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-400">
-            <AlertCircle className="mt-0.5 h-5 w-5 shrink-0" />
+          <div className="mb-5 flex items-start gap-3 rounded-lg border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+            <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
             <div>
               <p className="font-semibold">Registration failed</p>
-              <p className="text-red-405 mt-0.5 text-xs leading-relaxed">
+              <p className="mt-0.5 text-xs leading-relaxed text-red-400/80">
                 {apiError}
               </p>
             </div>
