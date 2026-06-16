@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { Trash2, RefreshCw } from 'lucide-react'
+import { Trash2 } from 'lucide-react'
 import {
   useDeletedUsers,
   useRestoreUser,
