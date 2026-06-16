@@ -15,6 +15,20 @@ import {
   type MockReminder,
 } from '../../lib/mockData'
 import { toast } from 'sonner'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
 
 export default function Reminders() {
   const [reminders, setReminders] = useState<MockReminder[]>([])
@@ -287,121 +301,124 @@ export default function Reminders() {
       </div>
 
       {/* Add Reminder Modal */}
-      {isAddModalOpen && (
-        <div className="animate-fade-in fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
-          <div className="animate-zoom-in w-full max-w-md rounded-xl border border-zinc-800 bg-zinc-900 shadow-2xl">
-            <div className="flex items-center justify-between border-b border-zinc-800 p-5">
-              <h2 className="flex items-center gap-2 text-lg font-bold text-white">
+      <Dialog open={isAddModalOpen} onOpenChange={setIsAddModalOpen}>
+        <DialogContent className="max-w-md" showCloseButton={false}>
+          <DialogHeader>
+            <DialogTitle className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
                 <Bell className="h-5 w-5 text-indigo-400" />
                 Schedule Reminder
-              </h2>
+              </div>
               <button
                 onClick={() => setIsAddModalOpen(false)}
                 className="cursor-pointer rounded-lg p-1 text-zinc-400 transition-colors hover:bg-zinc-800"
               >
                 <X className="h-5 w-5" />
               </button>
+            </DialogTitle>
+          </DialogHeader>
+
+          <form onSubmit={handleAddReminder} className="space-y-4">
+            <div className="space-y-1.5">
+              <label className="text-xs font-semibold text-zinc-400">
+                Title *
+              </label>
+              <Input
+                type="text"
+                placeholder="e.g. Prepare System Design Interview notes"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+              />
             </div>
 
-            <form onSubmit={handleAddReminder} className="space-y-4 p-5">
+            <div className="grid grid-cols-2 gap-4">
               <div className="space-y-1.5">
-                <label className="text-zinc-450 text-xs font-semibold">
-                  Title *
+                <label className="text-xs font-semibold text-zinc-400">
+                  Type
                 </label>
-                <input
-                  type="text"
-                  placeholder="e.g. Prepare System Design Interview notes"
-                  value={title}
-                  onChange={(e) => setTitle(e.target.value)}
+                <Select value={type} onValueChange={setType}>
+                  <SelectTrigger className="h-[38px] w-full border-zinc-800 bg-zinc-950 text-white">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Follow-up">Follow-up</SelectItem>
+                    <SelectItem value="Interview Prep">
+                      Interview Prep
+                    </SelectItem>
+                    <SelectItem value="Technical Test">
+                      Technical Test
+                    </SelectItem>
+                    <SelectItem value="Thank you">Thank you</SelectItem>
+                    <SelectItem value="Other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-zinc-400">
+                  Company Link
+                </label>
+                <Select value={company} onValueChange={setCompany}>
+                  <SelectTrigger className="h-[38px] w-full border-zinc-800 bg-zinc-950 text-white">
+                    <SelectValue placeholder="None / Custom" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="">None / Custom</SelectItem>
+                    {companies.map((c) => (
+                      <SelectItem key={c.id} value={c.name}>
+                        {c.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-zinc-400">
+                  Date *
+                </label>
+                <Input
+                  type="date"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
                   required
-                  className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2 text-sm text-white placeholder-zinc-700 transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <label className="text-zinc-455 text-xs font-semibold">
-                    Type
-                  </label>
-                  <select
-                    value={type}
-                    onChange={(e) => setType(e.target.value)}
-                    className="w-full cursor-pointer rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                  >
-                    <option value="Follow-up">Follow-up</option>
-                    <option value="Interview Prep">Interview Prep</option>
-                    <option value="Technical Test">Technical Test</option>
-                    <option value="Thank you">Thank you</option>
-                    <option value="Other">Other</option>
-                  </select>
-                </div>
-
-                <div className="space-y-1.5">
-                  <label className="text-zinc-455 text-xs font-semibold">
-                    Company Link
-                  </label>
-                  <select
-                    value={company}
-                    onChange={(e) => setCompany(e.target.value)}
-                    className="w-full cursor-pointer rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                  >
-                    <option value="">None / Custom</option>
-                    {companies.map((c) => (
-                      <option key={c.id} value={c.name}>
-                        {c.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+              <div className="space-y-1.5">
+                <label className="text-xs font-semibold text-zinc-400">
+                  Time *
+                </label>
+                <Input
+                  type="time"
+                  value={time}
+                  onChange={(e) => setTime(e.target.value)}
+                  required
+                />
               </div>
+            </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-1.5">
-                  <label className="text-zinc-455 text-xs font-semibold">
-                    Date *
-                  </label>
-                  <input
-                    type="date"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    required
-                    className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                  />
-                </div>
-
-                <div className="space-y-1.5">
-                  <label className="text-zinc-455 text-xs font-semibold">
-                    Time *
-                  </label>
-                  <input
-                    type="time"
-                    value={time}
-                    onChange={(e) => setTime(e.target.value)}
-                    required
-                    className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-white outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                  />
-                </div>
-              </div>
-
-              <div className="flex justify-end gap-3 border-t border-zinc-800 pt-4">
-                <button
-                  type="button"
-                  onClick={() => setIsAddModalOpen(false)}
-                  className="bg-zinc-850 cursor-pointer rounded-lg px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-zinc-800"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="cursor-pointer rounded-lg bg-indigo-600 px-4 py-2 text-xs font-semibold text-white shadow-md shadow-indigo-600/10 transition-all hover:bg-indigo-500 hover:shadow-indigo-600/20"
-                >
-                  Schedule
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
+            <div className="flex justify-end gap-3 border-t border-zinc-800 pt-4">
+              <button
+                type="button"
+                onClick={() => setIsAddModalOpen(false)}
+                className="bg-zinc-850 cursor-pointer rounded-lg px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-zinc-800"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="cursor-pointer rounded-lg bg-indigo-600 px-4 py-2 text-xs font-semibold text-white shadow-md shadow-indigo-600/10 transition-all hover:bg-indigo-500 hover:shadow-indigo-600/20"
+              >
+                Schedule
+              </button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }

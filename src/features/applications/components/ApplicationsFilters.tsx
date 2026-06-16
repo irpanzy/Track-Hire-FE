@@ -4,6 +4,15 @@ import {
   APPLICATION_SOURCE_OPTIONS,
   JOB_TYPE_OPTIONS,
 } from '../constants/applicationConstants'
+import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { Button } from '@/components/ui/button'
 
 interface ApplicationsFiltersProps {
   searchInput: string
@@ -47,82 +56,90 @@ export default function ApplicationsFilters({
           <div className="flex gap-2">
             <div className="relative flex-1">
               <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-zinc-500" />
-              <input
+              <Input
                 type="text"
                 placeholder="Search by position or company..."
                 value={searchInput}
                 onChange={(e) => onSearchInputChange(e.target.value)}
                 onKeyDown={onSearchKeyDown}
-                className="w-full rounded-lg border border-zinc-800 bg-zinc-950 py-2 pr-4 pl-10 text-sm text-white placeholder-zinc-500 transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                className="pl-10"
               />
             </div>
-            <button
-              onClick={onSearchSubmit}
-              className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-indigo-500"
-            >
-              Search
-            </button>
+            <Button onClick={onSearchSubmit}>Search</Button>
           </div>
         </div>
 
         {/* Status Filter */}
         <div>
-          <select
-            value={status}
-            onChange={(e) => onStatusChange(e.target.value)}
-            className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-white transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+          <Select 
+            value={status || undefined} 
+            onValueChange={(val) => onStatusChange(val === "all" ? "" : val)}
           >
-            <option value="">All Statuses</option>
-            {APPLICATION_STATUS_OPTIONS.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
+            <SelectTrigger className="h-[38px] w-full border-zinc-800 bg-zinc-950 text-white">
+              <SelectValue placeholder="All Statuses" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Statuses</SelectItem>
+              {APPLICATION_STATUS_OPTIONS.map((opt) => (
+                <SelectItem key={opt.value} value={opt.value}>
+                  {opt.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
 
         {/* Source Filter */}
         <div>
-          <select
-            value={source}
-            onChange={(e) => onSourceChange(e.target.value)}
-            className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-white transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+          <Select 
+            value={source || undefined} 
+            onValueChange={(val) => onSourceChange(val === "all" ? "" : val)}
           >
-            <option value="">All Sources</option>
-            {APPLICATION_SOURCE_OPTIONS.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
+            <SelectTrigger className="h-[38px] w-full border-zinc-800 bg-zinc-950 text-white">
+              <SelectValue placeholder="All Sources" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Sources</SelectItem>
+              {APPLICATION_SOURCE_OPTIONS.map((opt) => (
+                <SelectItem key={opt.value} value={opt.value}>
+                  {opt.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
 
         {/* Job Type Filter */}
         <div>
-          <select
-            value={jobType}
-            onChange={(e) => onJobTypeChange(e.target.value)}
-            className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-2 text-sm text-white transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+          <Select 
+            value={jobType || undefined} 
+            onValueChange={(val) => onJobTypeChange(val === "all" ? "" : val)}
           >
-            <option value="">All Job Types</option>
-            {JOB_TYPE_OPTIONS.map((opt) => (
-              <option key={opt.value} value={opt.value}>
-                {opt.label}
-              </option>
-            ))}
-          </select>
+            <SelectTrigger className="h-[38px] w-full border-zinc-800 bg-zinc-950 text-white">
+              <SelectValue placeholder="All Job Types" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Job Types</SelectItem>
+              {JOB_TYPE_OPTIONS.map((opt) => (
+                <SelectItem key={opt.value} value={opt.value}>
+                  {opt.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         </div>
       </div>
 
       {/* Order */}
       <div className="flex items-center gap-2">
         <span className="text-xs text-zinc-500">Sort Order:</span>
-        <button
+        <Button
+          variant="outline"
+          size="sm"
           onClick={() => onOrderChange(order === 'asc' ? 'desc' : 'asc')}
-          className="rounded-lg border border-zinc-800 px-3 py-1 text-xs font-medium text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-white"
         >
           {order === 'asc' ? '↑ Oldest First' : '↓ Newest First'}
-        </button>
+        </Button>
       </div>
     </div>
   )

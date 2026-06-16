@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { X, Sparkles, Loader2, Info, Save } from 'lucide-react'
-import { useForm } from 'react-hook-form'
+import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useApplicationMutations } from '../hooks/useApplicationMutations'
 import {
@@ -13,6 +13,20 @@ import {
   APPLICATION_STATUS_OPTIONS,
 } from '../constants/applicationConstants'
 import type { Application } from '../types/applicationType'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { Textarea } from '@/components/ui/textarea'
 
 interface ApplicationFormDialogProps {
   application: Application | null
@@ -32,6 +46,7 @@ export default function ApplicationFormDialog({
 
   const {
     register,
+    control,
     handleSubmit,
     setValue,
     formState: { errors, isSubmitting },
@@ -122,25 +137,27 @@ export default function ApplicationFormDialog({
     extractUrl.isPending
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm">
-      <div className="max-h-[90vh] w-full max-w-3xl overflow-y-auto rounded-xl border border-zinc-800 bg-zinc-900 shadow-2xl">
-        {/* Header */}
-        <div className="sticky top-0 z-10 flex items-center justify-between border-b border-zinc-800 bg-zinc-900 p-5">
-          <h2 className="text-xl font-bold text-white">
+    <Dialog open={true} onOpenChange={onClose}>
+      <DialogContent
+        className="max-h-[90vh] max-w-3xl overflow-y-auto"
+        showCloseButton={false}
+      >
+        <DialogHeader>
+          <DialogTitle className="flex items-center justify-between text-xl font-bold">
             {isEditMode ? 'Edit Application' : 'Add New Application'}
-          </h2>
-          <button
-            onClick={onClose}
-            disabled={isMutating}
-            className="rounded-lg p-1 text-zinc-500 transition-colors hover:bg-zinc-800 hover:text-white disabled:cursor-not-allowed"
-          >
-            <X className="h-5 w-5" />
-          </button>
-        </div>
+            <button
+              onClick={onClose}
+              disabled={isMutating}
+              className="rounded-lg p-1 text-zinc-500 transition-colors hover:bg-zinc-800 hover:text-white disabled:cursor-not-allowed"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          </DialogTitle>
+        </DialogHeader>
 
         {/* AI URL Extraction Section */}
         {!isEditMode && (
-          <div className="space-y-3 border-b border-zinc-800 bg-indigo-950/20 p-5">
+          <div className="-mx-4 -mt-4 space-y-3 border-b border-zinc-800 bg-indigo-950/20 p-5">
             <label className="flex items-center gap-1.5 text-xs font-semibold text-indigo-300">
               <Sparkles className="h-4 w-4 text-indigo-400" />
               AI Job Details Extractor (Auto-fill from URL)
@@ -269,16 +286,24 @@ export default function ApplicationFormDialog({
                 <label className="text-xs font-medium text-zinc-400">
                   Job Type *
                 </label>
-                <select
-                  {...register('jobType')}
-                  className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2 text-sm text-white transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                >
-                  {JOB_TYPE_OPTIONS.map((opt) => (
-                    <option key={opt.value} value={opt.value}>
-                      {opt.label}
-                    </option>
-                  ))}
-                </select>
+                <Controller
+                  name="jobType"
+                  control={control}
+                  render={({ field }) => (
+                    <Select value={field.value} onValueChange={field.onChange}>
+                      <SelectTrigger className="h-[38px] w-full border-zinc-800 bg-zinc-950 text-white">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {JOB_TYPE_OPTIONS.map((opt) => (
+                          <SelectItem key={opt.value} value={opt.value}>
+                            {opt.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
                 {errors.jobType && (
                   <p className="text-xs text-red-400">
                     {errors.jobType.message}
@@ -301,16 +326,24 @@ export default function ApplicationFormDialog({
                 <label className="text-xs font-medium text-zinc-400">
                   Source *
                 </label>
-                <select
-                  {...register('source')}
-                  className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2 text-sm text-white transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                >
-                  {APPLICATION_SOURCE_OPTIONS.map((opt) => (
-                    <option key={opt.value} value={opt.value}>
-                      {opt.label}
-                    </option>
-                  ))}
-                </select>
+                <Controller
+                  name="source"
+                  control={control}
+                  render={({ field }) => (
+                    <Select value={field.value} onValueChange={field.onChange}>
+                      <SelectTrigger className="h-[38px] w-full border-zinc-800 bg-zinc-950 text-white">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {APPLICATION_SOURCE_OPTIONS.map((opt) => (
+                          <SelectItem key={opt.value} value={opt.value}>
+                            {opt.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
                 {errors.source && (
                   <p className="text-xs text-red-400">
                     {errors.source.message}
@@ -345,16 +378,24 @@ export default function ApplicationFormDialog({
                 <label className="text-xs font-medium text-zinc-400">
                   Status
                 </label>
-                <select
-                  {...register('status')}
-                  className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2 text-sm text-white transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
-                >
-                  {APPLICATION_STATUS_OPTIONS.map((opt) => (
-                    <option key={opt.value} value={opt.value}>
-                      {opt.label}
-                    </option>
-                  ))}
-                </select>
+                <Controller
+                  name="status"
+                  control={control}
+                  render={({ field }) => (
+                    <Select value={field.value} onValueChange={field.onChange}>
+                      <SelectTrigger className="h-[38px] w-full border-zinc-800 bg-zinc-950 text-white">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {APPLICATION_STATUS_OPTIONS.map((opt) => (
+                          <SelectItem key={opt.value} value={opt.value}>
+                            {opt.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  )}
+                />
               </div>
 
               <div className="space-y-1.5">
@@ -383,11 +424,11 @@ export default function ApplicationFormDialog({
                 <label className="text-xs font-medium text-zinc-400">
                   Description
                 </label>
-                <textarea
+                <Textarea
                   {...register('description')}
                   rows={3}
                   placeholder="Job description..."
-                  className="w-full resize-y rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2 text-sm text-white placeholder-zinc-500 transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  className="resize-y"
                 />
               </div>
 
@@ -395,11 +436,11 @@ export default function ApplicationFormDialog({
                 <label className="text-xs font-medium text-zinc-400">
                   Requirements
                 </label>
-                <textarea
+                <Textarea
                   {...register('requirements')}
                   rows={3}
                   placeholder="Job requirements..."
-                  className="w-full resize-y rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2 text-sm text-white placeholder-zinc-500 transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  className="resize-y"
                 />
               </div>
 
@@ -407,11 +448,11 @@ export default function ApplicationFormDialog({
                 <label className="text-xs font-medium text-zinc-400">
                   Notes
                 </label>
-                <textarea
+                <Textarea
                   {...register('notes')}
                   rows={2}
                   placeholder="Personal notes..."
-                  className="w-full resize-y rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2 text-sm text-white placeholder-zinc-500 transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  className="resize-y"
                 />
               </div>
             </div>
@@ -446,7 +487,7 @@ export default function ApplicationFormDialog({
             </button>
           </div>
         </form>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   )
 }
