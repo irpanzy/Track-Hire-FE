@@ -3,6 +3,7 @@ import RootLayout from './layouts/RootLayout'
 import AuthLayout from './layouts/AuthLayout'
 import DashboardLayout from './layouts/DashboardLayout'
 import ProtectedRoute from './components/ProtectedRoute'
+import AdminRoute from './components/AdminRoute'
 import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
 import VerifyEmail from './pages/auth/VerifyEmail'
@@ -13,6 +14,7 @@ import Applications from './pages/applications/Applications'
 import Companies from './pages/companies/Companies'
 import Reminders from './pages/reminders/Reminders'
 import Profile from './pages/profile/Profile'
+import AdminUsers from './pages/admin/AdminUsers'
 import NotFound from './pages/NotFound'
 
 export const router = createBrowserRouter([
@@ -72,6 +74,15 @@ export const router = createBrowserRouter([
               {
                 path: 'profile',
                 element: <Profile />,
+              },
+              {
+                element: <AdminRoute />,
+                children: [
+                  {
+                    path: 'admin/users',
+                    element: <AdminUsers />,
+                  },
+                ],
               },
             ],
           },
