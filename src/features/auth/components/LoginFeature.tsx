@@ -57,7 +57,9 @@ export default function LoginFeature() {
             <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
             <div>
               <p className="font-semibold">Authentication failed</p>
-              <p className="mt-0.5 text-xs leading-relaxed text-red-400/80">{apiError}</p>
+              <p className="mt-0.5 text-xs leading-relaxed text-red-400/80">
+                {apiError}
+              </p>
             </div>
           </div>
         )}
@@ -73,7 +75,9 @@ export default function LoginFeature() {
             <div className="w-full border-t border-zinc-800" />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-zinc-900 px-2.5 text-zinc-600">or continue with</span>
+            <span className="bg-zinc-900 px-2.5 text-zinc-600">
+              or continue with
+            </span>
           </div>
         </div>
 

@@ -55,7 +55,8 @@ export default function ForgotPasswordFeature() {
           </h2>
         </div>
         <p className="mt-1 text-sm text-zinc-500">
-          Enter your email and we'll send you instructions to reset your password.
+          Enter your email and we'll send you instructions to reset your
+          password.
         </p>
       </div>
 

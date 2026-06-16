@@ -2,7 +2,15 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Link } from 'react-router-dom'
-import { Mail, Lock, Eye, EyeOff, AlertCircle, ArrowRight, Loader2 } from 'lucide-react'
+import {
+  Mail,
+  Lock,
+  Eye,
+  EyeOff,
+  AlertCircle,
+  ArrowRight,
+  Loader2,
+} from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -48,7 +56,7 @@ export default function LoginForm({ onSubmit, isLoading }: LoginFormProps) {
           {...register('emailOrUsername')}
           aria-invalid={!!errors.emailOrUsername}
           className={cn(
-            'h-10 border bg-zinc-900/80 text-sm text-white placeholder:text-zinc-600 transition-colors',
+            'h-10 border bg-zinc-900/80 text-sm text-white transition-colors placeholder:text-zinc-600',
             'focus-visible:border-indigo-500 focus-visible:ring-indigo-500/20',
             errors.emailOrUsername
               ? 'border-red-500/70 focus-visible:border-red-500 focus-visible:ring-red-500/20'
@@ -89,7 +97,7 @@ export default function LoginForm({ onSubmit, isLoading }: LoginFormProps) {
             {...register('password')}
             aria-invalid={!!errors.password}
             className={cn(
-              'h-10 border bg-zinc-900/80 pr-10 text-sm text-white placeholder:text-zinc-600 transition-colors',
+              'h-10 border bg-zinc-900/80 pr-10 text-sm text-white transition-colors placeholder:text-zinc-600',
               'focus-visible:border-indigo-500 focus-visible:ring-indigo-500/20',
               errors.password
                 ? 'border-red-500/70 focus-visible:border-red-500 focus-visible:ring-red-500/20'
@@ -100,9 +108,13 @@ export default function LoginForm({ onSubmit, isLoading }: LoginFormProps) {
             type="button"
             onClick={() => setShowPassword((v) => !v)}
             aria-label={showPassword ? 'Hide password' : 'Show password'}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 transition-colors hover:text-zinc-300"
+            className="absolute top-1/2 right-3 -translate-y-1/2 text-zinc-500 transition-colors hover:text-zinc-300"
           >
-            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            {showPassword ? (
+              <EyeOff className="h-4 w-4" />
+            ) : (
+              <Eye className="h-4 w-4" />
+            )}
           </button>
         </div>
         {errors.password && (

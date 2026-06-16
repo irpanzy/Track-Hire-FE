@@ -48,7 +48,7 @@ export default function ForgotPasswordForm({
           {...register('email')}
           aria-invalid={!!errors.email}
           className={cn(
-            'h-10 border bg-zinc-900/80 text-sm text-white placeholder:text-zinc-600 transition-colors',
+            'h-10 border bg-zinc-900/80 text-sm text-white transition-colors placeholder:text-zinc-600',
             'focus-visible:border-indigo-500 focus-visible:ring-indigo-500/20',
             errors.email
               ? 'border-red-500/70 focus-visible:border-red-500 focus-visible:ring-red-500/20'

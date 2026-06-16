@@ -10,7 +10,7 @@ export default function AuthLayout() {
   }
 
   return (
-    <div className="flex min-h-screen bg-zinc-950">
+    <div className="flex min-h-screen overflow-x-hidden bg-zinc-950">
       {/* Left panel: Info/Hero panel — hidden on mobile */}
       <div className="relative hidden w-1/2 flex-col justify-between border-r border-zinc-800 bg-zinc-950 p-10 text-white lg:flex">
         {/* Background radial gradient */}
@@ -52,7 +52,12 @@ export default function AuthLayout() {
 
           {/* Feature pills */}
           <div className="flex flex-wrap gap-2 pt-2">
-            {['Application Tracking', 'AI Extraction', 'Smart Reminders', 'Analytics'].map((f) => (
+            {[
+              'Application Tracking',
+              'AI Extraction',
+              'Smart Reminders',
+              'Analytics',
+            ].map((f) => (
               <span
                 key={f}
                 className="rounded-full border border-zinc-700/60 bg-zinc-800/60 px-3 py-1 text-xs text-zinc-300"
@@ -65,7 +70,9 @@ export default function AuthLayout() {
 
         {/* Footer */}
         <div className="relative z-10 flex items-center justify-between border-t border-zinc-800 pt-6 text-xs text-zinc-500">
-          <span>© {new Date().getFullYear()} Track Hire Inc. All rights reserved.</span>
+          <span>
+            © {new Date().getFullYear()} Track Hire Inc. All rights reserved.
+          </span>
           <a href="#" className="transition-colors hover:text-zinc-300">
             Privacy Policy
           </a>
@@ -73,7 +80,7 @@ export default function AuthLayout() {
       </div>
 
       {/* Right panel: Auth Forms */}
-      <div className="flex flex-1 flex-col items-center justify-center px-4 py-10 sm:px-6 lg:px-10">
+      <div className="flex flex-1 flex-col items-center justify-center overflow-x-hidden px-4 py-8 sm:px-6 sm:py-10 lg:px-10">
         {/* Logo — mobile only */}
         <div className="mb-8 flex items-center gap-2.5 lg:hidden">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-zinc-700 bg-zinc-800 shadow-md">

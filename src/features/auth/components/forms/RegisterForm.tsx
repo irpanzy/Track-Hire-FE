@@ -1,7 +1,17 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { User, Mail, Lock, AtSign, Eye, EyeOff, AlertCircle, ArrowRight, Loader2 } from 'lucide-react'
+import {
+  User,
+  Mail,
+  Lock,
+  AtSign,
+  Eye,
+  EyeOff,
+  AlertCircle,
+  ArrowRight,
+  Loader2,
+} from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -57,7 +67,7 @@ export default function RegisterForm({
           {...register('name')}
           aria-invalid={!!errors.name}
           className={cn(
-            'h-10 border bg-zinc-900/80 text-sm text-white placeholder:text-zinc-600 transition-colors',
+            'h-10 border bg-zinc-900/80 text-sm text-white transition-colors placeholder:text-zinc-600',
             'focus-visible:border-indigo-500 focus-visible:ring-indigo-500/20',
             errors.name
               ? 'border-red-500/70 focus-visible:border-red-500 focus-visible:ring-red-500/20'
@@ -89,7 +99,7 @@ export default function RegisterForm({
           {...register('username')}
           aria-invalid={!!errors.username}
           className={cn(
-            'h-10 border bg-zinc-900/80 text-sm text-white placeholder:text-zinc-600 transition-colors',
+            'h-10 border bg-zinc-900/80 text-sm text-white transition-colors placeholder:text-zinc-600',
             'focus-visible:border-indigo-500 focus-visible:ring-indigo-500/20',
             errors.username
               ? 'border-red-500/70 focus-visible:border-red-500 focus-visible:ring-red-500/20'
@@ -121,7 +131,7 @@ export default function RegisterForm({
           {...register('email')}
           aria-invalid={!!errors.email}
           className={cn(
-            'h-10 border bg-zinc-900/80 text-sm text-white placeholder:text-zinc-600 transition-colors',
+            'h-10 border bg-zinc-900/80 text-sm text-white transition-colors placeholder:text-zinc-600',
             'focus-visible:border-indigo-500 focus-visible:ring-indigo-500/20',
             errors.email
               ? 'border-red-500/70 focus-visible:border-red-500 focus-visible:ring-red-500/20'
@@ -154,7 +164,7 @@ export default function RegisterForm({
             {...register('password')}
             aria-invalid={!!errors.password}
             className={cn(
-              'h-10 border bg-zinc-900/80 pr-10 text-sm text-white placeholder:text-zinc-600 transition-colors',
+              'h-10 border bg-zinc-900/80 pr-10 text-sm text-white transition-colors placeholder:text-zinc-600',
               'focus-visible:border-indigo-500 focus-visible:ring-indigo-500/20',
               errors.password
                 ? 'border-red-500/70 focus-visible:border-red-500 focus-visible:ring-red-500/20'
@@ -165,9 +175,13 @@ export default function RegisterForm({
             type="button"
             onClick={() => setShowPassword((v) => !v)}
             aria-label={showPassword ? 'Hide password' : 'Show password'}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 transition-colors hover:text-zinc-300"
+            className="absolute top-1/2 right-3 -translate-y-1/2 text-zinc-500 transition-colors hover:text-zinc-300"
           >
-            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            {showPassword ? (
+              <EyeOff className="h-4 w-4" />
+            ) : (
+              <Eye className="h-4 w-4" />
+            )}
           </button>
         </div>
         {errors.password && (
@@ -196,7 +210,7 @@ export default function RegisterForm({
             {...register('confirmPassword')}
             aria-invalid={!!errors.confirmPassword}
             className={cn(
-              'h-10 border bg-zinc-900/80 pr-10 text-sm text-white placeholder:text-zinc-600 transition-colors',
+              'h-10 border bg-zinc-900/80 pr-10 text-sm text-white transition-colors placeholder:text-zinc-600',
               'focus-visible:border-indigo-500 focus-visible:ring-indigo-500/20',
               errors.confirmPassword
                 ? 'border-red-500/70 focus-visible:border-red-500 focus-visible:ring-red-500/20'
@@ -206,10 +220,18 @@ export default function RegisterForm({
           <button
             type="button"
             onClick={() => setShowConfirmPassword((v) => !v)}
-            aria-label={showConfirmPassword ? 'Hide confirm password' : 'Show confirm password'}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 transition-colors hover:text-zinc-300"
+            aria-label={
+              showConfirmPassword
+                ? 'Hide confirm password'
+                : 'Show confirm password'
+            }
+            className="absolute top-1/2 right-3 -translate-y-1/2 text-zinc-500 transition-colors hover:text-zinc-300"
           >
-            {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            {showConfirmPassword ? (
+              <EyeOff className="h-4 w-4" />
+            ) : (
+              <Eye className="h-4 w-4" />
+            )}
           </button>
         </div>
         {errors.confirmPassword && (

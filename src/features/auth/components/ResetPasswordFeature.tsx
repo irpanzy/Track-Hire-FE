@@ -69,7 +69,8 @@ export default function ResetPasswordFeature() {
           <div className="flex items-start gap-3 rounded-lg border border-amber-500/20 bg-amber-500/10 px-4 py-3 text-sm text-amber-400">
             <TriangleAlert className="mt-0.5 h-4 w-4 shrink-0" />
             <p className="text-xs leading-relaxed">
-              Reset token is missing. Please click the reset link sent to your email.
+              Reset token is missing. Please click the reset link sent to your
+              email.
             </p>
           </div>
         ) : (

@@ -65,7 +65,9 @@ export default function RegisterFeature() {
             <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />
             <div>
               <p className="font-semibold">Registration failed</p>
-              <p className="mt-0.5 text-xs leading-relaxed text-red-400/80">{apiError}</p>
+              <p className="mt-0.5 text-xs leading-relaxed text-red-400/80">
+                {apiError}
+              </p>
             </div>
           </div>
         )}
