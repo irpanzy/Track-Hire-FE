@@ -17,10 +17,7 @@
           "key": "Access-Control-Allow-Origin",
           "value": "https://www.track-hire.app"
         },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
+
         {
           "key": "X-Content-Type-Options",
           "value": "nosniff"
@@ -39,7 +36,7 @@
         },
         {
           "key": "Cross-Origin-Opener-Policy",
-          "value": "same-origin"
+          "value": "same-origin-allow-popups"
         },
         {
           "key": "Cache-Control",
