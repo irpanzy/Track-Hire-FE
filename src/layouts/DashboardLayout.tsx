@@ -19,6 +19,7 @@ import {
   Plus,
   Shield,
 } from 'lucide-react'
+import { toast } from 'sonner'
 
 export default function DashboardLayout() {
   const { user, logout } = useAuthStore()
@@ -28,6 +29,9 @@ export default function DashboardLayout() {
 
   const handleLogout = () => {
     logout()
+    toast.success('Signed out successfully.', {
+      description: 'You have been logged out of your account.',
+    })
     navigate('/login')
   }
 

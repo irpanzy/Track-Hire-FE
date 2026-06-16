@@ -7,8 +7,8 @@ import logoLight from '@/assets/logo-track-hire-light.png'
 function RedirectToDashboard() {
   const navigate = useNavigate()
   useEffect(() => {
-    toast.info('You are already logged in.', {
-      description: 'Redirecting you to the dashboard…',
+    toast.info('You are already signed in.', {
+      description: 'Redirecting you to your dashboard.',
     })
     navigate('/', { replace: true })
   }, [navigate])

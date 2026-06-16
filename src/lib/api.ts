@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { toast } from 'sonner'
 import { useAuthStore } from '@/features/auth'
 
 export const api = axios.create({
@@ -64,6 +65,9 @@ api.interceptors.response.use(
         processQueue(refreshError)
         isRefreshing = false
 
+        toast.warning('Your session has expired. Please sign in again.', {
+          description: 'You have been logged out for security reasons.',
+        })
         useAuthStore.getState().logout()
         return Promise.reject(refreshError)
       }

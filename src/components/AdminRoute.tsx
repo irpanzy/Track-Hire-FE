@@ -3,14 +3,14 @@ import { useEffect } from 'react'
 import { toast } from 'sonner'
 import { useAuthStore } from '@/features/auth'
 
-function RedirectUnauthorized({ to }: { to: string }) {
+function RedirectAccessDenied() {
   const navigate = useNavigate()
   useEffect(() => {
-    toast.error('Access denied.', {
-      description: 'You do not have permission to access this page.',
+    toast.error("You don't have permission to access this page.", {
+      description: 'Redirecting you to the dashboard.',
     })
-    navigate(to, { replace: true })
-  }, [navigate, to])
+    navigate('/', { replace: true })
+  }, [navigate])
   return null
 }
 
@@ -25,7 +25,7 @@ export default function AdminRoute() {
   }
 
   if (user?.role !== 'ADMIN') {
-    return <RedirectUnauthorized to="/" />
+    return <RedirectAccessDenied />
   }
 
   return <Outlet />
