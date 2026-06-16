@@ -1,15 +1,11 @@
 import { useLocation, Outlet, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
-import { toast } from 'sonner'
 import { useAuthStore } from '@/features/auth'
 import { Briefcase } from 'lucide-react'
 
 function RedirectToLogin({ from }: { from: ReturnType<typeof useLocation> }) {
   const navigate = useNavigate()
   useEffect(() => {
-    toast.warning('Please sign in to continue.', {
-      description: 'You need to be logged in to access that page.',
-    })
     navigate('/login', { replace: true, state: { from } })
   }, [navigate, from])
   return null

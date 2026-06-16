@@ -31,7 +31,7 @@ export default function RootLayout() {
         <div className="selection:bg-indigo-650/15 min-h-screen bg-zinc-950 text-zinc-100 antialiased">
           <Outlet />
         </div>
-        <Toaster closeButton position="top-right" richColors />
+        <Toaster closeButton position="top-center" richColors />
       </QueryClientProvider>
     </GoogleOAuthProvider>
   )
