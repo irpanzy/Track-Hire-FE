@@ -9,6 +9,7 @@ import {
   Eye,
   EyeOff,
   AlertCircle,
+  CheckCircle,
   ArrowRight,
   Loader2,
 } from 'lucide-react'
@@ -26,6 +27,50 @@ interface RegisterFormProps {
   isLoading: boolean
 }
 
+function getPasswordStrength(password: string): {
+  score: number
+  label: string
+  color: string
+  barColor: string
+} {
+  if (!password) return { score: 0, label: '', color: '', barColor: '' }
+
+  let score = 0
+  if (password.length >= 8) score++
+  if (/[A-Z]/.test(password)) score++
+  if (/[a-z]/.test(password)) score++
+  if (/[0-9]/.test(password)) score++
+  if (/[^A-Za-z0-9]/.test(password)) score++
+
+  if (score <= 1)
+    return {
+      score: 1,
+      label: 'Weak',
+      color: 'text-red-400',
+      barColor: 'bg-red-500',
+    }
+  if (score === 2)
+    return {
+      score: 2,
+      label: 'Fair',
+      color: 'text-amber-400',
+      barColor: 'bg-amber-500',
+    }
+  if (score === 3 || score === 4)
+    return {
+      score: 3,
+      label: 'Strong',
+      color: 'text-emerald-400',
+      barColor: 'bg-emerald-500',
+    }
+  return {
+    score: 4,
+    label: 'Very Strong',
+    color: 'text-indigo-400',
+    barColor: 'bg-indigo-500',
+  }
+}
+
 export default function RegisterForm({
   onSubmit,
   isLoading,
@@ -36,6 +81,7 @@ export default function RegisterForm({
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<RegisterFormValues>({
     resolver: zodResolver(registerSchema),
@@ -47,6 +93,14 @@ export default function RegisterForm({
       confirmPassword: '',
     },
   })
+
+  const passwordValue = watch('password')
+  const confirmPasswordValue = watch('confirmPassword')
+  const strength = getPasswordStrength(passwordValue)
+  const passwordsMatch =
+    !!passwordValue &&
+    !!confirmPasswordValue &&
+    passwordValue === confirmPasswordValue
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
@@ -184,6 +238,34 @@ export default function RegisterForm({
             )}
           </button>
         </div>
+
+        {/* Password strength bar */}
+        {passwordValue && (
+          <div className="space-y-1.5 pt-0.5">
+            <div className="flex gap-1">
+              {[1, 2, 3, 4].map((segment) => (
+                <div
+                  key={segment}
+                  className={cn(
+                    'h-1 flex-1 rounded-full transition-all duration-300',
+                    strength.score >= segment
+                      ? strength.barColor
+                      : 'bg-zinc-700/50'
+                  )}
+                />
+              ))}
+            </div>
+            <p
+              className={cn(
+                'text-xs font-medium transition-colors',
+                strength.color
+              )}
+            >
+              {strength.label}
+            </p>
+          </div>
+        )}
+
         {errors.password && (
           <p className="flex items-center gap-1.5 text-xs text-red-400">
             <AlertCircle className="h-3 w-3 shrink-0" />
@@ -234,6 +316,25 @@ export default function RegisterForm({
             )}
           </button>
         </div>
+
+        {/* Password match indicator */}
+        {confirmPasswordValue && !errors.confirmPassword && (
+          <p
+            className={cn(
+              'flex items-center gap-1.5 text-xs font-medium transition-colors',
+              passwordsMatch ? 'text-emerald-400' : 'text-zinc-500'
+            )}
+          >
+            <CheckCircle
+              className={cn(
+                'h-3 w-3 shrink-0 transition-colors',
+                passwordsMatch ? 'text-emerald-400' : 'text-zinc-600'
+              )}
+            />
+            {passwordsMatch ? 'Passwords match' : 'Passwords do not match'}
+          </p>
+        )}
+
         {errors.confirmPassword && (
           <p className="flex items-center gap-1.5 text-xs text-red-400">
             <AlertCircle className="h-3 w-3 shrink-0" />
