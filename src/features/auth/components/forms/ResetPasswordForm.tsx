@@ -1,8 +1,11 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Lock, ShieldAlert } from 'lucide-react'
+import { Lock, Eye, EyeOff, AlertCircle, CheckCircle, Loader2 } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { cn } from '@/lib/utils'
 import {
   resetPasswordSchema,
   type ResetPasswordFormValues,
@@ -17,6 +20,9 @@ export default function ResetPasswordForm({
   onSubmit,
   isLoading,
 }: ResetPasswordFormProps) {
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+
   const {
     register,
     handleSubmit,
@@ -31,71 +37,107 @@ export default function ResetPasswordForm({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      {/* New Password */}
       <div className="space-y-1.5">
         <Label
-          className="text-zinc-355 flex items-center gap-1.5 text-xs font-semibold"
           htmlFor="password"
+          className="flex items-center gap-1.5 text-sm font-medium text-zinc-300"
         >
           <Lock className="h-3.5 w-3.5 text-zinc-500" />
           New Password
         </Label>
-        <Input
-          id="password"
-          type="password"
-          placeholder="••••••••"
-          {...register('password')}
-          className={`w-full border bg-zinc-950 ${
-            errors.password
-              ? 'border-red-500 ring-1 ring-red-500'
-              : 'border-zinc-800'
-          } rounded-lg px-3.5 py-2 text-sm text-white placeholder-zinc-700 transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500`}
-        />
+        <div className="relative">
+          <Input
+            id="password"
+            type={showPassword ? 'text' : 'password'}
+            autoComplete="new-password"
+            placeholder="••••••••"
+            {...register('password')}
+            aria-invalid={!!errors.password}
+            className={cn(
+              'h-10 border bg-zinc-900/80 pr-10 text-sm text-white placeholder:text-zinc-600 transition-colors',
+              'focus-visible:border-indigo-500 focus-visible:ring-indigo-500/20',
+              errors.password
+                ? 'border-red-500/70 focus-visible:border-red-500 focus-visible:ring-red-500/20'
+                : 'border-zinc-700/60'
+            )}
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword((v) => !v)}
+            aria-label={showPassword ? 'Hide password' : 'Show password'}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 transition-colors hover:text-zinc-300"
+          >
+            {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+          </button>
+        </div>
         {errors.password && (
-          <p className="flex items-center gap-1 text-xs font-medium text-red-500">
-            <ShieldAlert className="h-3.5 w-3.5" />
+          <p className="flex items-center gap-1.5 text-xs text-red-400">
+            <AlertCircle className="h-3 w-3 shrink-0" />
             {errors.password.message}
           </p>
         )}
       </div>
 
+      {/* Confirm Password */}
       <div className="space-y-1.5">
         <Label
-          className="text-zinc-350 flex items-center gap-1.5 text-xs font-semibold"
           htmlFor="confirmPassword"
+          className="flex items-center gap-1.5 text-sm font-medium text-zinc-300"
         >
           <Lock className="h-3.5 w-3.5 text-zinc-500" />
           Confirm Password
         </Label>
-        <Input
-          id="confirmPassword"
-          type="password"
-          placeholder="••••••••"
-          {...register('confirmPassword')}
-          className={`w-full border bg-zinc-950 ${
-            errors.confirmPassword
-              ? 'border-red-500 ring-1 ring-red-500'
-              : 'border-zinc-800'
-          } rounded-lg px-3.5 py-2 text-sm text-white placeholder-zinc-700 transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500`}
-        />
+        <div className="relative">
+          <Input
+            id="confirmPassword"
+            type={showConfirmPassword ? 'text' : 'password'}
+            autoComplete="new-password"
+            placeholder="••••••••"
+            {...register('confirmPassword')}
+            aria-invalid={!!errors.confirmPassword}
+            className={cn(
+              'h-10 border bg-zinc-900/80 pr-10 text-sm text-white placeholder:text-zinc-600 transition-colors',
+              'focus-visible:border-indigo-500 focus-visible:ring-indigo-500/20',
+              errors.confirmPassword
+                ? 'border-red-500/70 focus-visible:border-red-500 focus-visible:ring-red-500/20'
+                : 'border-zinc-700/60'
+            )}
+          />
+          <button
+            type="button"
+            onClick={() => setShowConfirmPassword((v) => !v)}
+            aria-label={showConfirmPassword ? 'Hide confirm password' : 'Show confirm password'}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 transition-colors hover:text-zinc-300"
+          >
+            {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+          </button>
+        </div>
         {errors.confirmPassword && (
-          <p className="flex items-center gap-1 text-xs font-medium text-red-500">
-            <ShieldAlert className="h-3.5 w-3.5" />
+          <p className="flex items-center gap-1.5 text-xs text-red-400">
+            <AlertCircle className="h-3 w-3 shrink-0" />
             {errors.confirmPassword.message}
           </p>
         )}
       </div>
 
-      <button
+      <Button
         type="submit"
         disabled={isLoading}
-        className="disabled:bg-indigo-650 mt-4 flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-600/10 transition-all hover:bg-indigo-500 hover:shadow-indigo-600/20 disabled:cursor-not-allowed"
+        className="h-10 w-full gap-2 bg-indigo-600 text-sm font-semibold text-white shadow-lg shadow-indigo-600/20 transition-all hover:bg-indigo-500 hover:shadow-indigo-600/30 disabled:opacity-60"
       >
         {isLoading ? (
-          <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+          <>
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Resetting…
+          </>
         ) : (
-          'Reset Password'
+          <>
+            <CheckCircle className="h-4 w-4" />
+            Reset Password
+          </>
         )}
-      </button>
+      </Button>
     </form>
   )
 }
