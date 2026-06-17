@@ -67,6 +67,38 @@ export const applicationService = {
     return response.data
   },
 
+  // Get deleted applications
+  getDeletedApplications: async (
+    params: ApplicationsQueryParams
+  ): Promise<ApplicationsResponse> => {
+    const filteredParams = Object.entries(params).reduce(
+      (acc, [key, value]) => {
+        if (value !== '' && value !== null && value !== undefined) {
+          acc[key] = value
+        }
+        return acc
+      },
+      {} as Record<string, unknown>
+    )
+
+    const response = await api.get<ApplicationsResponse>('/applications/deleted/list', {
+      params: filteredParams,
+    })
+    return response.data
+  },
+
+  // Restore application
+  restoreApplication: async (id: string): Promise<ApplicationResponse> => {
+    const response = await api.post<ApplicationResponse>(`/applications/${id}/restore`)
+    return response.data
+  },
+
+  // Permanently delete application
+  permanentDeleteApplication: async (id: string): Promise<DeleteResponse> => {
+    const response = await api.delete<DeleteResponse>(`/applications/${id}/permanent`)
+    return response.data
+  },
+
   // Extract job details from URL
   extractUrl: async (
     payload: ExtractUrlPayload

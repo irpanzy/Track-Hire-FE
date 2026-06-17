@@ -60,6 +60,7 @@ export interface Application {
   deadlineDate: string | null
   notes: string | null
   createdAt: string
+  deletedAt?: string | null
   company: Company
   histories?: ApplicationHistory[]
 }

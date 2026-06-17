@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react'
-import { Plus, Briefcase } from 'lucide-react'
+import { Plus, Briefcase, Archive } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { useApplications } from '../hooks/useApplications'
 import { useApplicationMutations } from '../hooks/useApplicationMutations'
 import type {
@@ -108,6 +109,13 @@ export default function ApplicationsListFeature() {
               <span className="text-sm text-zinc-500">applications</span>
             </div>
           )}
+          <Link to="/applications/recycle-bin">
+            <button className="flex cursor-pointer items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900 px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-zinc-800 active:scale-95">
+              <Archive className="h-4 w-4" />
+              <span className="hidden sm:inline">Recycle Bin</span>
+              <span className="sm:hidden">Bin</span>
+            </button>
+          </Link>
           <button
             onClick={() => setIsFormOpen(true)}
             className="flex cursor-pointer items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-600/20 transition-all hover:bg-indigo-500 active:scale-95"
