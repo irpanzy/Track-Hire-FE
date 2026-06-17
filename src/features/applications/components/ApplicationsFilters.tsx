@@ -71,9 +71,9 @@ export default function ApplicationsFilters({
 
         {/* Status Filter */}
         <div>
-          <Select 
-            value={status || undefined} 
-            onValueChange={(val) => onStatusChange(val === "all" ? "" : val)}
+          <Select
+            value={status || undefined}
+            onValueChange={(val) => onStatusChange(val === 'all' ? '' : val)}
           >
             <SelectTrigger className="h-[38px] w-full border-zinc-800 bg-zinc-950 text-white">
               <SelectValue placeholder="All Statuses" />
@@ -91,9 +91,9 @@ export default function ApplicationsFilters({
 
         {/* Source Filter */}
         <div>
-          <Select 
-            value={source || undefined} 
-            onValueChange={(val) => onSourceChange(val === "all" ? "" : val)}
+          <Select
+            value={source || undefined}
+            onValueChange={(val) => onSourceChange(val === 'all' ? '' : val)}
           >
             <SelectTrigger className="h-[38px] w-full border-zinc-800 bg-zinc-950 text-white">
               <SelectValue placeholder="All Sources" />
@@ -111,9 +111,9 @@ export default function ApplicationsFilters({
 
         {/* Job Type Filter */}
         <div>
-          <Select 
-            value={jobType || undefined} 
-            onValueChange={(val) => onJobTypeChange(val === "all" ? "" : val)}
+          <Select
+            value={jobType || undefined}
+            onValueChange={(val) => onJobTypeChange(val === 'all' ? '' : val)}
           >
             <SelectTrigger className="h-[38px] w-full border-zinc-800 bg-zinc-950 text-white">
               <SelectValue placeholder="All Job Types" />

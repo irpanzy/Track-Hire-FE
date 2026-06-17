@@ -38,20 +38,16 @@ export default function ConfirmDeleteDialog({
             </div>
           </DialogTitle>
         </DialogHeader>
-        
+
         <p className="text-sm text-zinc-400">
           Are you sure you want to delete{' '}
           <span className="font-semibold text-white">{user.name}</span>{' '}
           <span className="text-zinc-500">(@{user.username})</span>? The user
           will be soft-deleted and will no longer have access.
         </p>
-        
+
         <div className="flex items-center justify-end gap-3">
-          <Button
-            variant="outline"
-            onClick={onCancel}
-            disabled={isLoading}
-          >
+          <Button variant="outline" onClick={onCancel} disabled={isLoading}>
             Cancel
           </Button>
           <Button
@@ -61,12 +57,12 @@ export default function ConfirmDeleteDialog({
           >
             {isLoading ? (
               <>
-                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 Deleting…
               </>
             ) : (
               <>
-                <Trash2 className="h-4 w-4 mr-2" />
+                <Trash2 className="mr-2 h-4 w-4" />
                 Delete
               </>
             )}

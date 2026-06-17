@@ -1,10 +1,12 @@
 // Components
 export { default as ApplicationsListFeature } from './components/ApplicationsListFeature'
+export { default as ApplicationsRecycleBinFeature } from './components/ApplicationsRecycleBinFeature'
 
 // Hooks
 export {
   useApplications,
   useApplication,
+  useDeletedApplications,
   applicationKeys,
 } from './hooks/useApplications'
 export { useApplicationMutations } from './hooks/useApplicationMutations'

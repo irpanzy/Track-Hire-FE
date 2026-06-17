@@ -15,6 +15,9 @@ export const applicationKeys = {
     [...applicationKeys.lists(), params] as const,
   details: () => [...applicationKeys.all, 'detail'] as const,
   detail: (id: string) => [...applicationKeys.details(), id] as const,
+  deleted: () => [...applicationKeys.all, 'deleted'] as const,
+  deletedList: (params?: ApplicationsQueryParams) =>
+    [...applicationKeys.deleted(), params] as const,
 }
 
 // Get all applications
@@ -32,5 +35,14 @@ export const useApplication = (id: string | undefined) => {
     queryKey: applicationKeys.detail(id || ''),
     queryFn: () => applicationService.getApplicationById(id!),
     enabled: !!id,
+  })
+}
+
+// Get deleted applications
+export const useDeletedApplications = (params?: ApplicationsQueryParams) => {
+  return useQuery<ApplicationsResponse, AxiosError<{ message?: string }>>({
+    queryKey: applicationKeys.deletedList(params),
+    queryFn: () => applicationService.getDeletedApplications(params || {}),
+    placeholderData: (prev) => prev,
   })
 }

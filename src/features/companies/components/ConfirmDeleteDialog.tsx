@@ -1,5 +1,5 @@
-import { RefreshCw, X, Loader2 } from 'lucide-react'
-import type { DeletedUser } from '../types/adminType'
+import { AlertTriangle, Loader2, X } from 'lucide-react'
+import type { Company } from '../types/companyType'
 import {
   Dialog,
   DialogContent,
@@ -9,34 +9,35 @@ import {
 } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 
-interface ConfirmRestoreDialogProps {
-  user: DeletedUser
+interface ConfirmDeleteDialogProps {
+  company: Company
   onConfirm: () => void
   onCancel: () => void
   isLoading: boolean
 }
 
-export default function ConfirmRestoreDialog({
-  user,
+export default function ConfirmDeleteDialog({
+  company,
   onConfirm,
   onCancel,
   isLoading,
-}: ConfirmRestoreDialogProps) {
+}: ConfirmDeleteDialogProps) {
   return (
     <Dialog open={true} onOpenChange={onCancel}>
-      <DialogContent className="max-w-md" showCloseButton={false}>
+      <DialogContent
+        className="max-w-md border-red-900/50"
+        showCloseButton={false}
+      >
         <DialogHeader>
-          <DialogTitle className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/10">
-                <RefreshCw className="h-5 w-5 text-emerald-400" />
-              </div>
-              <div>
-                <div className="text-lg font-bold">Restore User</div>
-                <DialogDescription>
-                  This action will restore the user account
-                </DialogDescription>
-              </div>
+          <DialogTitle className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-red-500/10">
+              <AlertTriangle className="h-5 w-5 text-red-400" />
+            </div>
+            <div>
+              <div className="text-lg font-bold">Delete Company</div>
+              <DialogDescription className="text-zinc-500">
+                This action cannot be undone
+              </DialogDescription>
             </div>
             <Button
               variant="ghost"
@@ -52,15 +53,15 @@ export default function ConfirmRestoreDialog({
 
         <div className="space-y-2 rounded-lg border border-zinc-800 bg-zinc-950 p-4">
           <p className="text-sm text-zinc-400">
-            <span className="font-medium text-white">Name:</span> {user.name}
+            <span className="font-medium text-white">Company:</span>{' '}
+            {company.name}
           </p>
-          <p className="text-sm text-zinc-400">
-            <span className="font-medium text-white">Email:</span> {user.email}
-          </p>
-          <p className="text-sm text-zinc-400">
-            <span className="font-medium text-white">Username:</span> @
-            {user.username}
-          </p>
+          {company.location && (
+            <p className="text-sm text-zinc-400">
+              <span className="font-medium text-white">Location:</span>{' '}
+              {company.location}
+            </p>
+          )}
         </div>
 
         <div className="flex gap-3">
@@ -73,19 +74,20 @@ export default function ConfirmRestoreDialog({
             Cancel
           </Button>
           <Button
+            variant="destructive"
             onClick={onConfirm}
             disabled={isLoading}
-            className="flex-1 bg-emerald-600 hover:bg-emerald-500"
+            className="flex-1"
           >
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Restoring...
+                Deleting...
               </>
             ) : (
               <>
-                <RefreshCw className="mr-2 h-4 w-4" />
-                Restore User
+                <AlertTriangle className="mr-2 h-4 w-4" />
+                Delete
               </>
             )}
           </Button>

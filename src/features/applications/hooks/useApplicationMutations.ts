@@ -55,7 +55,7 @@ export const useApplicationMutations = () => {
     },
   })
 
-  // Delete application
+  // Delete application (soft delete)
   const deleteApplication = useMutation<
     DeleteResponse,
     AxiosError<{ message?: string }>,
@@ -65,10 +65,49 @@ export const useApplicationMutations = () => {
     onSuccess: (data) => {
       toast.success(data.message || 'Application deleted successfully!')
       queryClient.invalidateQueries({ queryKey: applicationKeys.lists() })
+      queryClient.invalidateQueries({ queryKey: applicationKeys.deleted() })
     },
     onError: (error) => {
       const message =
         error?.response?.data?.message || 'Failed to delete application'
+      toast.error(message)
+    },
+  })
+
+  // Restore application
+  const restoreApplication = useMutation<
+    ApplicationResponse,
+    AxiosError<{ message?: string }>,
+    string
+  >({
+    mutationFn: (id) => applicationService.restoreApplication(id),
+    onSuccess: (data) => {
+      toast.success(data.message || 'Application restored successfully!')
+      queryClient.invalidateQueries({ queryKey: applicationKeys.lists() })
+      queryClient.invalidateQueries({ queryKey: applicationKeys.deleted() })
+    },
+    onError: (error) => {
+      const message =
+        error?.response?.data?.message || 'Failed to restore application'
+      toast.error(message)
+    },
+  })
+
+  // Permanently delete application
+  const permanentDeleteApplication = useMutation<
+    DeleteResponse,
+    AxiosError<{ message?: string }>,
+    string
+  >({
+    mutationFn: (id) => applicationService.permanentDeleteApplication(id),
+    onSuccess: (data) => {
+      toast.success(data.message || 'Application permanently deleted!')
+      queryClient.invalidateQueries({ queryKey: applicationKeys.deleted() })
+    },
+    onError: (error) => {
+      const message =
+        error?.response?.data?.message ||
+        'Failed to permanently delete application'
       toast.error(message)
     },
   })
@@ -94,6 +133,8 @@ export const useApplicationMutations = () => {
     createApplication,
     updateApplication,
     deleteApplication,
+    restoreApplication,
+    permanentDeleteApplication,
     extractUrl,
   }
 }

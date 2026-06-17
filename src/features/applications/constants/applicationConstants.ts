@@ -51,3 +51,13 @@ export const STATUS_COLORS: Record<ApplicationStatus, string> = {
   WITHDRAWN: 'bg-zinc-500/15 text-zinc-300 ring-zinc-500/30',
   ACCEPTED: 'bg-emerald-500/15 text-emerald-300 ring-emerald-500/30',
 }
+
+export const STATUS_LABELS: Record<ApplicationStatus, string> = {
+  APPLIED: 'Applied',
+  SCREENING: 'Screening',
+  INTERVIEW: 'Interview',
+  OFFER: 'Offer',
+  REJECTED: 'Rejected',
+  WITHDRAWN: 'Withdrawn',
+  ACCEPTED: 'Accepted',
+}
