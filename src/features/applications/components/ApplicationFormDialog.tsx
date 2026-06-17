@@ -71,7 +71,7 @@ export default function ApplicationFormDialog({
           notes: application.notes || '',
         }
       : {
-          status: 'APPLIED',
+          status: undefined,
         },
   })
 
@@ -139,7 +139,7 @@ export default function ApplicationFormDialog({
   return (
     <Dialog open={true} onOpenChange={onClose}>
       <DialogContent
-        className="max-h-[90vh] max-w-3xl overflow-y-auto"
+        className="max-h-[90vh] w-[98vw] !max-w-none overflow-y-auto sm:w-[95vw] md:w-[90vw] lg:w-[85vw] xl:w-[80vw]"
         showCloseButton={false}
       >
         <DialogHeader>
@@ -210,7 +210,7 @@ export default function ApplicationFormDialog({
             <h3 className="text-sm font-semibold text-zinc-300">
               Company Information
             </h3>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               <div className="space-y-1.5">
                 <label className="text-xs font-medium text-zinc-400">
                   Company Name *
@@ -244,7 +244,7 @@ export default function ApplicationFormDialog({
                 )}
               </div>
 
-              <div className="space-y-1.5 sm:col-span-2">
+              <div className="space-y-1.5">
                 <label className="text-xs font-medium text-zinc-400">
                   Company Location
                 </label>
@@ -265,8 +265,8 @@ export default function ApplicationFormDialog({
           {/* Job Details */}
           <div className="space-y-4">
             <h3 className="text-sm font-semibold text-zinc-300">Job Details</h3>
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <div className="space-y-1.5 sm:col-span-2">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="space-y-1.5 lg:col-span-2">
                 <label className="text-xs font-medium text-zinc-400">
                   Position *
                 </label>
@@ -292,7 +292,7 @@ export default function ApplicationFormDialog({
                   render={({ field }) => (
                     <Select value={field.value} onValueChange={field.onChange}>
                       <SelectTrigger className="h-[38px] w-full border-zinc-800 bg-zinc-950 text-white">
-                        <SelectValue />
+                        <SelectValue placeholder="Select job type..." />
                       </SelectTrigger>
                       <SelectContent>
                         {JOB_TYPE_OPTIONS.map((opt) => (
@@ -332,7 +332,7 @@ export default function ApplicationFormDialog({
                   render={({ field }) => (
                     <Select value={field.value} onValueChange={field.onChange}>
                       <SelectTrigger className="h-[38px] w-full border-zinc-800 bg-zinc-950 text-white">
-                        <SelectValue />
+                        <SelectValue placeholder="Select source..." />
                       </SelectTrigger>
                       <SelectContent>
                         {APPLICATION_SOURCE_OPTIONS.map((opt) => (
@@ -384,7 +384,7 @@ export default function ApplicationFormDialog({
                   render={({ field }) => (
                     <Select value={field.value} onValueChange={field.onChange}>
                       <SelectTrigger className="h-[38px] w-full border-zinc-800 bg-zinc-950 text-white">
-                        <SelectValue />
+                        <SelectValue placeholder="Select status..." />
                       </SelectTrigger>
                       <SelectContent>
                         {APPLICATION_STATUS_OPTIONS.map((opt) => (
@@ -420,7 +420,7 @@ export default function ApplicationFormDialog({
                 />
               </div>
 
-              <div className="space-y-1.5 sm:col-span-2">
+              <div className="space-y-1.5 sm:col-span-2 lg:col-span-3">
                 <label className="text-xs font-medium text-zinc-400">
                   Description
                 </label>
@@ -432,7 +432,7 @@ export default function ApplicationFormDialog({
                 />
               </div>
 
-              <div className="space-y-1.5 sm:col-span-2">
+              <div className="space-y-1.5 sm:col-span-2 lg:col-span-3">
                 <label className="text-xs font-medium text-zinc-400">
                   Requirements
                 </label>
@@ -444,7 +444,7 @@ export default function ApplicationFormDialog({
                 />
               </div>
 
-              <div className="space-y-1.5 sm:col-span-2">
+              <div className="space-y-1.5 sm:col-span-2 lg:col-span-3">
                 <label className="text-xs font-medium text-zinc-400">
                   Notes
                 </label>
