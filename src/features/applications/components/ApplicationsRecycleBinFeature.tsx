@@ -2,7 +2,10 @@ import { useState } from 'react'
 import { Trash2, RefreshCw, Search, Briefcase } from 'lucide-react'
 import { useDeletedApplications } from '../hooks/useApplications'
 import { useApplicationMutations } from '../hooks/useApplicationMutations'
-import type { Application, ApplicationsQueryParams } from '../types/applicationType'
+import type {
+  Application,
+  ApplicationsQueryParams,
+} from '../types/applicationType'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
@@ -24,7 +27,8 @@ export default function ApplicationsRecycleBinFeature() {
   const [deleteTarget, setDeleteTarget] = useState<Application | null>(null)
 
   const { data, isLoading, isError } = useDeletedApplications(params)
-  const { restoreApplication, permanentDeleteApplication } = useApplicationMutations()
+  const { restoreApplication, permanentDeleteApplication } =
+    useApplicationMutations()
 
   const handleSearchSubmit = () => {
     if (searchInput.trim()) {
@@ -50,7 +54,9 @@ export default function ApplicationsRecycleBinFeature() {
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Applications Recycle Bin</h1>
+          <h1 className="text-2xl font-bold text-white">
+            Applications Recycle Bin
+          </h1>
           <p className="mt-0.5 text-sm text-zinc-500">
             Restore or permanently delete applications
           </p>
@@ -89,12 +95,16 @@ export default function ApplicationsRecycleBinFeature() {
         <div className="flex h-64 items-center justify-center">
           <div className="text-center">
             <div className="mx-auto h-8 w-8 animate-spin rounded-full border-4 border-indigo-500 border-t-transparent" />
-            <p className="mt-3 text-sm text-zinc-500">Loading deleted applications...</p>
+            <p className="mt-3 text-sm text-zinc-500">
+              Loading deleted applications...
+            </p>
           </div>
         </div>
       ) : isError ? (
         <div className="flex h-64 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900">
-          <p className="text-sm text-red-400">Failed to load deleted applications</p>
+          <p className="text-sm text-red-400">
+            Failed to load deleted applications
+          </p>
         </div>
       ) : applications.length > 0 ? (
         <>
@@ -102,30 +112,37 @@ export default function ApplicationsRecycleBinFeature() {
             <table className="w-full">
               <thead className="border-b border-zinc-800 bg-zinc-900">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-zinc-400">
+                  <th className="px-6 py-3 text-left text-xs font-semibold tracking-wider text-zinc-400 uppercase">
                     Position & Company
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-zinc-400">
+                  <th className="px-6 py-3 text-left text-xs font-semibold tracking-wider text-zinc-400 uppercase">
                     Status
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-zinc-400">
+                  <th className="px-6 py-3 text-left text-xs font-semibold tracking-wider text-zinc-400 uppercase">
                     Applied Date
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-zinc-400">
+                  <th className="px-6 py-3 text-left text-xs font-semibold tracking-wider text-zinc-400 uppercase">
                     Deleted At
                   </th>
-                  <th className="px-6 py-3 text-right text-xs font-semibold uppercase tracking-wider text-zinc-400">
+                  <th className="px-6 py-3 text-right text-xs font-semibold tracking-wider text-zinc-400 uppercase">
                     Actions
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-zinc-800 bg-zinc-950">
                 {applications.map((application) => (
-                  <tr key={application.id} className="transition-colors hover:bg-zinc-900/50">
+                  <tr
+                    key={application.id}
+                    className="transition-colors hover:bg-zinc-900/50"
+                  >
                     <td className="px-6 py-4">
                       <div>
-                        <div className="font-medium text-white">{application.position}</div>
-                        <div className="text-sm text-zinc-500">{application.company.name}</div>
+                        <div className="font-medium text-white">
+                          {application.position}
+                        </div>
+                        <div className="text-sm text-zinc-500">
+                          {application.company.name}
+                        </div>
                       </div>
                     </td>
                     <td className="px-6 py-4">
@@ -151,7 +168,7 @@ export default function ApplicationsRecycleBinFeature() {
                           size="sm"
                           onClick={() => setRestoreTarget(application)}
                         >
-                          <RefreshCw className="h-3.5 w-3.5 mr-1.5" />
+                          <RefreshCw className="mr-1.5 h-3.5 w-3.5" />
                           Restore
                         </Button>
                         <Button
@@ -159,7 +176,7 @@ export default function ApplicationsRecycleBinFeature() {
                           size="sm"
                           onClick={() => setDeleteTarget(application)}
                         >
-                          <Trash2 className="h-3.5 w-3.5 mr-1.5" />
+                          <Trash2 className="mr-1.5 h-3.5 w-3.5" />
                           Delete Forever
                         </Button>
                       </div>
@@ -197,9 +214,11 @@ export default function ApplicationsRecycleBinFeature() {
         </>
       ) : (
         <div className="space-y-3 rounded-xl border border-zinc-800 bg-zinc-900 p-12 text-center">
-          <Briefcase className="mx-auto h-12 w-12 text-zinc-750" />
-          <h3 className="text-lg font-bold text-white">No deleted applications</h3>
-          <p className="mx-auto max-w-sm text-sm text-zinc-550">
+          <Briefcase className="text-zinc-750 mx-auto h-12 w-12" />
+          <h3 className="text-lg font-bold text-white">
+            No deleted applications
+          </h3>
+          <p className="text-zinc-550 mx-auto max-w-sm text-sm">
             {searchInput
               ? 'Try adjusting your search query'
               : 'Deleted applications will appear here'}

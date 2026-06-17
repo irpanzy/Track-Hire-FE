@@ -54,7 +54,10 @@ export default function CompanyDetailDialog({
 
   return (
     <Dialog open={true} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto" showCloseButton={false}>
+      <DialogContent
+        className="max-h-[90vh] max-w-2xl overflow-y-auto"
+        showCloseButton={false}
+      >
         <DialogHeader>
           <DialogTitle className="flex items-center justify-between">
             <div className="flex-1">
@@ -161,17 +164,17 @@ export default function CompanyDetailDialog({
         </div>
 
         {/* Footer Actions */}
-        <div className="flex justify-end gap-3 border-t border-zinc-800 pt-4 -mx-4 -mb-4 p-4 bg-muted/50 rounded-b-xl">
+        <div className="bg-muted/50 -mx-4 -mb-4 flex justify-end gap-3 rounded-b-xl border-t border-zinc-800 p-4 pt-4">
           <Button
             variant="outline"
             onClick={onDelete}
             className="border-red-500/20 text-red-400 hover:bg-red-500/10"
           >
-            <Trash2 className="h-4 w-4 mr-2" />
+            <Trash2 className="mr-2 h-4 w-4" />
             Delete
           </Button>
           <Button onClick={onEdit}>
-            <Edit2 className="h-4 w-4 mr-2" />
+            <Edit2 className="mr-2 h-4 w-4" />
             Edit Company
           </Button>
         </div>

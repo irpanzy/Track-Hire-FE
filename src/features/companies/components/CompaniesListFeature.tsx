@@ -1,5 +1,14 @@
 import { useState, useCallback } from 'react'
-import { Plus, Building2, Globe, ExternalLink, Edit2, Trash2, Eye, Archive } from 'lucide-react'
+import {
+  Plus,
+  Building2,
+  Globe,
+  ExternalLink,
+  Edit2,
+  Trash2,
+  Eye,
+  Archive,
+} from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useCompanies } from '../hooks/useCompanies'
 import { useCompanyMutations } from '../hooks/useCompanyMutations'
@@ -100,13 +109,13 @@ export default function CompaniesListFeature() {
           )}
           <Link to="/companies/recycle-bin">
             <Button variant="outline" size="sm">
-              <Archive className="h-4 w-4 mr-2" />
+              <Archive className="mr-2 h-4 w-4" />
               <span className="hidden sm:inline">Recycle Bin</span>
               <span className="sm:hidden">Bin</span>
             </Button>
           </Link>
           <Button onClick={() => setIsFormOpen(true)}>
-            <Plus className="h-4 w-4 mr-2" />
+            <Plus className="mr-2 h-4 w-4" />
             <span className="hidden sm:inline">Add Company</span>
             <span className="sm:hidden">Add</span>
           </Button>
@@ -120,7 +129,9 @@ export default function CompaniesListFeature() {
         onSearchInputChange={setSearchInput}
         onSearchSubmit={handleSearchSubmit}
         onSearchKeyDown={handleSearchKeyDown}
-        onUserOnlyChange={(userOnly) => setParams((p) => ({ ...p, userOnly, page: 1 }))}
+        onUserOnlyChange={(userOnly) =>
+          setParams((p) => ({ ...p, userOnly, page: 1 }))
+        }
         onOrderChange={(order) => setParams((p) => ({ ...p, order, page: 1 }))}
       />
 
@@ -198,7 +209,7 @@ export default function CompaniesListFeature() {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between border-t border-zinc-850 pt-4">
+                <div className="border-zinc-850 flex items-center justify-between border-t pt-4">
                   <div className="text-xs text-zinc-500">
                     Added {new Date(company.createdAt).toLocaleDateString()}
                   </div>
@@ -207,7 +218,7 @@ export default function CompaniesListFeature() {
                       href={company.website}
                       target="_blank"
                       rel="noreferrer"
-                      className="flex items-center gap-1 text-xs text-indigo-400 hover:text-indigo-350"
+                      className="hover:text-indigo-350 flex items-center gap-1 text-xs text-indigo-400"
                       onClick={(e) => e.stopPropagation()}
                     >
                       <Globe className="h-3.5 w-3.5" />
@@ -246,9 +257,9 @@ export default function CompaniesListFeature() {
         </>
       ) : (
         <div className="space-y-3 rounded-xl border border-zinc-800 bg-zinc-900 p-12 text-center">
-          <Building2 className="mx-auto h-12 w-12 text-zinc-750" />
+          <Building2 className="text-zinc-750 mx-auto h-12 w-12" />
           <h3 className="text-lg font-bold text-white">No companies found</h3>
-          <p className="mx-auto max-w-sm text-sm text-zinc-550">
+          <p className="text-zinc-550 mx-auto max-w-sm text-sm">
             {searchInput
               ? 'Try adjusting your search query'
               : 'Add a new target company to start tracking'}

@@ -159,12 +159,12 @@ export default function CompanyFormDialog({
             <Button type="submit" disabled={isMutating}>
               {isSubmitting ? (
                 <>
-                  <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                   Saving...
                 </>
               ) : (
                 <>
-                  <Save className="h-4 w-4 mr-2" />
+                  <Save className="mr-2 h-4 w-4" />
                   {isEditMode ? 'Update' : 'Add'} Company
                 </>
               )}

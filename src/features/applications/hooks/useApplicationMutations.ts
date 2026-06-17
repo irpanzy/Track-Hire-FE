@@ -106,7 +106,8 @@ export const useApplicationMutations = () => {
     },
     onError: (error) => {
       const message =
-        error?.response?.data?.message || 'Failed to permanently delete application'
+        error?.response?.data?.message ||
+        'Failed to permanently delete application'
       toast.error(message)
     },
   })

@@ -48,7 +48,9 @@ export default function CompaniesRecycleBinFeature() {
       {/* Page Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-white">Companies Recycle Bin</h1>
+          <h1 className="text-2xl font-bold text-white">
+            Companies Recycle Bin
+          </h1>
           <p className="mt-0.5 text-sm text-zinc-500">
             Restore or permanently delete companies
           </p>
@@ -87,12 +89,16 @@ export default function CompaniesRecycleBinFeature() {
         <div className="flex h-64 items-center justify-center">
           <div className="text-center">
             <div className="mx-auto h-8 w-8 animate-spin rounded-full border-4 border-indigo-500 border-t-transparent" />
-            <p className="mt-3 text-sm text-zinc-500">Loading deleted companies...</p>
+            <p className="mt-3 text-sm text-zinc-500">
+              Loading deleted companies...
+            </p>
           </div>
         </div>
       ) : isError ? (
         <div className="flex h-64 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900">
-          <p className="text-sm text-red-400">Failed to load deleted companies</p>
+          <p className="text-sm text-red-400">
+            Failed to load deleted companies
+          </p>
         </div>
       ) : companies.length > 0 ? (
         <>
@@ -100,32 +106,39 @@ export default function CompaniesRecycleBinFeature() {
             <table className="w-full">
               <thead className="border-b border-zinc-800 bg-zinc-900">
                 <tr>
-                  <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-zinc-400">
+                  <th className="px-6 py-3 text-left text-xs font-semibold tracking-wider text-zinc-400 uppercase">
                     Company
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-zinc-400">
+                  <th className="px-6 py-3 text-left text-xs font-semibold tracking-wider text-zinc-400 uppercase">
                     Location
                   </th>
-                  <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wider text-zinc-400">
+                  <th className="px-6 py-3 text-left text-xs font-semibold tracking-wider text-zinc-400 uppercase">
                     Deleted At
                   </th>
-                  <th className="px-6 py-3 text-right text-xs font-semibold uppercase tracking-wider text-zinc-400">
+                  <th className="px-6 py-3 text-right text-xs font-semibold tracking-wider text-zinc-400 uppercase">
                     Actions
                   </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-zinc-800 bg-zinc-950">
                 {companies.map((company) => (
-                  <tr key={company.id} className="transition-colors hover:bg-zinc-900/50">
+                  <tr
+                    key={company.id}
+                    className="transition-colors hover:bg-zinc-900/50"
+                  >
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
                         <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900 font-bold text-white">
                           {company.name[0]?.toUpperCase()}
                         </div>
                         <div>
-                          <div className="font-medium text-white">{company.name}</div>
+                          <div className="font-medium text-white">
+                            {company.name}
+                          </div>
                           {company.website && (
-                            <div className="text-xs text-zinc-500">{company.website}</div>
+                            <div className="text-xs text-zinc-500">
+                              {company.website}
+                            </div>
                           )}
                         </div>
                       </div>
@@ -145,7 +158,7 @@ export default function CompaniesRecycleBinFeature() {
                           size="sm"
                           onClick={() => setRestoreTarget(company)}
                         >
-                          <RefreshCw className="h-3.5 w-3.5 mr-1.5" />
+                          <RefreshCw className="mr-1.5 h-3.5 w-3.5" />
                           Restore
                         </Button>
                         <Button
@@ -153,7 +166,7 @@ export default function CompaniesRecycleBinFeature() {
                           size="sm"
                           onClick={() => setDeleteTarget(company)}
                         >
-                          <Trash2 className="h-3.5 w-3.5 mr-1.5" />
+                          <Trash2 className="mr-1.5 h-3.5 w-3.5" />
                           Delete Forever
                         </Button>
                       </div>
@@ -191,9 +204,9 @@ export default function CompaniesRecycleBinFeature() {
         </>
       ) : (
         <div className="space-y-3 rounded-xl border border-zinc-800 bg-zinc-900 p-12 text-center">
-          <Building2 className="mx-auto h-12 w-12 text-zinc-750" />
+          <Building2 className="text-zinc-750 mx-auto h-12 w-12" />
           <h3 className="text-lg font-bold text-white">No deleted companies</h3>
-          <p className="mx-auto max-w-sm text-sm text-zinc-550">
+          <p className="text-zinc-550 mx-auto max-w-sm text-sm">
             {searchInput
               ? 'Try adjusting your search query'
               : 'Deleted companies will appear here'}

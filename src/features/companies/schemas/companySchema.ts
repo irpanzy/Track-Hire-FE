@@ -6,11 +6,7 @@ export const createCompanySchema = z.object({
     .string()
     .min(1, 'Company name is required')
     .max(200, 'Company name must be at most 200 characters'),
-  website: z
-    .string()
-    .url('Must be a valid URL')
-    .optional()
-    .or(z.literal('')),
+  website: z.string().url('Must be a valid URL').optional().or(z.literal('')),
   location: z
     .string()
     .max(200, 'Location must be at most 200 characters')
@@ -27,11 +23,7 @@ export const updateCompanySchema = z.object({
     .min(1, 'Company name is required')
     .max(200, 'Company name must be at most 200 characters')
     .optional(),
-  website: z
-    .string()
-    .url('Must be a valid URL')
-    .optional()
-    .or(z.literal('')),
+  website: z.string().url('Must be a valid URL').optional().or(z.literal('')),
   location: z
     .string()
     .max(200, 'Location must be at most 200 characters')

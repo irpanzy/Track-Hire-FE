@@ -9,7 +9,12 @@ export { default as ConfirmPermanentDeleteDialog } from './components/ConfirmPer
 export { default as CompaniesFilters } from './components/CompaniesFilters'
 
 // Export hooks
-export { useCompanies, useCompany, useDeletedCompanies, companiesKeys } from './hooks/useCompanies'
+export {
+  useCompanies,
+  useCompany,
+  useDeletedCompanies,
+  companiesKeys,
+} from './hooks/useCompanies'
 export { useCompanyMutations } from './hooks/useCompanyMutations'
 
 // Export types

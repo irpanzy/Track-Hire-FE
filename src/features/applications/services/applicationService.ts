@@ -81,21 +81,28 @@ export const applicationService = {
       {} as Record<string, unknown>
     )
 
-    const response = await api.get<ApplicationsResponse>('/applications/deleted/list', {
-      params: filteredParams,
-    })
+    const response = await api.get<ApplicationsResponse>(
+      '/applications/deleted/list',
+      {
+        params: filteredParams,
+      }
+    )
     return response.data
   },
 
   // Restore application
   restoreApplication: async (id: string): Promise<ApplicationResponse> => {
-    const response = await api.post<ApplicationResponse>(`/applications/${id}/restore`)
+    const response = await api.post<ApplicationResponse>(
+      `/applications/${id}/restore`
+    )
     return response.data
   },
 
   // Permanently delete application
   permanentDeleteApplication: async (id: string): Promise<DeleteResponse> => {
-    const response = await api.delete<DeleteResponse>(`/applications/${id}/permanent`)
+    const response = await api.delete<DeleteResponse>(
+      `/applications/${id}/permanent`
+    )
     return response.data
   },
 

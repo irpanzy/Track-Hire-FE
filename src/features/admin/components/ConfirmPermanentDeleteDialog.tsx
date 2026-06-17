@@ -24,7 +24,10 @@ export default function ConfirmPermanentDeleteDialog({
 }: ConfirmPermanentDeleteDialogProps) {
   return (
     <Dialog open={true} onOpenChange={onCancel}>
-      <DialogContent className="max-w-md border-red-900/50" showCloseButton={false}>
+      <DialogContent
+        className="max-w-md border-red-900/50"
+        showCloseButton={false}
+      >
         <DialogHeader>
           <DialogTitle className="flex items-center justify-between">
             <div className="flex items-center gap-3">
@@ -94,12 +97,12 @@ export default function ConfirmPermanentDeleteDialog({
           >
             {isLoading ? (
               <>
-                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 Deleting...
               </>
             ) : (
               <>
-                <AlertTriangle className="h-4 w-4 mr-2" />
+                <AlertTriangle className="mr-2 h-4 w-4" />
                 Delete Permanently
               </>
             )}

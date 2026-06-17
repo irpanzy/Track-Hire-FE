@@ -1,5 +1,9 @@
 import { useQuery } from '@tanstack/react-query'
-import { getCompanies, getCompanyById, getDeletedCompanies } from '../services/companyService'
+import {
+  getCompanies,
+  getCompanyById,
+  getDeletedCompanies,
+} from '../services/companyService'
 import type { CompaniesQueryParams } from '../types/companyType'
 
 // Query key factory

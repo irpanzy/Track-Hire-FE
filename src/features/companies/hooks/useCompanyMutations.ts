@@ -34,8 +34,13 @@ export const useCompanyMutations = () => {
 
   // Update company mutation
   const updateCompanyMutation = useMutation({
-    mutationFn: ({ id, payload }: { id: string; payload: UpdateCompanyPayload }) =>
-      updateCompany(id, payload),
+    mutationFn: ({
+      id,
+      payload,
+    }: {
+      id: string
+      payload: UpdateCompanyPayload
+    }) => updateCompany(id, payload),
     onSuccess: (data, variables) => {
       queryClient.invalidateQueries({ queryKey: companiesKeys.lists() })
       queryClient.invalidateQueries({
