@@ -11,7 +11,9 @@ import ForgotPassword from './pages/auth/ForgotPassword'
 import ResetPassword from './pages/auth/ResetPassword'
 import Dashboard from './pages/dashboard/Dashboard'
 import Applications from './pages/applications/Applications'
+import ApplicationsRecycleBin from './pages/applications/ApplicationsRecycleBin'
 import Companies from './pages/companies/Companies'
+import CompaniesRecycleBin from './pages/companies/CompaniesRecycleBin'
 import Reminders from './pages/reminders/Reminders'
 import Profile from './pages/profile/Profile'
 import AdminUsers from './pages/admin/AdminUsers'
@@ -65,8 +67,16 @@ export const router = createBrowserRouter([
                 element: <Applications />,
               },
               {
+                path: 'applications/recycle-bin',
+                element: <ApplicationsRecycleBin />,
+              },
+              {
                 path: 'companies',
                 element: <Companies />,
+              },
+              {
+                path: 'companies/recycle-bin',
+                element: <CompaniesRecycleBin />,
               },
               {
                 path: 'reminders',
