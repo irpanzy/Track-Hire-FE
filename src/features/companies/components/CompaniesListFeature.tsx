@@ -156,9 +156,9 @@ export default function CompaniesListFeature() {
                 className="group flex h-48 flex-col justify-between rounded-xl border border-zinc-800 bg-zinc-900 p-5 shadow-sm transition-colors hover:border-zinc-700"
               >
                 <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-950 text-lg font-bold text-white transition-colors group-hover:text-indigo-400">
-                      {company.name[0]?.toUpperCase()}
+                  <div className="flex items-start gap-3">
+                    <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-950 text-lg font-bold text-white transition-colors group-hover:text-indigo-400">
+                      {company.name.substring(0, 2).toUpperCase()}
                     </div>
                     <div>
                       <h3 className="text-base font-bold text-white transition-colors group-hover:text-indigo-300">

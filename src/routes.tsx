@@ -15,6 +15,7 @@ import ApplicationsRecycleBin from './pages/applications/ApplicationsRecycleBin'
 import Companies from './pages/companies/Companies'
 import CompaniesRecycleBin from './pages/companies/CompaniesRecycleBin'
 import Reminders from './pages/reminders/Reminders'
+import RemindersRecycleBin from './pages/reminders/RemindersRecycleBin'
 import Profile from './pages/profile/Profile'
 import AdminUsers from './pages/admin/AdminUsers'
 import RecycleBin from './pages/admin/RecycleBin'
@@ -81,6 +82,10 @@ export const router = createBrowserRouter([
               {
                 path: 'reminders',
                 element: <Reminders />,
+              },
+              {
+                path: 'reminders/recycle-bin',
+                element: <RemindersRecycleBin />,
               },
               {
                 path: 'profile',

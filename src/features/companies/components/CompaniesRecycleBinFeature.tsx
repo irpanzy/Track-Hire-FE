@@ -127,9 +127,9 @@ export default function CompaniesRecycleBinFeature() {
                     className="transition-colors hover:bg-zinc-900/50"
                   >
                     <td className="px-6 py-4">
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900 font-bold text-white">
-                          {company.name[0]?.toUpperCase()}
+                      <div className="flex items-start gap-3">
+                        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900 font-bold text-white">
+                          {company.name.substring(0, 2).toUpperCase()}
                         </div>
                         <div>
                           <div className="font-medium text-white">
