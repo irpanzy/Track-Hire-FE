@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Trash2, RefreshCw, Search, Building2 } from 'lucide-react'
+import { Trash2, RefreshCw, Search, Building2, ArrowLeft } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { useDeletedCompanies } from '../hooks/useCompanies'
 import { useCompanyMutations } from '../hooks/useCompanyMutations'
 import type { Company, CompaniesQueryParams } from '../types/companyType'
@@ -7,6 +8,8 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import ConfirmRestoreDialog from './ConfirmRestoreDialog'
 import ConfirmPermanentDeleteDialog from './ConfirmPermanentDeleteDialog'
+import { RetroWindow, RetroButton } from '@/components/ui/retro-window'
+import retroCompanyIcon from '@/assets/retro-company.png'
 
 const LIMIT = 10
 
@@ -45,26 +48,33 @@ export default function CompaniesRecycleBinFeature() {
 
   return (
     <div className="space-y-6">
-      {/* Page Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-white">
-            Companies Recycle Bin
-          </h1>
-          <p className="mt-0.5 text-sm text-zinc-500">
-            Restore or permanently delete companies
-          </p>
-        </div>
-        {pagination && (
-          <div className="flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900 px-4 py-2">
-            <Trash2 className="h-4 w-4 text-red-400" />
-            <span className="text-sm font-semibold text-white">
-              {pagination.total}
-            </span>
-            <span className="text-sm text-zinc-500">deleted</span>
-          </div>
-        )}
-      </div>
+      {/* Retro Window Header */}
+      <RetroWindow
+        title="Companies Recycle Bin"
+        icon={
+          <img
+            src={retroCompanyIcon}
+            alt="Recycle Bin"
+            className="mt-1 h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7"
+          />
+        }
+        count={pagination?.total}
+        actions={
+          <Link to="/companies">
+            <RetroButton
+              variant="secondary"
+              icon={<ArrowLeft className="h-4 w-4" />}
+            >
+              <span className="hidden sm:inline">Back to Companies</span>
+              <span className="sm:hidden">Back</span>
+            </RetroButton>
+          </Link>
+        }
+      >
+        <p className="font-mono text-xs text-zinc-500">
+          Restore or permanently delete companies
+        </p>
+      </RetroWindow>
 
       {/* Search */}
       <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-4">

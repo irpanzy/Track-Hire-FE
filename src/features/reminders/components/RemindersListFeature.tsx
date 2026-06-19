@@ -9,7 +9,6 @@ import {
   Archive,
   Edit2,
   Building2,
-  AlarmClock,
   SlidersHorizontal,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
@@ -26,6 +25,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { RetroWindow, RetroButton } from '@/components/ui/retro-window'
+import retroAlarmIcon from '@/assets/retro-alarm.png'
 
 const LIMIT = 20
 
@@ -98,41 +99,43 @@ export default function RemindersListFeature({
 
   return (
     <div className="space-y-6">
-      {/* Page Header */}
-      <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
-        <div>
-          <h1 className="text-2xl font-bold text-white">Reminders</h1>
-          <p className="mt-0.5 text-sm text-zinc-500">
-            Set and manage deadlines or interview follow-ups
-          </p>
-        </div>
-        <div className="flex items-center gap-3">
-          {pagination && (
-            <div className="hidden items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900 px-4 py-2 sm:flex">
-              <AlarmClock className="h-4 w-4 text-indigo-400" />
-              <span className="text-sm font-semibold text-white">
-                {pagination.total}
-              </span>
-              <span className="text-sm text-zinc-500">reminders</span>
-            </div>
-          )}
-          <Link to="/reminders/recycle-bin">
-            <button className="flex cursor-pointer items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900 px-4 py-2 text-sm font-semibold text-white transition-all hover:bg-zinc-800 active:scale-95">
-              <Archive className="h-4 w-4" />
-              <span className="hidden sm:inline">Recycle Bin</span>
-              <span className="sm:hidden">Bin</span>
-            </button>
-          </Link>
-          <button
-            onClick={() => setIsFormOpen(true)}
-            className="flex cursor-pointer items-center gap-2 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-600/20 transition-all hover:bg-indigo-500 active:scale-95"
-          >
-            <Plus className="h-4 w-4" />
-            <span className="hidden sm:inline">Add Reminder</span>
-            <span className="sm:hidden">Add</span>
-          </button>
-        </div>
-      </div>
+      {/* Retro Window Header */}
+      <RetroWindow
+        title="Reminders"
+        icon={
+          <img
+            src={retroAlarmIcon}
+            alt="Reminders"
+            className="mt-1 h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7"
+          />
+        }
+        count={pagination?.total}
+        actions={
+          <div className="flex items-center gap-2">
+            <Link to="/reminders/recycle-bin">
+              <RetroButton
+                variant="secondary"
+                icon={<Archive className="h-4 w-4" />}
+              >
+                <span className="hidden sm:inline">Recycle Bin</span>
+                <span className="sm:hidden">Bin</span>
+              </RetroButton>
+            </Link>
+            <RetroButton
+              variant="primary"
+              icon={<Plus className="h-4 w-4" />}
+              onClick={() => setIsFormOpen(true)}
+            >
+              <span className="hidden sm:inline">Add Reminder</span>
+              <span className="sm:hidden">Add</span>
+            </RetroButton>
+          </div>
+        }
+      >
+        <p className="font-mono text-xs text-zinc-500">
+          Set and manage deadlines or interview follow-ups
+        </p>
+      </RetroWindow>
 
       {/* Filters */}
       <div className="flex flex-wrap items-center gap-3 rounded-xl border border-zinc-800 bg-zinc-900 p-4">

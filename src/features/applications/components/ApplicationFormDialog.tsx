@@ -27,6 +27,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
+import { RetroLoading } from '@/components/ui/retro-window'
 
 interface ApplicationFormDialogProps {
   application: Application | null
@@ -43,13 +44,14 @@ export default function ApplicationFormDialog({
 
   const [extractUrlInput, setExtractUrlInput] = useState('')
   const [showAiAlert, setShowAiAlert] = useState(false)
+  const [isComplete, setIsComplete] = useState(false)
 
   const {
     register,
     control,
     handleSubmit,
     setValue,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<CreateApplicationFormValues>({
     resolver: zodResolver(createApplicationSchema),
     defaultValues: isEditMode
@@ -118,14 +120,22 @@ export default function ApplicationFormDialog({
         { id: application.id, payload },
         {
           onSuccess: () => {
-            onClose()
+            setIsComplete(true)
+            // Brief delay to show 100% before closing
+            setTimeout(() => {
+              onClose()
+            }, 500)
           },
         }
       )
     } else {
       createApplication.mutate(payload, {
         onSuccess: () => {
-          onClose()
+          setIsComplete(true)
+          // Brief delay to show 100% before closing
+          setTimeout(() => {
+            onClose()
+          }, 500)
         },
       })
     }
@@ -136,12 +146,27 @@ export default function ApplicationFormDialog({
     updateApplication.isPending ||
     extractUrl.isPending
 
+  const isSubmitting =
+    createApplication.isPending || updateApplication.isPending
+
   return (
     <Dialog open={true} onOpenChange={onClose}>
       <DialogContent
         className="max-h-[90vh] w-[98vw] !max-w-none overflow-y-auto sm:w-[95vw] md:w-[90vw] lg:w-[85vw] xl:w-[80vw]"
         showCloseButton={false}
       >
+        {/* RetroLoading Overlay */}
+        {isSubmitting && (
+          <div className="absolute inset-0 z-50 flex items-center justify-center rounded-lg bg-zinc-950/95 backdrop-blur-sm">
+            <RetroLoading
+              text={
+                isEditMode ? 'Updating application' : 'Creating application'
+              }
+              isComplete={isComplete}
+            />
+          </div>
+        )}
+
         <DialogHeader>
           <DialogTitle className="flex items-center justify-between text-xl font-bold">
             {isEditMode ? 'Edit Application' : 'Add New Application'}

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Bell, X, Loader2, Save, Calendar, Link2 } from 'lucide-react'
@@ -21,6 +22,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
+import { RetroLoading } from '@/components/ui/retro-window'
 
 // Helper to convert ISO date to datetime-local format
 const toDatetimeLocal = (isoString: string) => {
@@ -50,6 +52,7 @@ export default function ReminderFormDialog({
 }: ReminderFormDialogProps) {
   const isEditMode = !!reminder
   const { createReminder, updateReminder } = useReminderMutations()
+  const [isComplete, setIsComplete] = useState(false)
 
   const {
     register,
@@ -84,10 +87,26 @@ export default function ReminderFormDialog({
     if (isEditMode) {
       updateReminder.mutate(
         { id: reminder.id, payload },
-        { onSuccess: () => onClose() }
+        {
+          onSuccess: () => {
+            setIsComplete(true)
+            // Brief delay to show 100% before closing
+            setTimeout(() => {
+              onClose()
+            }, 500)
+          },
+        }
       )
     } else {
-      createReminder.mutate(payload, { onSuccess: () => onClose() })
+      createReminder.mutate(payload, {
+        onSuccess: () => {
+          setIsComplete(true)
+          // Brief delay to show 100% before closing
+          setTimeout(() => {
+            onClose()
+          }, 500)
+        },
+      })
     }
   }
 
@@ -99,6 +118,16 @@ export default function ReminderFormDialog({
         className="max-h-[90vh] w-[98vw] !max-w-none overflow-y-auto sm:w-[90vw] md:w-[80vw] lg:w-[70vw] xl:w-[60vw]"
         showCloseButton={false}
       >
+        {/* RetroLoading Overlay */}
+        {isMutating && (
+          <div className="absolute inset-0 z-50 flex items-center justify-center rounded-lg bg-zinc-950/95 backdrop-blur-sm">
+            <RetroLoading
+              text={isEditMode ? 'Updating reminder' : 'Creating reminder'}
+              isComplete={isComplete}
+            />
+          </div>
+        )}
+
         <DialogHeader>
           <DialogTitle className="flex items-center justify-between">
             <div className="flex items-center gap-2">
