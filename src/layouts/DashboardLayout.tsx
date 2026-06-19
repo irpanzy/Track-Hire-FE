@@ -1,11 +1,6 @@
-import { useState } from 'react'
-import {
-  Link,
-  NavLink,
-  Outlet,
-  useNavigate,
-  useLocation,
-} from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { NavLink, Outlet, useNavigate, useLocation } from 'react-router-dom'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useAuthStore } from '@/features/auth'
 import { toast } from 'sonner'
 import {
@@ -17,17 +12,28 @@ import {
   User,
   Menu,
   X,
-  Plus,
   Shield,
   Trash2,
+  Clock,
 } from 'lucide-react'
 import logoLight from '@/assets/logo-track-hire-light.png'
+import retroAdminIcon from '@/assets/retro-admin.png'
+import retroUserIcon from '@/assets/retro-user.png'
 
 export default function DashboardLayout() {
   const { user, logout } = useAuthStore()
   const navigate = useNavigate()
   const location = useLocation()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [currentTime, setCurrentTime] = useState(new Date())
+
+  // Update clock every second
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date())
+    }, 1000)
+    return () => clearInterval(timer)
+  }, [])
 
   const handleLogout = () => {
     logout()
@@ -159,113 +165,140 @@ export default function DashboardLayout() {
       </aside>
 
       {/* Mobile Drawer (Overlay & Sidebar) */}
-      {sidebarOpen && (
-        <div className="fixed inset-0 z-45 flex md:hidden">
-          {/* Overlay */}
-          <div
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
-            onClick={() => setSidebarOpen(false)}
-          />
+      <AnimatePresence>
+        {sidebarOpen && (
+          <div className="fixed inset-0 z-45 flex md:hidden">
+            {/* Overlay with fade animation */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black/60 backdrop-blur-sm"
+              onClick={() => setSidebarOpen(false)}
+            />
 
-          <aside className="border-zinc-850 relative flex w-64 max-w-xs flex-col border-r bg-zinc-900 p-4">
-            <div className="mb-8 flex items-center justify-between">
-              <img src={logoLight} alt="Track Hire" className="h-12 w-auto" />
-              <button
-                onClick={() => setSidebarOpen(false)}
-                className="cursor-pointer rounded-lg p-1 text-zinc-400 hover:bg-zinc-800 hover:text-white"
-              >
-                <X className="h-6 w-6" />
-              </button>
-            </div>
+            {/* Sidebar with slide animation */}
+            <motion.aside
+              initial={{ x: -280 }}
+              animate={{ x: 0 }}
+              exit={{ x: -280 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="border-zinc-850 relative flex w-64 max-w-xs flex-col border-r bg-zinc-900 p-4"
+            >
+              <div className="mb-8 flex items-center justify-between">
+                <img src={logoLight} alt="Track Hire" className="h-12 w-auto" />
+                <button
+                  onClick={() => setSidebarOpen(false)}
+                  className="cursor-pointer rounded-lg p-1 text-zinc-400 hover:bg-zinc-800 hover:text-white"
+                >
+                  <X className="h-6 w-6" />
+                </button>
+              </div>
 
-            <nav className="flex-1 space-y-1">
-              {navItems.map((item) => {
-                const Icon = item.icon
-                return (
-                  <NavLink
-                    key={item.name}
-                    to={item.path}
-                    onClick={() => setSidebarOpen(false)}
-                    className={({ isActive }) =>
-                      `flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-all ${
-                        isActive
-                          ? 'bg-indigo-650 text-white shadow-lg'
-                          : 'hover:bg-zinc-850 text-zinc-400 hover:text-white'
-                      }`
-                    }
-                  >
-                    <Icon className="h-5 w-5" />
-                    {item.name}
-                  </NavLink>
-                )
-              })}
-
-              {/* Admin Section — mobile */}
-              {adminNavItems.length > 0 && (
-                <>
-                  <div className="my-2 border-t border-zinc-800" />
-                  <p className="px-4 pb-1 text-[10px] font-semibold tracking-widest text-zinc-600 uppercase">
-                    Admin
-                  </p>
-                  {adminNavItems.map((item) => {
-                    const Icon = item.icon
-                    return (
+              <nav className="flex-1 space-y-1">
+                {navItems.map((item, index) => {
+                  const Icon = item.icon
+                  return (
+                    <motion.div
+                      key={item.name}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                    >
                       <NavLink
-                        key={item.name}
                         to={item.path}
                         onClick={() => setSidebarOpen(false)}
                         className={({ isActive }) =>
                           `flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-all ${
                             isActive
-                              ? 'bg-indigo-500/15 text-indigo-300 ring-1 ring-indigo-500/20'
-                              : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
+                              ? 'bg-indigo-650 text-white shadow-lg'
+                              : 'hover:bg-zinc-850 text-zinc-400 hover:text-white'
                           }`
                         }
                       >
                         <Icon className="h-5 w-5" />
                         {item.name}
                       </NavLink>
-                    )
-                  })}
-                </>
-              )}
-            </nav>
+                    </motion.div>
+                  )
+                })}
 
-            <div className="border-zinc-850 border-t pt-4">
-              <div className="mb-3 flex items-center gap-3 px-2 py-2">
-                <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-indigo-500/30 bg-indigo-500/20">
-                  {user?.avatarUrl ? (
-                    <img
-                      src={user.avatarUrl}
-                      alt={user.name}
-                      className="h-full w-full object-cover"
-                    />
-                  ) : (
-                    <span className="font-bold text-indigo-300">
-                      {user?.name?.[0]?.toUpperCase() || 'U'}
-                    </span>
-                  )}
+                {/* Admin Section — mobile */}
+                {adminNavItems.length > 0 && (
+                  <>
+                    <div className="my-2 border-t border-zinc-800" />
+                    <p className="px-4 pb-1 text-[10px] font-semibold tracking-widest text-zinc-600 uppercase">
+                      Admin
+                    </p>
+                    {adminNavItems.map((item, index) => {
+                      const Icon = item.icon
+                      return (
+                        <motion.div
+                          key={item.name}
+                          initial={{ opacity: 0, x: -20 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{
+                            delay: (navItems.length + index) * 0.05,
+                          }}
+                        >
+                          <NavLink
+                            to={item.path}
+                            onClick={() => setSidebarOpen(false)}
+                            className={({ isActive }) =>
+                              `flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-all ${
+                                isActive
+                                  ? 'bg-indigo-500/15 text-indigo-300 ring-1 ring-indigo-500/20'
+                                  : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
+                              }`
+                            }
+                          >
+                            <Icon className="h-5 w-5" />
+                            {item.name}
+                          </NavLink>
+                        </motion.div>
+                      )
+                    })}
+                  </>
+                )}
+              </nav>
+
+              <div className="border-zinc-850 border-t pt-4">
+                <div className="mb-3 flex items-center gap-3 px-2 py-2">
+                  <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-indigo-500/30 bg-indigo-500/20">
+                    {user?.avatarUrl ? (
+                      <img
+                        src={user.avatarUrl}
+                        alt={user.name}
+                        className="h-full w-full object-cover"
+                      />
+                    ) : (
+                      <span className="font-bold text-indigo-300">
+                        {user?.name?.[0]?.toUpperCase() || 'U'}
+                      </span>
+                    )}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="truncate text-sm font-semibold text-white">
+                      {user?.name || 'User'}
+                    </p>
+                    <p className="truncate text-xs text-zinc-500">
+                      {user?.email || 'user@example.com'}
+                    </p>
+                  </div>
                 </div>
-                <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-semibold text-white">
-                    {user?.name || 'User'}
-                  </p>
-                  <p className="truncate text-xs text-zinc-500">
-                    {user?.email || 'user@example.com'}
-                  </p>
-                </div>
+                <button
+                  onClick={handleLogout}
+                  className="flex w-full cursor-pointer items-center gap-3 rounded-lg px-4 py-2.5 text-sm font-medium text-red-400 transition-colors hover:bg-red-500/10 hover:text-red-300"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Sign Out
+                </button>
               </div>
-              <button
-                onClick={handleLogout}
-                className="flex w-full cursor-pointer items-center gap-3 rounded-lg px-4 py-2.5 text-sm font-medium text-red-400 transition-colors hover:bg-red-500/10 hover:text-red-300"
-              >
-                <LogOut className="h-4 w-4" />
-                Sign Out
-              </button>
-            </div>
-          </aside>
-        </div>
-      )}
+            </motion.aside>
+          </div>
+        )}
+      </AnimatePresence>
 
       {/* Main Content Area */}
       <div className="flex flex-1 flex-col overflow-hidden">
@@ -284,28 +317,72 @@ export default function DashboardLayout() {
           </div>
 
           <div className="flex items-center gap-4">
-            {/* Quick action button */}
-            <Link
-              to="/applications"
-              className="hidden cursor-pointer items-center gap-2 rounded-md bg-indigo-600 px-3.5 py-1.5 text-xs font-semibold text-white shadow-lg shadow-indigo-600/15 transition-all hover:bg-indigo-500 active:scale-95 sm:flex"
+            {/* Retro Digital Clock */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="border-retro-orange/30 hidden items-center gap-2 rounded-lg border-2 bg-zinc-950 px-3 py-1.5 sm:flex"
             >
-              <Plus className="h-3.5 w-3.5" />
-              Add Application
-            </Link>
+              <Clock className="text-retro-orange h-4 w-4" />
+              <div className="text-retro-cyan font-mono text-sm font-bold tracking-wider">
+                {currentTime.toLocaleTimeString('en-US', {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  second: '2-digit',
+                  hour12: false,
+                })}
+              </div>
+            </motion.div>
 
-            {/* Notification button */}
-            <button className="relative cursor-pointer rounded-lg p-2 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-white">
-              <span className="absolute top-1.5 right-1.5 h-2 w-2 animate-pulse rounded-full bg-indigo-500" />
-              <Bell className="h-5 w-5" />
-            </button>
+            {/* User Badge */}
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="hidden items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-1.5 lg:flex"
+            >
+              <div className="flex h-7 w-7 items-center justify-center overflow-hidden rounded-full border border-indigo-500/30 bg-indigo-500/20">
+                {user?.avatarUrl ? (
+                  <img
+                    src={user.avatarUrl}
+                    alt={user.name}
+                    className="h-full w-full object-cover"
+                  />
+                ) : (
+                  <span className="text-xs font-bold text-indigo-300">
+                    {user?.name?.[0]?.toUpperCase() || 'U'}
+                  </span>
+                )}
+              </div>
+              <div className="min-w-0">
+                <p className="truncate text-xs font-semibold text-white">
+                  {user?.name || 'User'}
+                </p>
+                <div className="flex items-center gap-1">
+                  <img
+                    src={
+                      user?.role === 'ADMIN' ? retroAdminIcon : retroUserIcon
+                    }
+                    alt={user?.role === 'ADMIN' ? 'Admin' : 'User'}
+                    className="h-3 w-3"
+                  />
+                  <p className="truncate text-[10px] text-zinc-500">
+                    {user?.role === 'ADMIN' ? 'Admin' : 'User'}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </header>
 
         {/* Content Outlet */}
         <main className="flex-1 overflow-y-auto bg-zinc-950 p-6 md:p-8">
-          <div className="mx-auto max-w-7xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="mx-auto max-w-7xl"
+          >
             <Outlet />
-          </div>
+          </motion.div>
         </main>
       </div>
     </div>
