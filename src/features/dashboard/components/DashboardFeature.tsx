@@ -5,14 +5,17 @@ import StatusChart from './StatusChart'
 import MonthlyTrendChart from './MonthlyTrendChart'
 import SourceChart from './SourceChart'
 import RecentApplications from './RecentApplications'
+import { RetroWindow } from '@/components/ui/retro-window'
+import retroDashboardIcon from '@/assets/retro-dashboard.png'
 
 export default function DashboardFeature() {
   const { data, isLoading, isError } = useDashboardStats()
 
   if (isLoading) {
     return (
-      <div className="flex h-96 items-center justify-center">
+      <div className="flex h-96 flex-col items-center justify-center gap-3">
         <Loader2 className="h-8 w-8 animate-spin text-indigo-500" />
+        <p className="text-sm text-zinc-500">Loading dashboard...</p>
       </div>
     )
   }
@@ -29,15 +32,22 @@ export default function DashboardFeature() {
 
   return (
     <div className="animate-fade-in space-y-6">
-      {/* Header */}
-      <div>
-        <h1 className="text-3xl font-extrabold tracking-tight text-white">
-          Dashboard
-        </h1>
-        <p className="mt-1 text-zinc-400">
+      {/* Retro Window Header */}
+      <RetroWindow
+        title="Dashboard"
+        icon={
+          <img
+            src={retroDashboardIcon}
+            alt="Dashboard"
+            className="mt-1 h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7"
+          />
+        }
+        count={stats.totalApplications}
+      >
+        <p className="font-mono text-xs text-zinc-500">
           Overview of your job application tracking
         </p>
-      </div>
+      </RetroWindow>
 
       {/* Stats Cards */}
       <StatsCards

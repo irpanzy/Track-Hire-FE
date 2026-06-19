@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Building2, Loader2, Save, X } from 'lucide-react'
@@ -16,6 +17,7 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
+import { RetroLoading } from '@/components/ui/retro-window'
 
 interface CompanyFormDialogProps {
   company: Company | null
@@ -28,6 +30,7 @@ export default function CompanyFormDialog({
 }: CompanyFormDialogProps) {
   const isEditMode = !!company
   const { createCompany, updateCompany } = useCompanyMutations()
+  const [isComplete, setIsComplete] = useState(false)
 
   const {
     register,
@@ -62,14 +65,22 @@ export default function CompanyFormDialog({
         { id: company.id, payload },
         {
           onSuccess: () => {
-            onClose()
+            setIsComplete(true)
+            // Brief delay to show 100% before closing
+            setTimeout(() => {
+              onClose()
+            }, 500)
           },
         }
       )
     } else {
       createCompany.mutate(payload, {
         onSuccess: () => {
-          onClose()
+          setIsComplete(true)
+          // Brief delay to show 100% before closing
+          setTimeout(() => {
+            onClose()
+          }, 500)
         },
       })
     }
@@ -80,6 +91,16 @@ export default function CompanyFormDialog({
   return (
     <Dialog open={true} onOpenChange={onClose}>
       <DialogContent className="max-w-md" showCloseButton={false}>
+        {/* RetroLoading Overlay */}
+        {isMutating && (
+          <div className="absolute inset-0 z-50 flex items-center justify-center rounded-lg bg-zinc-950/95 backdrop-blur-sm">
+            <RetroLoading
+              text={isEditMode ? 'Updating company' : 'Adding company'}
+              isComplete={isComplete}
+            />
+          </div>
+        )}
+
         <DialogHeader>
           <DialogTitle className="flex items-center justify-between">
             <div className="flex items-center gap-2">

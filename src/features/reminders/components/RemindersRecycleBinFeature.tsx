@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Trash2, RefreshCw, Bell, AlarmClock } from 'lucide-react'
+import { Trash2, RefreshCw, Bell, AlarmClock, ArrowLeft } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { useDeletedReminders } from '../hooks/useReminders'
 import { useReminderMutations } from '../hooks/useReminderMutations'
 import type {
@@ -8,6 +9,8 @@ import type {
 } from '../types/reminderType'
 import { Button } from '@/components/ui/button'
 import ConfirmPermanentDeleteReminderDialog from './ConfirmPermanentDeleteReminderDialog'
+import { RetroWindow, RetroButton } from '@/components/ui/retro-window'
+import retroAlarmIcon from '@/assets/retro-alarm.png'
 
 const LIMIT = 10
 
@@ -27,26 +30,33 @@ export default function RemindersRecycleBinFeature() {
 
   return (
     <div className="space-y-6">
-      {/* Page Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-bold text-white">
-            Reminders Recycle Bin
-          </h1>
-          <p className="mt-0.5 text-sm text-zinc-500">
-            Restore or permanently delete reminders
-          </p>
-        </div>
-        {pagination && (
-          <div className="flex items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-900 px-4 py-2">
-            <Trash2 className="h-4 w-4 text-red-400" />
-            <span className="text-sm font-semibold text-white">
-              {pagination.total}
-            </span>
-            <span className="text-sm text-zinc-500">deleted</span>
-          </div>
-        )}
-      </div>
+      {/* Retro Window Header */}
+      <RetroWindow
+        title="Reminders Recycle Bin"
+        icon={
+          <img
+            src={retroAlarmIcon}
+            alt="Recycle Bin"
+            className="mt-1 h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7"
+          />
+        }
+        count={pagination?.total}
+        actions={
+          <Link to="/reminders">
+            <RetroButton
+              variant="secondary"
+              icon={<ArrowLeft className="h-4 w-4" />}
+            >
+              <span className="hidden sm:inline">Back to Reminders</span>
+              <span className="sm:hidden">Back</span>
+            </RetroButton>
+          </Link>
+        }
+      >
+        <p className="font-mono text-xs text-zinc-500">
+          Restore or permanently delete reminders
+        </p>
+      </RetroWindow>
 
       {/* Content */}
       {isLoading ? (
