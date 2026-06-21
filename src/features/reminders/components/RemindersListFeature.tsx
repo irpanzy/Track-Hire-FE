@@ -138,68 +138,75 @@ export default function RemindersListFeature({
       </RetroWindow>
 
       {/* Filters */}
-      <div className="glass flex flex-wrap items-center gap-3 rounded-xl p-4">
-        <div className="flex items-center gap-2 text-xs font-semibold text-zinc-400">
-          <SlidersHorizontal className="h-3.5 w-3.5" />
-          Filter
+      <div className="glass space-y-4 rounded-xl p-4">
+        <div className="flex items-center gap-2 text-zinc-400">
+          <SlidersHorizontal className="h-4 w-4" />
+          <span className="text-sm font-medium">Filters</span>
         </div>
-        <div className="flex flex-wrap gap-2">
-          {(['all', 'pending', 'done'] as const).map((status) => (
-            <button
-              key={status}
-              onClick={() => setFilterStatus(status)}
-              className={`rounded-md px-3 py-1 text-xs font-semibold capitalize transition-colors ${
-                filterStatus === status
-                  ? 'bg-indigo-600 text-white'
-                  : 'border border-zinc-700 text-zinc-400 hover:bg-zinc-800 hover:text-white'
-              }`}
+
+        <div className="grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
+          {/* Status Filter */}
+          <div>
+            <Select
+              value={filterStatus}
+              onValueChange={(v) =>
+                setFilterStatus(v as 'all' | 'pending' | 'done')
+              }
             >
-              {status === 'all'
-                ? 'All'
-                : status === 'pending'
-                  ? 'Upcoming'
-                  : 'Done'}
-            </button>
-          ))}
-        </div>
-        <div className="ml-auto flex items-center gap-2">
-          <span className="text-xs text-zinc-500">Sort by</span>
-          <Select
-            value={params.sortBy}
-            onValueChange={(v) =>
-              setParams((p) => ({
-                ...p,
-                sortBy: v as RemindersQueryParams['sortBy'],
-                page: 1,
-              }))
-            }
-          >
-            <SelectTrigger className="h-8 w-[140px] text-xs">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="reminderDate">Reminder Date</SelectItem>
-              <SelectItem value="createdAt">Created At</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select
-            value={params.order}
-            onValueChange={(v) =>
-              setParams((p) => ({
-                ...p,
-                order: v as 'asc' | 'desc',
-                page: 1,
-              }))
-            }
-          >
-            <SelectTrigger className="h-8 w-[90px] text-xs">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="asc">Asc</SelectItem>
-              <SelectItem value="desc">Desc</SelectItem>
-            </SelectContent>
-          </Select>
+              <SelectTrigger className="h-[38px] w-full border-white/[0.08] bg-white/[0.04] text-white backdrop-blur-xl">
+                <SelectValue placeholder="All Statuses" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Statuses</SelectItem>
+                <SelectItem value="pending">Upcoming</SelectItem>
+                <SelectItem value="done">Done</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Sort By */}
+          <div>
+            <Select
+              value={params.sortBy}
+              onValueChange={(v) =>
+                setParams((p) => ({
+                  ...p,
+                  sortBy: v as RemindersQueryParams['sortBy'],
+                  page: 1,
+                }))
+              }
+            >
+              <SelectTrigger className="h-[38px] w-full border-white/[0.08] bg-white/[0.04] text-white backdrop-blur-xl">
+                <SelectValue placeholder="Sort By" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="reminderDate">Reminder Date</SelectItem>
+                <SelectItem value="createdAt">Created At</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Sort Order */}
+          <div>
+            <Select
+              value={params.order}
+              onValueChange={(v) =>
+                setParams((p) => ({
+                  ...p,
+                  order: v as 'asc' | 'desc',
+                  page: 1,
+                }))
+              }
+            >
+              <SelectTrigger className="h-[38px] w-full border-white/[0.08] bg-white/[0.04] text-white backdrop-blur-xl">
+                <SelectValue placeholder="Order" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="asc">↑ Ascending</SelectItem>
+                <SelectItem value="desc">↓ Descending</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
       </div>
 
