@@ -77,7 +77,7 @@ export default function CompaniesRecycleBinFeature() {
       </RetroWindow>
 
       {/* Search */}
-      <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-4">
+      <div className="glass rounded-xl p-4">
         <div className="flex gap-2">
           <div className="relative flex-1">
             <Search className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-zinc-500" />
@@ -105,16 +105,16 @@ export default function CompaniesRecycleBinFeature() {
           </div>
         </div>
       ) : isError ? (
-        <div className="flex h-64 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900">
+        <div className="glass flex h-64 items-center justify-center rounded-xl">
           <p className="text-sm text-red-400">
             Failed to load deleted companies
           </p>
         </div>
       ) : companies.length > 0 ? (
         <>
-          <div className="overflow-hidden rounded-xl border border-zinc-800">
+          <div className="glass overflow-hidden rounded-xl">
             <table className="w-full">
-              <thead className="border-b border-zinc-800 bg-zinc-900">
+              <thead className="border-b border-white/[0.06] bg-white/[0.02]">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-semibold tracking-wider text-zinc-400 uppercase">
                     Company
@@ -130,7 +130,7 @@ export default function CompaniesRecycleBinFeature() {
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-800 bg-zinc-950">
+              <tbody className="divide-y divide-white/[0.05]">
                 {companies.map((company) => (
                   <tr
                     key={company.id}
@@ -138,7 +138,7 @@ export default function CompaniesRecycleBinFeature() {
                   >
                     <td className="px-6 py-4">
                       <div className="flex items-start gap-3">
-                        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-900 font-bold text-white">
+                        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.04] font-bold text-white">
                           {company.name.substring(0, 2).toUpperCase()}
                         </div>
                         <div>
@@ -213,7 +213,7 @@ export default function CompaniesRecycleBinFeature() {
           )}
         </>
       ) : (
-        <div className="space-y-3 rounded-xl border border-zinc-800 bg-zinc-900 p-12 text-center">
+        <div className="glass space-y-3 rounded-xl p-12 text-center">
           <Building2 className="text-zinc-750 mx-auto h-12 w-12" />
           <h3 className="text-lg font-bold text-white">No deleted companies</h3>
           <p className="text-zinc-550 mx-auto max-w-sm text-sm">

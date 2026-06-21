@@ -21,7 +21,7 @@ export default function ApplicationTableRow({
       {/* Company & Position */}
       <td className="px-4 py-3.5">
         <div className="flex items-start gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-zinc-700 bg-zinc-800">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.04]">
             <Building2 className="h-5 w-5 text-zinc-400" />
           </div>
           <div className="min-w-0 flex-1">
@@ -40,7 +40,7 @@ export default function ApplicationTableRow({
 
       {/* Job Type */}
       <td className="hidden px-4 py-3.5 md:table-cell">
-        <span className="inline-flex items-center rounded-full bg-zinc-800 px-2.5 py-1 text-xs font-medium text-zinc-400 ring-1 ring-zinc-700/50">
+        <span className="inline-flex items-center rounded-full bg-white/[0.04] px-2.5 py-1 text-xs font-medium text-zinc-400 ring-1 ring-white/[0.08]">
           {application.jobType.replace('_', ' ')}
         </span>
       </td>

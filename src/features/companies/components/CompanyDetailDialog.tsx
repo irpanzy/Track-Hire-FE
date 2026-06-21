@@ -83,7 +83,7 @@ export default function CompanyDetailDialog({
         {/* Content */}
         <div className="space-y-6">
           {/* Company Info */}
-          <div className="space-y-3 rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+          <div className="space-y-3 rounded-xl border border-white/[0.08] bg-white/[0.03] p-4 backdrop-blur-md">
             <h3 className="flex items-center gap-2 text-sm font-semibold text-white">
               <Building2 className="h-4 w-4 text-indigo-400" />
               Company Information
@@ -117,7 +117,7 @@ export default function CompanyDetailDialog({
 
           {/* Applications at this company */}
           {company.applications && company.applications.length > 0 && (
-            <div className="space-y-3 rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+            <div className="space-y-3 rounded-xl border border-white/[0.08] bg-white/[0.03] p-4 backdrop-blur-md">
               <h3 className="flex items-center gap-2 text-sm font-semibold text-white">
                 <Briefcase className="h-4 w-4 text-indigo-400" />
                 Your Applications ({company.applications.length})
@@ -126,7 +126,7 @@ export default function CompanyDetailDialog({
                 {company.applications.map((app) => (
                   <div
                     key={app.id}
-                    className="flex items-center justify-between rounded-lg border border-zinc-800 bg-zinc-900 p-3"
+                    className="flex items-center justify-between rounded-lg border border-white/[0.08] bg-white/[0.03] p-3"
                   >
                     <div>
                       <p className="text-sm font-medium text-white">
@@ -164,7 +164,7 @@ export default function CompanyDetailDialog({
         </div>
 
         {/* Footer Actions */}
-        <div className="bg-muted/50 -mx-4 -mb-4 flex justify-end gap-3 rounded-b-xl border-t border-zinc-800 p-4 pt-4">
+        <div className="-mx-4 -mb-4 flex justify-end gap-3 rounded-b-xl border-t border-white/[0.08] bg-white/[0.02] p-4 pt-4 backdrop-blur-md">
           <Button
             variant="outline"
             onClick={onDelete}

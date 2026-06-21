@@ -50,7 +50,7 @@ export default function ConfirmRestoreDialog({
           </DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-2 rounded-lg border border-zinc-800 bg-zinc-950 p-4">
+        <div className="space-y-2 rounded-lg border border-white/[0.08] bg-white/[0.03] p-4 backdrop-blur-md">
           <p className="text-sm text-zinc-400">
             <span className="font-medium text-white">Name:</span> {user.name}
           </p>

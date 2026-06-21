@@ -53,7 +53,7 @@ export default function ConfirmPermanentDeleteDialog({
           </DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-3 rounded-lg border border-red-900/30 bg-red-950/20 p-4">
+        <div className="space-y-3 rounded-lg border border-red-900/30 bg-red-950/10 p-4 backdrop-blur-md">
           <p className="text-sm font-medium text-red-400">
             ⚠️ This will permanently delete:
           </p>
@@ -67,7 +67,7 @@ export default function ConfirmPermanentDeleteDialog({
           </ul>
         </div>
 
-        <div className="space-y-2 rounded-lg border border-zinc-800 bg-zinc-950 p-4">
+        <div className="space-y-2 rounded-lg border border-white/[0.08] bg-white/[0.03] p-4 backdrop-blur-md">
           <p className="text-sm text-zinc-400">
             <span className="font-medium text-white">Name:</span> {user.name}
           </p>

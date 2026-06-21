@@ -44,7 +44,7 @@ export default function ApplicationsFilters({
   onOrderChange,
 }: ApplicationsFiltersProps) {
   return (
-    <div className="space-y-4 rounded-xl border border-zinc-800 bg-zinc-900 p-4">
+    <div className="glass space-y-4 rounded-xl p-4">
       <div className="flex items-center gap-2 text-zinc-400">
         <SlidersHorizontal className="h-4 w-4" />
         <span className="text-sm font-medium">Filters</span>
@@ -75,7 +75,7 @@ export default function ApplicationsFilters({
             value={status || undefined}
             onValueChange={(val) => onStatusChange(val === 'all' ? '' : val)}
           >
-            <SelectTrigger className="h-[38px] w-full border-zinc-800 bg-zinc-950 text-white">
+            <SelectTrigger className="h-[38px] w-full border-white/[0.08] bg-white/[0.04] text-white backdrop-blur-xl">
               <SelectValue placeholder="All Statuses" />
             </SelectTrigger>
             <SelectContent>
@@ -95,7 +95,7 @@ export default function ApplicationsFilters({
             value={source || undefined}
             onValueChange={(val) => onSourceChange(val === 'all' ? '' : val)}
           >
-            <SelectTrigger className="h-[38px] w-full border-zinc-800 bg-zinc-950 text-white">
+            <SelectTrigger className="h-[38px] w-full border-white/[0.08] bg-white/[0.04] text-white backdrop-blur-xl">
               <SelectValue placeholder="All Sources" />
             </SelectTrigger>
             <SelectContent>
@@ -115,7 +115,7 @@ export default function ApplicationsFilters({
             value={jobType || undefined}
             onValueChange={(val) => onJobTypeChange(val === 'all' ? '' : val)}
           >
-            <SelectTrigger className="h-[38px] w-full border-zinc-800 bg-zinc-950 text-white">
+            <SelectTrigger className="h-[38px] w-full border-white/[0.08] bg-white/[0.04] text-white backdrop-blur-xl">
               <SelectValue placeholder="All Job Types" />
             </SelectTrigger>
             <SelectContent>

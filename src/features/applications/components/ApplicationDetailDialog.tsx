@@ -102,7 +102,7 @@ export default function ApplicationDetailDialog({
           </div>
 
           {/* Quick Info Grid */}
-          <div className="grid grid-cols-1 gap-4 rounded-xl border border-zinc-800 bg-zinc-950 p-4 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-4 rounded-xl border border-white/[0.08] bg-white/[0.03] p-4 backdrop-blur-md md:grid-cols-2">
             <div className="flex items-start gap-3">
               <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-zinc-500" />
               <div>
@@ -167,7 +167,7 @@ export default function ApplicationDetailDialog({
           </div>
 
           {/* Company Info */}
-          <div className="space-y-3 rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+          <div className="space-y-3 rounded-xl border border-white/[0.08] bg-white/[0.03] p-4 backdrop-blur-md">
             <h3 className="flex items-center gap-2 text-sm font-semibold text-white">
               <Building2 className="h-4 w-4 text-indigo-400" />
               Company Information
@@ -201,7 +201,7 @@ export default function ApplicationDetailDialog({
 
           {/* Description */}
           {application.description && (
-            <div className="space-y-3 rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+            <div className="space-y-3 rounded-xl border border-white/[0.08] bg-white/[0.03] p-4 backdrop-blur-md">
               <h3 className="flex items-center gap-2 text-sm font-semibold text-white">
                 <FileText className="h-4 w-4 text-indigo-400" />
                 Job Description
@@ -214,7 +214,7 @@ export default function ApplicationDetailDialog({
 
           {/* Requirements */}
           {application.requirements && (
-            <div className="space-y-3 rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+            <div className="space-y-3 rounded-xl border border-white/[0.08] bg-white/[0.03] p-4 backdrop-blur-md">
               <h3 className="flex items-center gap-2 text-sm font-semibold text-white">
                 <CheckCircle className="h-4 w-4 text-indigo-400" />
                 Requirements
@@ -227,7 +227,7 @@ export default function ApplicationDetailDialog({
 
           {/* Notes */}
           {application.notes && (
-            <div className="space-y-3 rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+            <div className="space-y-3 rounded-xl border border-white/[0.08] bg-white/[0.03] p-4 backdrop-blur-md">
               <h3 className="flex items-center gap-2 text-sm font-semibold text-white">
                 <FileText className="h-4 w-4 text-indigo-400" />
                 My Notes
@@ -240,7 +240,7 @@ export default function ApplicationDetailDialog({
 
           {/* History Timeline */}
           {application.histories && application.histories.length > 0 && (
-            <div className="space-y-3 rounded-xl border border-zinc-800 bg-zinc-950 p-4">
+            <div className="space-y-3 rounded-xl border border-white/[0.08] bg-white/[0.03] p-4 backdrop-blur-md">
               <h3 className="flex items-center gap-2 text-sm font-semibold text-white">
                 <Clock className="h-4 w-4 text-indigo-400" />
                 Status History
@@ -323,7 +323,7 @@ export default function ApplicationDetailDialog({
         </div>
 
         {/* Footer Actions */}
-        <div className="bg-muted/50 -mx-4 -mb-4 flex justify-end gap-3 rounded-b-xl border-t border-zinc-800 p-4 pt-4">
+        <div className="-mx-4 -mb-4 flex justify-end gap-3 rounded-b-xl border-t border-white/[0.08] bg-white/[0.02] p-4 pt-4 backdrop-blur-md">
           <Button
             variant="outline"
             onClick={onDelete}
