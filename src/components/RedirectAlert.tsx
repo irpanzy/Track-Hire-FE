@@ -49,7 +49,7 @@ export default function RedirectAlert({
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-zinc-950/80 p-4 backdrop-blur-sm">
       <div
         className={cn(
-          'w-full max-w-sm rounded-2xl border bg-zinc-900 p-6 shadow-2xl',
+          'w-full max-w-sm rounded-2xl border bg-zinc-900/80 p-6 shadow-2xl shadow-black/30 backdrop-blur-2xl',
           isError ? 'border-red-500/30' : 'border-indigo-500/30'
         )}
       >

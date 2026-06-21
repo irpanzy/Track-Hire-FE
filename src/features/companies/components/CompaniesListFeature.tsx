@@ -151,7 +151,7 @@ export default function CompaniesListFeature() {
           </div>
         </div>
       ) : isError ? (
-        <div className="flex h-64 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900">
+        <div className="glass flex h-64 items-center justify-center rounded-xl">
           <p className="text-sm text-red-400">Failed to load companies</p>
         </div>
       ) : companies.length > 0 ? (
@@ -160,11 +160,11 @@ export default function CompaniesListFeature() {
             {companies.map((company) => (
               <div
                 key={company.id}
-                className="group flex h-48 flex-col justify-between rounded-xl border border-zinc-800 bg-zinc-900 p-5 shadow-sm transition-colors hover:border-zinc-700"
+                className="group glass glass-glow flex h-48 flex-col justify-between rounded-xl p-5 shadow-sm"
               >
                 <div className="flex items-start justify-between">
                   <div className="flex items-start gap-3">
-                    <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg border border-zinc-800 bg-zinc-950 text-lg font-bold text-white transition-colors group-hover:text-indigo-400">
+                    <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.04] text-lg font-bold text-white transition-colors group-hover:text-indigo-400">
                       {company.name.substring(0, 2).toUpperCase()}
                     </div>
                     <div>
@@ -185,7 +185,7 @@ export default function CompaniesListFeature() {
                         href={company.website}
                         target="_blank"
                         rel="noreferrer"
-                        className="rounded-md border border-zinc-800 bg-zinc-950 p-1.5 text-zinc-500 transition-colors hover:text-white"
+                        className="rounded-md border border-white/[0.08] bg-white/[0.04] p-1.5 text-zinc-500 transition-colors hover:text-white"
                         title="Visit website"
                         onClick={(e) => e.stopPropagation()}
                       >
@@ -194,21 +194,21 @@ export default function CompaniesListFeature() {
                     )}
                     <button
                       onClick={() => handleViewDetail(company)}
-                      className="cursor-pointer rounded-md border border-zinc-800 bg-zinc-950 p-1.5 text-zinc-500 transition-colors hover:text-indigo-400"
+                      className="cursor-pointer rounded-md border border-white/[0.08] bg-white/[0.04] p-1.5 text-zinc-500 transition-colors hover:text-indigo-400"
                       title="View details"
                     >
                       <Eye className="h-3.5 w-3.5" />
                     </button>
                     <button
                       onClick={() => handleEdit(company)}
-                      className="cursor-pointer rounded-md border border-zinc-800 bg-zinc-950 p-1.5 text-zinc-500 transition-colors hover:text-indigo-400"
+                      className="cursor-pointer rounded-md border border-white/[0.08] bg-white/[0.04] p-1.5 text-zinc-500 transition-colors hover:text-indigo-400"
                       title="Edit company"
                     >
                       <Edit2 className="h-3.5 w-3.5" />
                     </button>
                     <button
                       onClick={() => setDeleteTarget(company)}
-                      className="cursor-pointer rounded-md border border-zinc-800 bg-zinc-950 p-1.5 text-zinc-500 transition-colors hover:text-red-400"
+                      className="cursor-pointer rounded-md border border-white/[0.08] bg-white/[0.04] p-1.5 text-zinc-500 transition-colors hover:text-red-400"
                       title="Delete company"
                     >
                       <Trash2 className="h-3.5 w-3.5" />
@@ -216,7 +216,7 @@ export default function CompaniesListFeature() {
                   </div>
                 </div>
 
-                <div className="border-zinc-850 flex items-center justify-between border-t pt-4">
+                <div className="flex items-center justify-between border-t border-white/[0.06] pt-4">
                   <div className="text-xs text-zinc-500">
                     Added {new Date(company.createdAt).toLocaleDateString()}
                   </div>
@@ -263,7 +263,7 @@ export default function CompaniesListFeature() {
           )}
         </>
       ) : (
-        <div className="space-y-3 rounded-xl border border-zinc-800 bg-zinc-900 p-12 text-center">
+        <div className="glass space-y-3 rounded-xl p-12 text-center">
           <Building2 className="text-zinc-750 mx-auto h-12 w-12" />
           <h3 className="text-lg font-bold text-white">No companies found</h3>
           <p className="text-zinc-550 mx-auto max-w-sm text-sm">

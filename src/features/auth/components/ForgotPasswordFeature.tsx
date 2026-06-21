@@ -61,7 +61,7 @@ export default function ForgotPasswordFeature() {
       </div>
 
       {/* Card */}
-      <div className="rounded-xl border border-zinc-800/80 bg-zinc-900/60 p-5 shadow-xl backdrop-blur-sm sm:p-6">
+      <div className="rounded-xl border border-white/[0.1] bg-white/[0.04] p-5 shadow-xl backdrop-blur-2xl sm:p-6">
         {apiError && (
           <div className="mb-5 flex items-start gap-3 rounded-lg border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-400">
             <AlertCircle className="mt-0.5 h-4 w-4 shrink-0" />

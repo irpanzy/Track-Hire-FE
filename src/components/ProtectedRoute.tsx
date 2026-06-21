@@ -17,8 +17,8 @@ export default function ProtectedRoute() {
 
   if (isCheckingAuth) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center space-y-4 bg-zinc-950">
-        <div className="relative flex h-12 w-12 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900 text-indigo-400 shadow-xl">
+      <div className="gradient-mesh flex min-h-screen flex-col items-center justify-center space-y-4">
+        <div className="glass relative flex h-12 w-12 items-center justify-center rounded-xl text-indigo-400 shadow-xl">
           <Briefcase className="h-6 w-6" />
           <span className="absolute inset-[-4px] animate-spin rounded-xl border-2 border-indigo-500 border-t-transparent" />
         </div>

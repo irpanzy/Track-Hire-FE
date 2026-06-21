@@ -3,8 +3,8 @@ import { AlertTriangle, Home } from 'lucide-react'
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-zinc-950 px-6 py-12 text-center">
-      <div className="max-w-md space-y-6">
+    <div className="gradient-mesh flex min-h-screen flex-col items-center justify-center px-6 py-12 text-center">
+      <div className="max-w-md space-y-6 rounded-2xl border border-white/[0.08] bg-white/[0.04] p-10 shadow-2xl shadow-black/20 backdrop-blur-2xl">
         <div className="inline-flex rounded-full border border-red-500/20 bg-red-500/10 p-4 text-red-400">
           <AlertTriangle className="h-10 w-10" />
         </div>

@@ -69,11 +69,11 @@ export default function DashboardLayout() {
   }
 
   return (
-    <div className="flex h-screen overflow-hidden bg-zinc-950 text-zinc-100">
+    <div className="gradient-mesh flex h-screen overflow-hidden text-zinc-100">
       {/* Sidebar for Desktop */}
-      <aside className="border-zinc-850 hidden border-r bg-zinc-900 md:flex md:w-64 md:flex-col">
+      <aside className="hidden border-r border-white/[0.06] bg-white/[0.03] backdrop-blur-2xl md:flex md:w-64 md:flex-col">
         {/* Brand */}
-        <div className="border-zinc-850 flex h-16 items-center gap-2 border-b px-6">
+        <div className="flex h-16 items-center gap-2 border-b border-white/[0.06] px-6">
           <img src={logoLight} alt="Track Hire" className="h-12 w-auto" />
         </div>
 
@@ -89,7 +89,7 @@ export default function DashboardLayout() {
                   `group flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-all duration-200 ${
                     isActive
                       ? 'bg-indigo-650 text-white shadow-lg shadow-indigo-600/20'
-                      : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
+                      : 'text-zinc-400 hover:bg-white/[0.04] hover:text-white'
                   }`
                 }
               >
@@ -102,7 +102,7 @@ export default function DashboardLayout() {
           {/* Admin Section */}
           {adminNavItems.length > 0 && (
             <>
-              <div className="my-2 border-t border-zinc-800" />
+              <div className="my-2 border-t border-white/[0.06]" />
               <p className="px-4 pb-1 text-[10px] font-semibold tracking-widest text-zinc-600 uppercase">
                 Admin
               </p>
@@ -116,7 +116,7 @@ export default function DashboardLayout() {
                       `group flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-all duration-200 ${
                         isActive
                           ? 'bg-indigo-500/15 text-indigo-300 shadow-lg ring-1 shadow-indigo-600/10 ring-indigo-500/20'
-                          : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
+                          : 'text-zinc-400 hover:bg-white/[0.04] hover:text-white'
                       }`
                     }
                   >
@@ -130,7 +130,7 @@ export default function DashboardLayout() {
         </nav>
 
         {/* User profile / Logout */}
-        <div className="border-zinc-850 border-t bg-zinc-900/50 p-4">
+        <div className="border-t border-white/[0.06] bg-white/[0.02] p-4">
           <div className="mb-3 flex items-center gap-3 px-2 py-2">
             <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-indigo-500/30 bg-indigo-500/20">
               {user?.avatarUrl ? (
@@ -184,13 +184,13 @@ export default function DashboardLayout() {
               animate={{ x: 0 }}
               exit={{ x: -280 }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="border-zinc-850 relative flex w-64 max-w-xs flex-col border-r bg-zinc-900 p-4"
+              className="relative flex w-64 max-w-xs flex-col border-r border-white/[0.06] bg-zinc-900/80 p-4 backdrop-blur-2xl"
             >
               <div className="mb-8 flex items-center justify-between">
                 <img src={logoLight} alt="Track Hire" className="h-12 w-auto" />
                 <button
                   onClick={() => setSidebarOpen(false)}
-                  className="cursor-pointer rounded-lg p-1 text-zinc-400 hover:bg-zinc-800 hover:text-white"
+                  className="cursor-pointer rounded-lg p-1 text-zinc-400 hover:bg-white/[0.04] hover:text-white"
                 >
                   <X className="h-6 w-6" />
                 </button>
@@ -213,7 +213,7 @@ export default function DashboardLayout() {
                           `flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-all ${
                             isActive
                               ? 'bg-indigo-650 text-white shadow-lg'
-                              : 'hover:bg-zinc-850 text-zinc-400 hover:text-white'
+                              : 'text-zinc-400 hover:bg-white/[0.04] hover:text-white'
                           }`
                         }
                       >
@@ -227,7 +227,7 @@ export default function DashboardLayout() {
                 {/* Admin Section — mobile */}
                 {adminNavItems.length > 0 && (
                   <>
-                    <div className="my-2 border-t border-zinc-800" />
+                    <div className="my-2 border-t border-white/[0.06]" />
                     <p className="px-4 pb-1 text-[10px] font-semibold tracking-widest text-zinc-600 uppercase">
                       Admin
                     </p>
@@ -249,7 +249,7 @@ export default function DashboardLayout() {
                               `flex items-center gap-3 rounded-lg px-4 py-3 text-sm font-medium transition-all ${
                                 isActive
                                   ? 'bg-indigo-500/15 text-indigo-300 ring-1 ring-indigo-500/20'
-                                  : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'
+                                  : 'text-zinc-400 hover:bg-white/[0.04] hover:text-white'
                               }`
                             }
                           >
@@ -263,7 +263,7 @@ export default function DashboardLayout() {
                 )}
               </nav>
 
-              <div className="border-zinc-850 border-t pt-4">
+              <div className="border-t border-white/[0.06] pt-4">
                 <div className="mb-3 flex items-center gap-3 px-2 py-2">
                   <div className="flex h-9 w-9 items-center justify-center overflow-hidden rounded-full border border-indigo-500/30 bg-indigo-500/20">
                     {user?.avatarUrl ? (
@@ -303,11 +303,11 @@ export default function DashboardLayout() {
       {/* Main Content Area */}
       <div className="flex flex-1 flex-col overflow-hidden">
         {/* Top Navbar */}
-        <header className="border-zinc-850 z-10 flex h-16 shrink-0 items-center justify-between border-b bg-zinc-900 px-6">
+        <header className="z-10 flex h-16 shrink-0 items-center justify-between border-b border-white/[0.06] bg-white/[0.03] px-6 backdrop-blur-2xl">
           <div className="flex items-center gap-4">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="cursor-pointer rounded-lg p-1.5 text-zinc-400 hover:bg-zinc-800 hover:text-white md:hidden"
+              className="cursor-pointer rounded-lg p-1.5 text-zinc-400 hover:bg-white/[0.04] hover:text-white md:hidden"
             >
               <Menu className="h-6 w-6" />
             </button>
@@ -337,7 +337,7 @@ export default function DashboardLayout() {
             {/* User Badge */}
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="hidden items-center gap-2 rounded-lg border border-zinc-800 bg-zinc-950 px-3 py-1.5 lg:flex"
+              className="hidden items-center gap-2 rounded-lg border border-white/[0.08] bg-white/[0.04] px-3 py-1.5 backdrop-blur-md lg:flex"
             >
               <div className="flex h-7 w-7 items-center justify-center overflow-hidden rounded-full border border-indigo-500/30 bg-indigo-500/20">
                 {user?.avatarUrl ? (
@@ -374,7 +374,7 @@ export default function DashboardLayout() {
         </header>
 
         {/* Content Outlet */}
-        <main className="flex-1 overflow-y-auto bg-zinc-950 p-6 md:p-8">
+        <main className="flex-1 overflow-y-auto p-6 md:p-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

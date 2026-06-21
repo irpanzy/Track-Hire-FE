@@ -10,9 +10,9 @@ export default function AuthLayout() {
   }
 
   return (
-    <div className="flex min-h-screen overflow-x-hidden bg-zinc-950">
+    <div className="gradient-mesh-auth flex min-h-screen overflow-x-hidden">
       {/* Left panel: Info/Hero panel — hidden on mobile */}
-      <div className="relative hidden w-1/2 flex-col justify-between border-r border-zinc-800 bg-zinc-950 p-10 text-white lg:flex">
+      <div className="relative hidden w-1/2 flex-col justify-between border-r border-white/[0.06] bg-white/[0.02] p-10 text-white backdrop-blur-xl lg:flex">
         {/* Background radial gradient */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(99,102,241,0.08),transparent_60%)]" />
 
@@ -54,7 +54,7 @@ export default function AuthLayout() {
             ].map((f) => (
               <span
                 key={f}
-                className="rounded-full border border-zinc-700/60 bg-zinc-800/60 px-3 py-1 text-xs text-zinc-300"
+                className="rounded-full border border-white/[0.08] bg-white/[0.04] px-3 py-1 text-xs text-zinc-300 backdrop-blur-sm"
               >
                 {f}
               </span>
@@ -63,7 +63,7 @@ export default function AuthLayout() {
         </div>
 
         {/* Footer */}
-        <div className="relative z-10 flex items-center justify-between border-t border-zinc-800 pt-6 text-xs text-zinc-500">
+        <div className="relative z-10 flex items-center justify-between border-t border-white/[0.06] pt-6 text-xs text-zinc-500">
           <span>
             © {new Date().getFullYear()} Track Hire Inc. All rights reserved.
           </span>

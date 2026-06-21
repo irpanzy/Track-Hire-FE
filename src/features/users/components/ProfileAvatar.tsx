@@ -52,7 +52,7 @@ export default function ProfileAvatar({
   }
 
   return (
-    <div className="flex h-fit flex-col items-center rounded-xl border border-zinc-800 bg-zinc-900 p-6 text-center shadow-sm">
+    <div className="glass flex h-fit flex-col items-center rounded-xl p-6 text-center shadow-sm">
       <div className="group relative">
         <Avatar className="h-24 w-24 border-2 border-indigo-500/30 shadow-lg shadow-indigo-600/10">
           {isUploading ? (

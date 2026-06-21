@@ -50,7 +50,7 @@ export default function LoginFeature() {
       </div>
 
       {/* Card */}
-      <div className="rounded-xl border border-zinc-800/80 bg-zinc-900/60 p-5 shadow-xl backdrop-blur-sm sm:p-6">
+      <div className="rounded-xl border border-white/[0.1] bg-white/[0.04] p-5 shadow-xl backdrop-blur-2xl sm:p-6">
         {/* API Error */}
         {apiError && (
           <div className="mb-5 flex items-start gap-3 rounded-lg border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-400">
@@ -75,7 +75,7 @@ export default function LoginFeature() {
             <div className="w-full border-t border-zinc-800" />
           </div>
           <div className="relative flex justify-center text-xs uppercase">
-            <span className="bg-zinc-900 px-2.5 text-zinc-600">
+            <span className="bg-zinc-900/80 px-2.5 text-zinc-600 backdrop-blur-xl">
               or continue with
             </span>
           </div>

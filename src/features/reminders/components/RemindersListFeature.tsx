@@ -138,7 +138,7 @@ export default function RemindersListFeature({
       </RetroWindow>
 
       {/* Filters */}
-      <div className="flex flex-wrap items-center gap-3 rounded-xl border border-zinc-800 bg-zinc-900 p-4">
+      <div className="glass flex flex-wrap items-center gap-3 rounded-xl p-4">
         <div className="flex items-center gap-2 text-xs font-semibold text-zinc-400">
           <SlidersHorizontal className="h-3.5 w-3.5" />
           Filter
@@ -174,7 +174,7 @@ export default function RemindersListFeature({
               }))
             }
           >
-            <SelectTrigger className="h-8 w-[140px] border-zinc-700 bg-zinc-950 text-xs text-white">
+            <SelectTrigger className="h-8 w-[140px] text-xs">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -192,7 +192,7 @@ export default function RemindersListFeature({
               }))
             }
           >
-            <SelectTrigger className="h-8 w-[90px] border-zinc-700 bg-zinc-950 text-xs text-white">
+            <SelectTrigger className="h-8 w-[90px] text-xs">
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
@@ -212,11 +212,11 @@ export default function RemindersListFeature({
           </div>
         </div>
       ) : isError ? (
-        <div className="flex h-64 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900">
+        <div className="glass flex h-64 items-center justify-center rounded-xl">
           <p className="text-sm text-red-400">Failed to load reminders</p>
         </div>
       ) : reminders.length === 0 ? (
-        <div className="space-y-3 rounded-xl border border-zinc-800 bg-zinc-900 p-12 text-center">
+        <div className="glass space-y-3 rounded-xl p-12 text-center">
           <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-indigo-500/10">
             <Bell className="h-7 w-7 text-indigo-400" />
           </div>
@@ -246,8 +246,8 @@ export default function RemindersListFeature({
                   <span className="h-2 w-2 animate-pulse rounded-full bg-indigo-500" />
                   Upcoming ({pendingReminders.length})
                 </h2>
-                <div className="overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900">
-                  <div className="divide-y divide-zinc-800">
+                <div className="glass overflow-hidden rounded-xl">
+                  <div className="divide-y divide-white/[0.05]">
                     {pendingReminders.map((reminder) => {
                       const { date, time } = formatReminderDate(
                         reminder.reminderDate
@@ -347,8 +347,8 @@ export default function RemindersListFeature({
                   <span className="h-2 w-2 rounded-full bg-zinc-600" />
                   Completed ({doneReminders.length})
                 </h2>
-                <div className="overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900 opacity-70">
-                  <div className="divide-y divide-zinc-800">
+                <div className="glass overflow-hidden rounded-xl opacity-70">
+                  <div className="divide-y divide-white/[0.05]">
                     {doneReminders.map((reminder) => {
                       const { date, time } = formatReminderDate(
                         reminder.reminderDate

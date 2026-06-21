@@ -25,7 +25,7 @@ export default function CompaniesFilters({
   onOrderChange,
 }: CompaniesFiltersProps) {
   return (
-    <div className="space-y-4 rounded-xl border border-zinc-800 bg-zinc-900 p-4">
+    <div className="glass space-y-4 rounded-xl p-4">
       <div className="flex items-center gap-2 text-zinc-400">
         <SlidersHorizontal className="h-4 w-4" />
         <span className="text-sm font-medium">Filters</span>

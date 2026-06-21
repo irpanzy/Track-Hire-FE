@@ -156,7 +156,7 @@ export default function ReminderFormDialog({
               <input
                 {...register('title')}
                 placeholder="e.g. Follow up interview call"
-                className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2 text-sm text-white placeholder-zinc-500 transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                className="w-full rounded-lg border border-white/[0.08] bg-white/[0.04] px-3.5 py-2 text-sm text-white placeholder-zinc-500 backdrop-blur-xl transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
               />
               {errors.title && (
                 <p className="text-xs text-red-400">{errors.title.message}</p>
@@ -172,7 +172,7 @@ export default function ReminderFormDialog({
               <input
                 {...register('reminderDate')}
                 type="datetime-local"
-                className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2 text-sm text-white [color-scheme:dark] transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                className="w-full rounded-lg border border-white/[0.08] bg-white/[0.04] px-3.5 py-2 text-sm text-white [color-scheme:dark] backdrop-blur-xl transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
               />
               {errors.reminderDate && (
                 <p className="text-xs text-red-400">
@@ -197,7 +197,7 @@ export default function ReminderFormDialog({
                       field.onChange(val === 'none' ? '' : val)
                     }
                   >
-                    <SelectTrigger className="h-[38px] w-full border-zinc-800 bg-zinc-950 text-white">
+                    <SelectTrigger className="h-[38px] w-full border-white/[0.08] bg-white/[0.04] text-white backdrop-blur-xl">
                       <SelectValue placeholder="None — standalone reminder" />
                     </SelectTrigger>
                     <SelectContent>
@@ -230,7 +230,7 @@ export default function ReminderFormDialog({
           </div>
 
           {/* Actions */}
-          <div className="flex justify-end gap-3 border-t border-zinc-800 pt-4">
+          <div className="flex justify-end gap-3 border-t border-white/[0.08] pt-4">
             <button
               type="button"
               onClick={onClose}

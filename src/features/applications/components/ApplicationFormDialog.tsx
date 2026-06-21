@@ -182,7 +182,7 @@ export default function ApplicationFormDialog({
 
         {/* AI URL Extraction Section */}
         {!isEditMode && (
-          <div className="-mx-4 -mt-4 space-y-3 border-b border-zinc-800 bg-indigo-950/20 p-5">
+          <div className="-mx-4 -mt-4 space-y-3 border-b border-white/[0.08] bg-indigo-950/10 p-5">
             <label className="flex items-center gap-1.5 text-xs font-semibold text-indigo-300">
               <Sparkles className="h-4 w-4 text-indigo-400" />
               AI Job Details Extractor (Auto-fill from URL)
@@ -195,7 +195,7 @@ export default function ApplicationFormDialog({
                 onChange={(e) => setExtractUrlInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleExtractUrl()}
                 disabled={extractUrl.isPending}
-                className="flex-1 rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2 text-sm text-white placeholder-zinc-500 transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex-1 rounded-lg border border-white/[0.08] bg-white/[0.04] px-3.5 py-2 text-sm text-white placeholder-zinc-500 backdrop-blur-xl transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 disabled:cursor-not-allowed disabled:opacity-50"
               />
               <button
                 type="button"
@@ -243,7 +243,7 @@ export default function ApplicationFormDialog({
                 <input
                   {...register('companyName')}
                   placeholder="e.g. Google"
-                  className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2 text-sm text-white placeholder-zinc-500 transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  className="w-full rounded-lg border border-white/[0.08] bg-white/[0.04] px-3.5 py-2 text-sm text-white placeholder-zinc-500 backdrop-blur-xl transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
                 />
                 {errors.companyName && (
                   <p className="text-xs text-red-400">
@@ -260,7 +260,7 @@ export default function ApplicationFormDialog({
                   {...register('companyWebsite')}
                   type="url"
                   placeholder="https://example.com"
-                  className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2 text-sm text-white placeholder-zinc-500 transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  className="w-full rounded-lg border border-white/[0.08] bg-white/[0.04] px-3.5 py-2 text-sm text-white placeholder-zinc-500 backdrop-blur-xl transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
                 />
                 {errors.companyWebsite && (
                   <p className="text-xs text-red-400">
@@ -276,7 +276,7 @@ export default function ApplicationFormDialog({
                 <input
                   {...register('companyLocation')}
                   placeholder="e.g. Jakarta, Indonesia"
-                  className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2 text-sm text-white placeholder-zinc-500 transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  className="w-full rounded-lg border border-white/[0.08] bg-white/[0.04] px-3.5 py-2 text-sm text-white placeholder-zinc-500 backdrop-blur-xl transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
                 />
                 {errors.companyLocation && (
                   <p className="text-xs text-red-400">
@@ -298,7 +298,7 @@ export default function ApplicationFormDialog({
                 <input
                   {...register('position')}
                   placeholder="e.g. Frontend Developer"
-                  className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2 text-sm text-white placeholder-zinc-500 transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  className="w-full rounded-lg border border-white/[0.08] bg-white/[0.04] px-3.5 py-2 text-sm text-white placeholder-zinc-500 backdrop-blur-xl transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
                 />
                 {errors.position && (
                   <p className="text-xs text-red-400">
@@ -316,7 +316,7 @@ export default function ApplicationFormDialog({
                   control={control}
                   render={({ field }) => (
                     <Select value={field.value} onValueChange={field.onChange}>
-                      <SelectTrigger className="h-[38px] w-full border-zinc-800 bg-zinc-950 text-white">
+                      <SelectTrigger className="h-[38px] w-full border-white/[0.08] bg-white/[0.04] text-white backdrop-blur-xl">
                         <SelectValue placeholder="Select job type..." />
                       </SelectTrigger>
                       <SelectContent>
@@ -343,7 +343,7 @@ export default function ApplicationFormDialog({
                 <input
                   {...register('location')}
                   placeholder="e.g. Remote, Jakarta"
-                  className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2 text-sm text-white placeholder-zinc-500 transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  className="w-full rounded-lg border border-white/[0.08] bg-white/[0.04] px-3.5 py-2 text-sm text-white placeholder-zinc-500 backdrop-blur-xl transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
                 />
               </div>
 
@@ -356,7 +356,7 @@ export default function ApplicationFormDialog({
                   control={control}
                   render={({ field }) => (
                     <Select value={field.value} onValueChange={field.onChange}>
-                      <SelectTrigger className="h-[38px] w-full border-zinc-800 bg-zinc-950 text-white">
+                      <SelectTrigger className="h-[38px] w-full border-white/[0.08] bg-white/[0.04] text-white backdrop-blur-xl">
                         <SelectValue placeholder="Select source..." />
                       </SelectTrigger>
                       <SelectContent>
@@ -384,7 +384,7 @@ export default function ApplicationFormDialog({
                   {...register('sourceUrl')}
                   type="url"
                   placeholder="https://..."
-                  className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2 text-sm text-white placeholder-zinc-500 transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  className="w-full rounded-lg border border-white/[0.08] bg-white/[0.04] px-3.5 py-2 text-sm text-white placeholder-zinc-500 backdrop-blur-xl transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
                 />
               </div>
 
@@ -395,7 +395,7 @@ export default function ApplicationFormDialog({
                 <input
                   {...register('salaryRange')}
                   placeholder="e.g. $100k - $150k"
-                  className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2 text-sm text-white placeholder-zinc-500 transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  className="w-full rounded-lg border border-white/[0.08] bg-white/[0.04] px-3.5 py-2 text-sm text-white placeholder-zinc-500 backdrop-blur-xl transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
                 />
               </div>
 
@@ -408,7 +408,7 @@ export default function ApplicationFormDialog({
                   control={control}
                   render={({ field }) => (
                     <Select value={field.value} onValueChange={field.onChange}>
-                      <SelectTrigger className="h-[38px] w-full border-zinc-800 bg-zinc-950 text-white">
+                      <SelectTrigger className="h-[38px] w-full border-white/[0.08] bg-white/[0.04] text-white backdrop-blur-xl">
                         <SelectValue placeholder="Select status..." />
                       </SelectTrigger>
                       <SelectContent>
@@ -430,7 +430,7 @@ export default function ApplicationFormDialog({
                 <input
                   {...register('appliedDate')}
                   type="date"
-                  className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2 text-sm text-white transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  className="w-full rounded-lg border border-white/[0.08] bg-white/[0.04] px-3.5 py-2 text-sm text-white backdrop-blur-xl transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
                 />
               </div>
 
@@ -441,7 +441,7 @@ export default function ApplicationFormDialog({
                 <input
                   {...register('deadlineDate')}
                   type="date"
-                  className="w-full rounded-lg border border-zinc-800 bg-zinc-950 px-3.5 py-2 text-sm text-white transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+                  className="w-full rounded-lg border border-white/[0.08] bg-white/[0.04] px-3.5 py-2 text-sm text-white backdrop-blur-xl transition-all outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
                 />
               </div>
 
@@ -484,7 +484,7 @@ export default function ApplicationFormDialog({
           </div>
 
           {/* Actions */}
-          <div className="flex justify-end gap-3 border-t border-zinc-800 pt-4">
+          <div className="flex justify-end gap-3 border-t border-white/[0.08] pt-4">
             <button
               type="button"
               onClick={onClose}

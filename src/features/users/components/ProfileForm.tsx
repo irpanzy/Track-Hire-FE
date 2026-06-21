@@ -32,8 +32,8 @@ export default function ProfileForm({
   }
 
   return (
-    <div className="space-y-6 rounded-xl border border-zinc-800 bg-zinc-900 p-6 shadow-sm md:col-span-2">
-      <h3 className="border-zinc-850 border-b pb-3 text-lg font-bold text-white">
+    <div className="glass space-y-6 rounded-xl p-6 shadow-sm md:col-span-2">
+      <h3 className="border-b border-white/[0.06] pb-3 text-lg font-bold text-white">
         Personal Details
       </h3>
 

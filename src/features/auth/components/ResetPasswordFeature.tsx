@@ -62,7 +62,7 @@ export default function ResetPasswordFeature() {
       </div>
 
       {/* Card */}
-      <div className="rounded-xl border border-zinc-800/80 bg-zinc-900/60 p-5 shadow-xl backdrop-blur-sm sm:p-6">
+      <div className="rounded-xl border border-white/[0.1] bg-white/[0.04] p-5 shadow-xl backdrop-blur-2xl sm:p-6">
         {/* Google account restriction notice */}
         {isGoogleAccountError ? (
           <div className="flex flex-col gap-3 rounded-lg border border-amber-500/20 bg-amber-500/10 px-4 py-4">

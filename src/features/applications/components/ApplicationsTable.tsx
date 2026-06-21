@@ -54,7 +54,7 @@ export default function ApplicationsTable({
 }: ApplicationsTableProps) {
   if (isLoading) {
     return (
-      <div className="flex h-64 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900">
+      <div className="glass flex h-64 items-center justify-center rounded-xl">
         <Loader2 className="h-6 w-6 animate-spin text-indigo-400" />
       </div>
     )
@@ -62,7 +62,7 @@ export default function ApplicationsTable({
 
   if (isError) {
     return (
-      <div className="flex h-64 flex-col items-center justify-center gap-3 rounded-xl border border-zinc-800 bg-zinc-900 text-zinc-500">
+      <div className="glass flex h-64 flex-col items-center justify-center gap-3 rounded-xl text-zinc-500">
         <AlertTriangle className="h-8 w-8 text-red-400" />
         <p className="text-sm">
           Failed to load applications. Please try again.
@@ -73,7 +73,7 @@ export default function ApplicationsTable({
 
   if (applications.length === 0) {
     return (
-      <div className="flex h-64 flex-col items-center justify-center gap-3 rounded-xl border border-zinc-800 bg-zinc-900 text-zinc-500">
+      <div className="glass flex h-64 flex-col items-center justify-center gap-3 rounded-xl text-zinc-500">
         <Briefcase className="h-8 w-8" />
         <p className="text-sm">No applications found</p>
         <p className="text-xs">
@@ -86,11 +86,11 @@ export default function ApplicationsTable({
   return (
     <div className="space-y-4">
       {/* Table */}
-      <div className="overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900">
+      <div className="glass overflow-hidden rounded-xl">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-zinc-800 bg-zinc-900/50">
+              <tr className="border-b border-white/[0.06] bg-white/[0.02]">
                 <th
                   className="cursor-pointer px-4 py-3 text-left font-medium text-zinc-500 transition-colors hover:text-zinc-300"
                   onClick={() => onToggleSort('position')}
@@ -131,7 +131,7 @@ export default function ApplicationsTable({
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-zinc-800/60">
+            <tbody className="divide-y divide-white/[0.05]">
               {applications.map((app) => (
                 <ApplicationTableRow
                   key={app.id}
@@ -165,7 +165,7 @@ export default function ApplicationsTable({
             <button
               disabled={pagination.page <= 1}
               onClick={() => onPageChange(pagination.page - 1)}
-              className="flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-700 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-zinc-400 backdrop-blur-md transition-colors hover:bg-white/[0.06] hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
@@ -175,7 +175,7 @@ export default function ApplicationsTable({
             <button
               disabled={pagination.page >= pagination.totalPages}
               onClick={() => onPageChange(pagination.page + 1)}
-              className="flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-700 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-zinc-400 backdrop-blur-md transition-colors hover:bg-white/[0.06] hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
             >
               <ChevronRight className="h-4 w-4" />
             </button>

@@ -69,16 +69,16 @@ export default function RemindersRecycleBinFeature() {
           </div>
         </div>
       ) : isError ? (
-        <div className="flex h-64 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900">
+        <div className="glass flex h-64 items-center justify-center rounded-xl">
           <p className="text-sm text-red-400">
             Failed to load deleted reminders
           </p>
         </div>
       ) : reminders.length > 0 ? (
         <>
-          <div className="overflow-hidden rounded-xl border border-zinc-800">
+          <div className="glass overflow-hidden rounded-xl">
             <table className="w-full">
-              <thead className="border-b border-zinc-800 bg-zinc-900">
+              <thead className="border-b border-white/[0.06] bg-white/[0.02]">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-semibold tracking-wider text-zinc-400 uppercase">
                     Reminder
@@ -97,7 +97,7 @@ export default function RemindersRecycleBinFeature() {
                   </th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-zinc-800 bg-zinc-950">
+              <tbody className="divide-y divide-white/[0.05]">
                 {reminders.map((reminder) => (
                   <tr
                     key={reminder.id}
@@ -200,7 +200,7 @@ export default function RemindersRecycleBinFeature() {
           )}
         </>
       ) : (
-        <div className="space-y-3 rounded-xl border border-zinc-800 bg-zinc-900 p-12 text-center">
+        <div className="glass space-y-3 rounded-xl p-12 text-center">
           <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-zinc-800">
             <AlarmClock className="h-7 w-7 text-zinc-600" />
           </div>
@@ -214,11 +214,11 @@ export default function RemindersRecycleBinFeature() {
       {/* Restore confirmation */}
       {restoreTarget && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-md"
           onClick={() => setRestoreTarget(null)}
         >
           <div
-            className="mx-4 w-full max-w-md rounded-xl border border-zinc-800 bg-zinc-900 p-6 shadow-2xl"
+            className="mx-4 w-full max-w-md rounded-xl border border-white/[0.1] bg-zinc-900/80 p-6 shadow-2xl backdrop-blur-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="mb-4 flex items-center gap-3">
@@ -234,7 +234,7 @@ export default function RemindersRecycleBinFeature() {
                 </p>
               </div>
             </div>
-            <div className="mb-6 rounded-lg border border-zinc-800 bg-zinc-950 p-4">
+            <div className="mb-6 rounded-lg border border-white/[0.06] bg-white/[0.03] p-4">
               <p className="text-sm text-zinc-400">
                 <span className="font-medium text-white">Reminder:</span>{' '}
                 {restoreTarget.title}

@@ -53,7 +53,7 @@ export default function UsersTable({
 }: UsersTableProps) {
   if (isLoading) {
     return (
-      <div className="flex h-64 items-center justify-center rounded-xl border border-zinc-800 bg-zinc-900">
+      <div className="glass flex h-64 items-center justify-center rounded-xl">
         <Loader2 className="h-6 w-6 animate-spin text-indigo-400" />
       </div>
     )
@@ -61,7 +61,7 @@ export default function UsersTable({
 
   if (isError) {
     return (
-      <div className="flex h-64 flex-col items-center justify-center gap-3 rounded-xl border border-zinc-800 bg-zinc-900 text-zinc-500">
+      <div className="glass flex h-64 flex-col items-center justify-center gap-3 rounded-xl text-zinc-500">
         <AlertTriangle className="h-8 w-8 text-red-400" />
         <p className="text-sm">Failed to load users. Please try again.</p>
       </div>
@@ -70,7 +70,7 @@ export default function UsersTable({
 
   if (users.length === 0) {
     return (
-      <div className="flex h-64 flex-col items-center justify-center gap-3 rounded-xl border border-zinc-800 bg-zinc-900 text-zinc-500">
+      <div className="glass flex h-64 flex-col items-center justify-center gap-3 rounded-xl text-zinc-500">
         <Users className="h-8 w-8" />
         <p className="text-sm">No users found</p>
       </div>
@@ -80,11 +80,11 @@ export default function UsersTable({
   return (
     <div className="space-y-4">
       {/* Table */}
-      <div className="overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900">
+      <div className="glass overflow-hidden rounded-xl">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-zinc-800 bg-zinc-900/50">
+              <tr className="border-b border-white/[0.06] bg-white/[0.02]">
                 <th className="px-4 py-3 text-left font-medium text-zinc-500">
                   User
                 </th>
@@ -117,7 +117,7 @@ export default function UsersTable({
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-zinc-800/60">
+            <tbody className="divide-y divide-white/[0.05]">
               {users.map((user) => (
                 <tr
                   key={user.id}
@@ -126,7 +126,7 @@ export default function UsersTable({
                   {/* User cell */}
                   <td className="px-4 py-3.5">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border border-zinc-700 bg-zinc-800">
+                      <div className="flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full border border-white/[0.08] bg-white/[0.04]">
                         {user.avatarUrl ? (
                           <img
                             src={user.avatarUrl}
@@ -162,7 +162,7 @@ export default function UsersTable({
                         'inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-semibold',
                         user.role === 'ADMIN'
                           ? 'bg-indigo-500/15 text-indigo-300 ring-1 ring-indigo-500/30'
-                          : 'bg-zinc-800 text-zinc-400 ring-1 ring-zinc-700/50'
+                          : 'bg-white/[0.04] text-zinc-400 ring-1 ring-white/[0.08]'
                       )}
                     >
                       {user.role === 'ADMIN' ? (
@@ -229,7 +229,7 @@ export default function UsersTable({
             <button
               disabled={pagination.page <= 1}
               onClick={() => onPageChange(pagination.page - 1)}
-              className="flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-700 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-zinc-400 backdrop-blur-md transition-colors hover:bg-white/[0.06] hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
@@ -239,7 +239,7 @@ export default function UsersTable({
             <button
               disabled={pagination.page >= pagination.totalPages}
               onClick={() => onPageChange(pagination.page + 1)}
-              className="flex h-8 w-8 items-center justify-center rounded-lg border border-zinc-700 text-zinc-400 transition-colors hover:bg-zinc-800 hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/[0.08] bg-white/[0.03] text-zinc-400 backdrop-blur-md transition-colors hover:bg-white/[0.06] hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
             >
               <ChevronRight className="h-4 w-4" />
             </button>

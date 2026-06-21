@@ -22,7 +22,7 @@ export default function DashboardFeature() {
 
   if (isError || !data) {
     return (
-      <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-8 text-center">
+      <div className="glass rounded-xl p-8 text-center">
         <p className="text-zinc-400">Failed to load dashboard stats</p>
       </div>
     )

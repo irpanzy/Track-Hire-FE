@@ -10,7 +10,7 @@ export default function ForgotPasswordSuccess({
 }: ForgotPasswordSuccessProps) {
   return (
     <div className="animate-fade-in w-full max-w-md space-y-6 text-center">
-      <div className="flex flex-col items-center space-y-6 rounded-xl border border-zinc-800 bg-zinc-900 p-8 shadow-xl">
+      <div className="flex flex-col items-center space-y-6 rounded-xl border border-white/[0.1] bg-white/[0.04] p-8 shadow-xl backdrop-blur-2xl">
         <div className="rounded-full border border-emerald-500/20 bg-emerald-500/10 p-4 text-emerald-400 shadow-md">
           <CheckCircle className="h-12 w-12" />
         </div>
